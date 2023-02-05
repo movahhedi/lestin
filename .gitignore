@@ -1,0 +1,18 @@
+# Secrets
+[Ss]ecret.*
+[Cc]onfig.*
+*.env
+*.local
+
+# Temps
+**/[Tt]emp/**
+**/[Tt]emps/**
+**/.DS_Store
+**/._.DS_Store
+
+# Dependancies
+**/node_modules/**
+
+# Build
+/build
+/dist

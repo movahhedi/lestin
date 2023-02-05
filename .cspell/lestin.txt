@@ -1,0 +1,12 @@
+lestin
+movahhedi
+esbuild
+
+horiz
+stemh
+stemv
+bbox
+xlink
+panose
+wmode
+inlist

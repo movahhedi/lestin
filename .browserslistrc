@@ -1,0 +1,9 @@
+defaults
+> 0.3%
+chrome > 23
+ff > 23
+safari >= 7
+opera >= 23
+ie >= 11
+android >= 4
+ios >= 7

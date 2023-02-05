@@ -1,0 +1,45 @@
+{
+	"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+	"editor.formatOnPaste": false,
+	"editor.formatOnType": false,
+	"editor.formatOnSave": false,
+	"editor.formatOnSaveMode": "file",
+	"editor.renderWhitespace": "boundary",
+	"editor.cursorBlinking": "smooth",
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"terminal.integrated.defaultProfile.windows": "Command Prompt",
+	"files.trimTrailingWhitespace": true,
+	"files.exclude": {
+		"**/.git": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true,
+		"node_modules": true
+	},
+	"search.exclude": {
+		"build": true,
+		"dist": true,
+		"node_modules": true
+	},
+	"gitlens.defaultTimeFormat": "H:mm",
+	"gitlens.views.contributors.showStatistics": true,
+	"typescript.format.semicolons": "insert",
+	"prettier.endOfLine": "crlf",
+	"prettier.printWidth": 150,
+	"prettier.semi": true,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 4,
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+	],
+	"cSpell.language": "en,fa,en-GB,en-US",
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+}

@@ -1,0 +1,30 @@
+{
+	"version": "0.2",
+	"ignorePaths": [
+		"**/node_modules/**",
+		"**/temp/**",
+		"build/**",
+		"dist/**"
+	],
+	"minWordLength": 4,
+	"allowCompoundWords": true,
+	"dictionaryDefinitions": [
+		{
+			"name": "lestin",
+			"path": "./.cspell/lestin.txt",
+			"addWords": true
+		},
+		{
+			"name": "common",
+			"path": "./.cspell/common.txt",
+			"addWords": true
+		}
+	],
+	"dictionaries": [
+		"lestin",
+		"common"
+	],
+	"words": [],
+	"ignoreWords": [],
+	"import": []
+}

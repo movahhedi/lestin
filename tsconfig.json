@@ -1,0 +1,37 @@
+{
+	// "files": ["src/main.ts"],
+	"compilerOptions": {
+		"noImplicitAny": false,
+		"target": "esnext",
+		"module": "ES6",
+		"lib": ["ES2019", "DOM"],
+		"moduleResolution": "Node",
+		"removeComments": false,
+		"preserveConstEnums": true,
+		// "outFile": "script.js",
+		"sourceMap": true,
+		"jsx": "preserve",
+		"jsxFactory": "MyCreateElement",
+		"jsxFragmentFactory": "MyCreateFragment",
+		"jsxImportSource": "",
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true,
+		"typeRoots": [
+			"./node_modules/@types",
+			"./@types"
+		],
+		"allowJs": false,
+		// Generate d.ts files
+		"declaration": true,
+		// This compiler run should only output d.ts files
+		// "emitDeclarationOnly": true,
+		// Types should go into this directory. Removing this would place the .d.ts files next to the .js files
+		"outDir": "dist",
+		// Go to js file when using IDE functions like "Go to Definition" in VSCode
+		"declarationMap": true
+	},
+	"include": ["src/**/*.ts"],
+	"exclude": ["node_modules", "**/*.spec.ts"]
+
+}
