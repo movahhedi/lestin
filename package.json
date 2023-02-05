@@ -24,21 +24,21 @@
 		"ts"
 	],
 	"private": false,
-	"dependencies": {
-		"@types/lodash": "^4.14.191",
-		"csstype": "^3.1.1",
-		"lodash": "^4.17.21",
-		"prop-types": "^15.8.1",
-		"scheduler": "^0.23.0",
-		"typescript": "^4.9.5"
-	},
 	"scripts": {
 		"build": "rollup -c"
+	},
+	"dependencies": {
+		"lodash": "^4.17.21"
 	},
 	"devDependencies": {
 		"esbuild": "^0.17.5",
 		"rollup": "^3.13.0",
 		"rollup-plugin-dts": "^5.1.1",
-		"rollup-plugin-esbuild": "^5.0.0"
+		"rollup-plugin-esbuild": "^5.0.0",
+		"@types/lodash": "^4.14.191",
+		"csstype": "^3.1.1",
+		"prop-types": "^15.8.1",
+		"scheduler": "^0.23.0",
+		"typescript": "^4.9.5"
 	}
 }
