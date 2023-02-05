@@ -10,3 +10,10 @@ xlink
 panose
 wmode
 inlist
+labelledby
+bivariance
+describedby
+jsxs
+mpath
+noindex
+bgcolor

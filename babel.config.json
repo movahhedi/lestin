@@ -1,0 +1,11 @@
+{
+	"presets": [
+		// "es2015",
+		// "@babel/env",
+		"@babel/preset-env",
+		"@babel/preset-react",
+		// ["@babel/preset-react", {"runtime": "automatic"}]
+		"@babel/preset-typescript"
+		// "@babel/plugin-transform-typescript"
+	]
+}
