@@ -876,9 +876,6 @@ export interface IntrinsicElements {
 	use: SVGAttributes<SVGUseElement>;
 }
 
-createElement("div", {
-	checked:
-});
 /*
 // export function createElement(type: "input", props: DOMAttributes<HTMLInputElement> | null, ...children: ComponentChildren[]): HTMLElement;
 export function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(type: keyof IntrinsicElements, props: (DOMAttributes<T> & P) | null, ...children: ComponentChildren[]): HTMLElement;
@@ -886,14 +883,30 @@ export function createElement<P extends SVGAttributes<T>, T extends HTMLElement>
 export function createElement<T extends HTMLElement>(type: string, props: (DOMAttributes<T> & HTMLAttributes & SVGAttributes) | null, ...children: ComponentChildren[]): HTMLElement;
 // export function createElement<P>(type: ComponentType<P>, props: (DOMAttributes<P> & P) | null, ...children: ComponentChildren[]): HTMLElement;
 export function createElement(type: any, props: (DOMAttributes) | null = null, ...children: ComponentChildren[]) {*/
-export function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(type: keyof IntrinsicElements, props: (DOMAttributes<T> & P) | null, ...children: ComponentChildren[]): HTMLElement {
+
+// export function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(type: keyof IntrinsicElements, props: (DOMAttributes<T> & P) | null, ...children: ComponentChildren[]): HTMLElement {
+
+
+
+// export function createElement(type: "input", props?: (InputHTMLAttributes<HTMLInputElement> & ClassAttributes<HTMLInputElement>) | null, ...children: ReactNode[]): DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+// export function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(type: keyof ReactHTML, props?: (ClassAttributes<T> & P) | null, ...children: ReactNode[]): DetailedReactHTMLElement<P, T>;
+// export function createElement<P extends SVGAttributes<T>, T extends SVGElement>(type: keyof ReactSVG, props?: (ClassAttributes<T> & P) | null, ...children: ReactNode[]): ReactSVGElement;
+// export function createElement<P extends DOMAttributes<T>, T extends Element>(type: string, props?: (ClassAttributes<T> & P) | null, ...children: ReactNode[]): DOMElement<P, T>;
+
+// export function createElement<P extends {}>(type: FunctionComponent<P>, props?: (Attributes & P) | null, ...children: ReactNode[]): FunctionComponentElement<P>;
+// export function createElement<P extends {}>(type: ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>, props?: (ClassAttributes<ClassicComponent<P, ComponentState>> & P) | null, ...children: ReactNode[]): CElement<P, ClassicComponent<P, ComponentState>>;
+// export function createElement<P extends {}, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(type: ClassType<P, T, C>, props?: (ClassAttributes<T> & P) | null, ...children: ReactNode[]): CElement<P, T>;
+// export function createElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string, props?: (Attributes & P) | null, ...children: ReactNode[]): ReactElement<P>;
+
+export function createElement<P extends DOMAttributes<T>, T extends HTMLElement>(type: string, props?: (HTMLAttributes<T> & P) | null, ...children: ComponentChildren[]): HTMLElement;
+export function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(type: keyof IntrinsicElements, props?: (HTMLAttributes<T> & P) | null, ...children: ComponentChildren[]): HTMLElement {
+// export function createElement(type: IntrinsicElements, props: (HTMLAttributes<HTMLDivElement>), ...children: ComponentChildren[]): HTMLElement {
 	children.forEach((child: any, index: any, object: any) => {
 		if (typeof child !== "number" && (!child || _isEmpty(child))) object.splice(index, 1);
 		// if (child == undefined || child == null || child == false || child == {} || child == []) object.splice(index, 1);
 	});
-	if (typeof type === "function") return type(props, ...children);
+	// if (typeof type === "function") return type(props, ...children);
 	let element: HTMLElement = document.createElement(type);
-
 	Object.entries(props || {}).forEach(([name, value]) => {
 		// if (name.startsWith("on") && name.toLowerCase() in window) element.addEventListener(name.toLowerCase().substring(2), value);
 		if (name.startsWith("on") && name.toLowerCase() in window) {
@@ -907,7 +920,7 @@ export function createElement<P extends HTMLAttributes<T>, T extends HTMLElement
 			if (typeof value === "string") element.style.cssText = value;
 			else Object.assign(element, value);
 		} else if (name === "innerHTML") element.innerHTML = value;
-		else if (name === "htmlFor") element.htmlFor = value;
+		// else if (name === "htmlFor") element.htmlFor = value;
 		else if (name === "className") element.className = value;
 		else if (name === "data" || name === "dataset") Object.assign(element.dataset, value);
 		else if (name.startsWith("func") && typeof value === "function") element[name.substring(4)] = value;
@@ -926,9 +939,9 @@ export function createElement<P extends HTMLAttributes<T>, T extends HTMLElement
 
 export const Fragment = (props: any, ...children: any) => children;
 
-export function appendChild(parent: HTMLElement, text: string);
-export function appendChild(parent: HTMLElement, child: HTMLElement);
-export function appendChild(parent: HTMLElement, childOrText: HTMLElement | string) {
+export function appendChild(parent: HTMLElement, text: string): void;
+export function appendChild(parent: HTMLElement, child: HTMLElement): void;
+export function appendChild(parent: HTMLElement, childOrText: HTMLElement | string): void {
 	if (Array.isArray(childOrText)) {
 		childOrText.forEach((nestedChild) => appendChild(parent, nestedChild));
 	} else if (childOrText instanceof HTMLElement) {
@@ -937,3 +950,9 @@ export function appendChild(parent: HTMLElement, childOrText: HTMLElement | stri
 		parent.appendChild(document.createTextNode(childOrText));
 	}
 }
+
+export {
+	createElement as jsx,
+	createElement as jsxs,
+	createElement as jsxDEV,
+};
