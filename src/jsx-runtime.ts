@@ -1,16 +1,16 @@
 /// <reference path="jsx-runtime.d.ts" />
 
-import _isEmpty from "lodash/isEmpty";
+// import _isEmpty from "lodash/isEmpty";
 
 // export type ComponentChild = HTMLElement | string; // object | string | number | bigint | boolean | null | undefined;
 // export type ComponentChildren = HTMLElement[] | HTMLElement | string;
-
+/*
 export interface LestinDOMAttributes {
 	children?: HTMLElement[] | HTMLElement | string;
 	dangerouslySetInnerHTML?: {
 		__html: string;
 	};
-}
+}*/
 
 /*
 // export function createElement(type: "input", props: DOMAttributes<HTMLInputElement> | null, ...children: ComponentChildren[]): HTMLElement;
@@ -34,17 +34,27 @@ export function createElement(type: any, props: (DOMAttributes) | null = null, .
 // export function createElement<P extends {}, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(type: ClassType<P, T, C>, props?: (Attributes<T> & P) | null, ...children: HTMLElement[]): CElement<P, T>;
 // export function createElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string, props?: (Attributes & P) | null, ...children: HTMLElement[]): LestinElement<P>;
 
-export function createElement<P extends {}>(type: (props?: (React.Attributes & P) | null, ...children: HTMLElement[]) => HTMLElement, props?: (React.Attributes & P) | null, ...children: HTMLElement[]): HTMLElement;
+export function createElement<P extends {}>(type: (props?: (React.Attributes & P) | null, ...children: HTMLElement[] | React.ReactNode[]) => HTMLElement, props?: (React.Attributes & P) | null, ...children: HTMLElement[]): HTMLElement;
 export function createElement<P extends React.DOMAttributes<T>, T extends HTMLElement>(type: string, props?: (React.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement;
 export function createElement<P extends React.HTMLAttributes<T>, T extends HTMLElement>(type: keyof JSX.IntrinsicElements, props?: (React.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement;
 export function createElement<P extends React.HTMLAttributes<T>, T extends HTMLElement>(type: string | keyof JSX.IntrinsicElements | ((props?: (React.Attributes & P) | null, ...children: HTMLElement[]) => HTMLElement), props?: (React.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement {
-//  export function createElement(type: IntrinsicElements, props: (HTMLAttributes<HTMLDivElement>), ...children: ComponentChildren[]): HTMLElement {
+// export function createElement(type: IntrinsicElements, props: (HTMLAttributes<HTMLDivElement>), ...children: ComponentChildren[]): HTMLElement {
 
-	children.forEach((child: any, index: any, object: any) => {
-		if (typeof child !== "number" && (!child || _isEmpty(child))) object.splice(index, 1);
+	// let newChildren = children || props.children || [];
+	let newChildren = props.children || [];
+	delete props["children"];
+
+	if ( ! Array.isArray(newChildren)) {
+		newChildren = [newChildren];
+	}
+
+	newChildren.forEach((child: any, index: any, object: any) => {
+		if (typeof child !== "number" && (!child || child == false)) {
+			object.splice(index, 1);
+		}
 	});
 
-	if (typeof type === "function") return type(props, ...children);
+	if (typeof type === "function") return type(props, ...newChildren);
 
 	let element: HTMLElement = document.createElement(type);
 
@@ -81,10 +91,12 @@ export function createElement<P extends React.HTMLAttributes<T>, T extends HTMLE
 			else element.setAttributeNS(null, name, value.toString());
 		}*/
 
+		else if (name === "children" || name === "childrenQ") {}
+
 		else element.setAttribute(name, value.toString());
 	});
 
-	children.forEach((child: any) => appendChild(element, child));
+	newChildren?.forEach((child: any) => appendChild(element, child));
 
 	return element;
 }
@@ -94,6 +106,7 @@ export const Fragment = (props: any, ...children: any) => children;
 export function appendChild(parent: HTMLElement, text: string): void;
 export function appendChild(parent: HTMLElement, child: HTMLElement): void;
 export function appendChild(parent: HTMLElement, childOrText: HTMLElement | string): void {
+
 	if (Array.isArray(childOrText)) {
 		childOrText.forEach((nestedChild) => appendChild(parent, nestedChild));
 	}

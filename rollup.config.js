@@ -1,5 +1,6 @@
 import dts from "rollup-plugin-dts";
 import esbuild from "rollup-plugin-esbuild";
+import terser from "@rollup/plugin-terser";
 import packageJson from "./package.json" assert { type: "json" };
 
 const name = "dist/jsx-runtime";
@@ -10,12 +11,12 @@ const bundle = (config) => ({
 	...config,
 	input: "src/jsx-runtime.ts",
 	external: (id) => !/^[./]/.test(id),
-	dir: "dist",
+	// dir: "dist",
 });
 
 export default [
 	bundle({
-		plugins: [esbuild()],
+		plugins: [esbuild(), terser()],
 		output: [
 			{
 				file: `${name}.js`,
