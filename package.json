@@ -1,10 +1,10 @@
 {
 	"name": "lestin",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Vanilla JSX, No Virtual-DOM, No React",
-	"main": "dist/lestin.js",
-	"module": "dist/lestin.mjs",
-	"typings": "dist/lestin.d.ts",
+	"main": "dist/jsx-runtime.js",
+	"module": "dist/jsx-runtime.mjs",
+	"typings": "dist/jsx-runtime.d.ts",
 	"type": "module",
 	"repository": {
 		"type": "git",
