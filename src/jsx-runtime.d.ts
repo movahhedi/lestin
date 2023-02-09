@@ -345,6 +345,25 @@ declare namespace Lestin {
 	type AnimationEventHandler<T = Element> = EventHandler<AnimationEvent<T>>;
 	type TransitionEventHandler<T = Element> = EventHandler<TransitionEvent<T>>;
 
+	// SoAoU: single or array or undefined
+
+	type LestinEventHandler_SoAoU<T = Element> = LestinEventHandler<T> | LestinEventHandler<T>[] | undefined;
+
+	type ClipboardEventHandler_SoAoU<T = Element> = ClipboardEventHandler<T> | ClipboardEventHandler<T>[] | undefined;
+	type CompositionEventHandler_SoAoU<T = Element> = CompositionEventHandler<T> | CompositionEventHandler<T>[] | undefined;
+	type DragEventHandler_SoAoU<T = Element> = DragEventHandler<T> | DragEventHandler<T>[] | undefined;
+	type FocusEventHandler_SoAoU<T = Element> = FocusEventHandler<T> | FocusEventHandler<T>[] | undefined;
+	type FormEventHandler_SoAoU<T = Element> = FormEventHandler<T> | FormEventHandler<T>[] | undefined;
+	type ChangeEventHandler_SoAoU<T = Element> = ChangeEventHandler<T> | ChangeEventHandler<T>[] | undefined;
+	type KeyboardEventHandler_SoAoU<T = Element> = KeyboardEventHandler<T> | KeyboardEventHandler<T>[] | undefined;
+	type MouseEventHandler_SoAoU<T = Element> = MouseEventHandler<T> | MouseEventHandler<T>[] | undefined;
+	type TouchEventHandler_SoAoU<T = Element> = TouchEventHandler<T> | TouchEventHandler<T>[] | undefined;
+	type PointerEventHandler_SoAoU<T = Element> = PointerEventHandler<T> | PointerEventHandler<T>[] | undefined;
+	type UIEventHandler_SoAoU<T = Element> = UIEventHandler<T> | UIEventHandler<T>[] | undefined;
+	type WheelEventHandler_SoAoU<T = Element> = WheelEventHandler<T> | WheelEventHandler<T>[] | undefined;
+	type AnimationEventHandler_SoAoU<T = Element> = AnimationEventHandler<T> | AnimationEventHandler<T>[] | undefined;
+	type TransitionEventHandler_SoAoU<T = Element> = TransitionEventHandler<T> | TransitionEventHandler<T>[] | undefined;
+
 	//
 	// Props / DOM Attributes
 	// ----------------------------------------------------------------------
@@ -355,201 +374,203 @@ declare namespace Lestin {
 
 	interface SVGProps<T> extends SVGAttributes<T>, Attributes<T> {}
 
+	type ClipboardEventHandler_SoA<T> = ClipboardEventHandler<T> | ClipboardEventHandler<T>[] | undefined;
+
 	interface DOMAttributes<T> {
 		children?: LestinNode | undefined;
 		innerHTML?: string | TrustedHTML | undefined;
 
 		// Clipboard Events
-		onCopy?: ClipboardEventHandler<T> | undefined;
-		onCopyCapture?: ClipboardEventHandler<T> | undefined;
-		onCut?: ClipboardEventHandler<T> | undefined;
-		onCutCapture?: ClipboardEventHandler<T> | undefined;
-		onPaste?: ClipboardEventHandler<T> | undefined;
-		onPasteCapture?: ClipboardEventHandler<T> | undefined;
+		onCopy?: ClipboardEventHandler_SoAoU<T>;
+		onCopyCapture?: ClipboardEventHandler_SoAoU<T>;
+		onCut?: ClipboardEventHandler_SoAoU<T>;
+		onCutCapture?: ClipboardEventHandler_SoAoU<T>;
+		onPaste?: ClipboardEventHandler_SoAoU<T>;
+		onPasteCapture?: ClipboardEventHandler_SoAoU<T>;
 
 		// Composition Events
-		onCompositionEnd?: CompositionEventHandler<T> | undefined;
-		onCompositionEndCapture?: CompositionEventHandler<T> | undefined;
-		onCompositionStart?: CompositionEventHandler<T> | undefined;
-		onCompositionStartCapture?: CompositionEventHandler<T> | undefined;
-		onCompositionUpdate?: CompositionEventHandler<T> | undefined;
-		onCompositionUpdateCapture?: CompositionEventHandler<T> | undefined;
+		onCompositionEnd?: CompositionEventHandler_SoAoU<T>;
+		onCompositionEndCapture?: CompositionEventHandler_SoAoU<T>;
+		onCompositionStart?: CompositionEventHandler_SoAoU<T>;
+		onCompositionStartCapture?: CompositionEventHandler_SoAoU<T>;
+		onCompositionUpdate?: CompositionEventHandler_SoAoU<T>;
+		onCompositionUpdateCapture?: CompositionEventHandler_SoAoU<T>;
 
 		// Focus Events
-		onFocus?: FocusEventHandler<T> | undefined;
-		onFocusCapture?: FocusEventHandler<T> | undefined;
-		onBlur?: FocusEventHandler<T> | undefined;
-		onBlurCapture?: FocusEventHandler<T> | undefined;
+		onFocus?: FocusEventHandler_SoAoU<T>;
+		onFocusCapture?: FocusEventHandler_SoAoU<T>;
+		onBlur?: FocusEventHandler_SoAoU<T>;
+		onBlurCapture?: FocusEventHandler_SoAoU<T>;
 
 		// Form Events
-		onChange?: FormEventHandler<T> | undefined;
-		onChangeCapture?: FormEventHandler<T> | undefined;
-		onBeforeInput?: FormEventHandler<T> | undefined;
-		onBeforeInputCapture?: FormEventHandler<T> | undefined;
-		onInput?: FormEventHandler<T> | undefined;
-		onInputCapture?: FormEventHandler<T> | undefined;
-		onReset?: FormEventHandler<T> | undefined;
-		onResetCapture?: FormEventHandler<T> | undefined;
-		onSubmit?: FormEventHandler<T> | undefined;
-		onSubmitCapture?: FormEventHandler<T> | undefined;
-		onInvalid?: FormEventHandler<T> | undefined;
-		onInvalidCapture?: FormEventHandler<T> | undefined;
+		onChange?: FormEventHandler_SoAoU<T>;
+		onChangeCapture?: FormEventHandler_SoAoU<T>;
+		onBeforeInput?: FormEventHandler_SoAoU<T>;
+		onBeforeInputCapture?: FormEventHandler_SoAoU<T>;
+		onInput?: FormEventHandler_SoAoU<T>;
+		onInputCapture?: FormEventHandler_SoAoU<T>;
+		onReset?: FormEventHandler_SoAoU<T>;
+		onResetCapture?: FormEventHandler_SoAoU<T>;
+		onSubmit?: FormEventHandler_SoAoU<T>;
+		onSubmitCapture?: FormEventHandler_SoAoU<T>;
+		onInvalid?: FormEventHandler_SoAoU<T>;
+		onInvalidCapture?: FormEventHandler_SoAoU<T>;
 
 		// Image Events
-		onLoad?: LestinEventHandler<T> | undefined;
-		onLoadCapture?: LestinEventHandler<T> | undefined;
-		onError?: LestinEventHandler<T> | undefined; // also a Media Event
-		onErrorCapture?: LestinEventHandler<T> | undefined; // also a Media Event
+		onLoad?: LestinEventHandler_SoAoU<T>;
+		onLoadCapture?: LestinEventHandler_SoAoU<T>;
+		onError?: LestinEventHandler_SoAoU<T>; // also a Media Event
+		onErrorCapture?: LestinEventHandler_SoAoU<T>; // also a Media Event
 
 		// Keyboard Events
-		onKeyDown?: KeyboardEventHandler<T> | undefined;
-		onKeyDownCapture?: KeyboardEventHandler<T> | undefined;
+		onKeyDown?: KeyboardEventHandler_SoAoU<T>;
+		onKeyDownCapture?: KeyboardEventHandler_SoAoU<T>;
 		/** @deprecated */
-		onKeyPress?: KeyboardEventHandler<T> | undefined;
+		onKeyPress?: KeyboardEventHandler_SoAoU<T>;
 		/** @deprecated */
-		onKeyPressCapture?: KeyboardEventHandler<T> | undefined;
-		onKeyUp?: KeyboardEventHandler<T> | undefined;
-		onKeyUpCapture?: KeyboardEventHandler<T> | undefined;
+		onKeyPressCapture?: KeyboardEventHandler_SoAoU<T>;
+		onKeyUp?: KeyboardEventHandler_SoAoU<T>;
+		onKeyUpCapture?: KeyboardEventHandler_SoAoU<T>;
 
 		// Media Events
-		onAbort?: LestinEventHandler<T> | undefined;
-		onAbortCapture?: LestinEventHandler<T> | undefined;
-		onCanPlay?: LestinEventHandler<T> | undefined;
-		onCanPlayCapture?: LestinEventHandler<T> | undefined;
-		onCanPlayThrough?: LestinEventHandler<T> | undefined;
-		onCanPlayThroughCapture?: LestinEventHandler<T> | undefined;
-		onDurationChange?: LestinEventHandler<T> | undefined;
-		onDurationChangeCapture?: LestinEventHandler<T> | undefined;
-		onEmptied?: LestinEventHandler<T> | undefined;
-		onEmptiedCapture?: LestinEventHandler<T> | undefined;
-		onEncrypted?: LestinEventHandler<T> | undefined;
-		onEncryptedCapture?: LestinEventHandler<T> | undefined;
-		onEnded?: LestinEventHandler<T> | undefined;
-		onEndedCapture?: LestinEventHandler<T> | undefined;
-		onLoadedData?: LestinEventHandler<T> | undefined;
-		onLoadedDataCapture?: LestinEventHandler<T> | undefined;
-		onLoadedMetadata?: LestinEventHandler<T> | undefined;
-		onLoadedMetadataCapture?: LestinEventHandler<T> | undefined;
-		onLoadStart?: LestinEventHandler<T> | undefined;
-		onLoadStartCapture?: LestinEventHandler<T> | undefined;
-		onPause?: LestinEventHandler<T> | undefined;
-		onPauseCapture?: LestinEventHandler<T> | undefined;
-		onPlay?: LestinEventHandler<T> | undefined;
-		onPlayCapture?: LestinEventHandler<T> | undefined;
-		onPlaying?: LestinEventHandler<T> | undefined;
-		onPlayingCapture?: LestinEventHandler<T> | undefined;
-		onProgress?: LestinEventHandler<T> | undefined;
-		onProgressCapture?: LestinEventHandler<T> | undefined;
-		onRateChange?: LestinEventHandler<T> | undefined;
-		onRateChangeCapture?: LestinEventHandler<T> | undefined;
-		onSeeked?: LestinEventHandler<T> | undefined;
-		onSeekedCapture?: LestinEventHandler<T> | undefined;
-		onSeeking?: LestinEventHandler<T> | undefined;
-		onSeekingCapture?: LestinEventHandler<T> | undefined;
-		onStalled?: LestinEventHandler<T> | undefined;
-		onStalledCapture?: LestinEventHandler<T> | undefined;
-		onSuspend?: LestinEventHandler<T> | undefined;
-		onSuspendCapture?: LestinEventHandler<T> | undefined;
-		onTimeUpdate?: LestinEventHandler<T> | undefined;
-		onTimeUpdateCapture?: LestinEventHandler<T> | undefined;
-		onVolumeChange?: LestinEventHandler<T> | undefined;
-		onVolumeChangeCapture?: LestinEventHandler<T> | undefined;
-		onWaiting?: LestinEventHandler<T> | undefined;
-		onWaitingCapture?: LestinEventHandler<T> | undefined;
+		onAbort?: LestinEventHandler_SoAoU<T>;
+		onAbortCapture?: LestinEventHandler_SoAoU<T>;
+		onCanPlay?: LestinEventHandler_SoAoU<T>;
+		onCanPlayCapture?: LestinEventHandler_SoAoU<T>;
+		onCanPlayThrough?: LestinEventHandler_SoAoU<T>;
+		onCanPlayThroughCapture?: LestinEventHandler_SoAoU<T>;
+		onDurationChange?: LestinEventHandler_SoAoU<T>;
+		onDurationChangeCapture?: LestinEventHandler_SoAoU<T>;
+		onEmptied?: LestinEventHandler_SoAoU<T>;
+		onEmptiedCapture?: LestinEventHandler_SoAoU<T>;
+		onEncrypted?: LestinEventHandler_SoAoU<T>;
+		onEncryptedCapture?: LestinEventHandler_SoAoU<T>;
+		onEnded?: LestinEventHandler_SoAoU<T>;
+		onEndedCapture?: LestinEventHandler_SoAoU<T>;
+		onLoadedData?: LestinEventHandler_SoAoU<T>;
+		onLoadedDataCapture?: LestinEventHandler_SoAoU<T>;
+		onLoadedMetadata?: LestinEventHandler_SoAoU<T>;
+		onLoadedMetadataCapture?: LestinEventHandler_SoAoU<T>;
+		onLoadStart?: LestinEventHandler_SoAoU<T>;
+		onLoadStartCapture?: LestinEventHandler_SoAoU<T>;
+		onPause?: LestinEventHandler_SoAoU<T>;
+		onPauseCapture?: LestinEventHandler_SoAoU<T>;
+		onPlay?: LestinEventHandler_SoAoU<T>;
+		onPlayCapture?: LestinEventHandler_SoAoU<T>;
+		onPlaying?: LestinEventHandler_SoAoU<T>;
+		onPlayingCapture?: LestinEventHandler_SoAoU<T>;
+		onProgress?: LestinEventHandler_SoAoU<T>;
+		onProgressCapture?: LestinEventHandler_SoAoU<T>;
+		onRateChange?: LestinEventHandler_SoAoU<T>;
+		onRateChangeCapture?: LestinEventHandler_SoAoU<T>;
+		onSeeked?: LestinEventHandler_SoAoU<T>;
+		onSeekedCapture?: LestinEventHandler_SoAoU<T>;
+		onSeeking?: LestinEventHandler_SoAoU<T>;
+		onSeekingCapture?: LestinEventHandler_SoAoU<T>;
+		onStalled?: LestinEventHandler_SoAoU<T>;
+		onStalledCapture?: LestinEventHandler_SoAoU<T>;
+		onSuspend?: LestinEventHandler_SoAoU<T>;
+		onSuspendCapture?: LestinEventHandler_SoAoU<T>;
+		onTimeUpdate?: LestinEventHandler_SoAoU<T>;
+		onTimeUpdateCapture?: LestinEventHandler_SoAoU<T>;
+		onVolumeChange?: LestinEventHandler_SoAoU<T>;
+		onVolumeChangeCapture?: LestinEventHandler_SoAoU<T>;
+		onWaiting?: LestinEventHandler_SoAoU<T>;
+		onWaitingCapture?: LestinEventHandler_SoAoU<T>;
 
 		// MouseEvents
-		onAuxClick?: MouseEventHandler<T> | undefined;
-		onAuxClickCapture?: MouseEventHandler<T> | undefined;
-		onClick?: MouseEventHandler<T> | undefined;
-		onClickCapture?: MouseEventHandler<T> | undefined;
-		onContextMenu?: MouseEventHandler<T> | undefined;
-		onContextMenuCapture?: MouseEventHandler<T> | undefined;
-		onDoubleClick?: MouseEventHandler<T> | undefined;
-		onDoubleClickCapture?: MouseEventHandler<T> | undefined;
-		onDrag?: DragEventHandler<T> | undefined;
-		onDragCapture?: DragEventHandler<T> | undefined;
-		onDragEnd?: DragEventHandler<T> | undefined;
-		onDragEndCapture?: DragEventHandler<T> | undefined;
-		onDragEnter?: DragEventHandler<T> | undefined;
-		onDragEnterCapture?: DragEventHandler<T> | undefined;
-		onDragExit?: DragEventHandler<T> | undefined;
-		onDragExitCapture?: DragEventHandler<T> | undefined;
-		onDragLeave?: DragEventHandler<T> | undefined;
-		onDragLeaveCapture?: DragEventHandler<T> | undefined;
-		onDragOver?: DragEventHandler<T> | undefined;
-		onDragOverCapture?: DragEventHandler<T> | undefined;
-		onDragStart?: DragEventHandler<T> | undefined;
-		onDragStartCapture?: DragEventHandler<T> | undefined;
-		onDrop?: DragEventHandler<T> | undefined;
-		onDropCapture?: DragEventHandler<T> | undefined;
-		onMouseDown?: MouseEventHandler<T> | undefined;
-		onMouseDownCapture?: MouseEventHandler<T> | undefined;
-		onMouseEnter?: MouseEventHandler<T> | undefined;
-		onMouseLeave?: MouseEventHandler<T> | undefined;
-		onMouseMove?: MouseEventHandler<T> | undefined;
-		onMouseMoveCapture?: MouseEventHandler<T> | undefined;
-		onMouseOut?: MouseEventHandler<T> | undefined;
-		onMouseOutCapture?: MouseEventHandler<T> | undefined;
-		onMouseOver?: MouseEventHandler<T> | undefined;
-		onMouseOverCapture?: MouseEventHandler<T> | undefined;
-		onMouseUp?: MouseEventHandler<T> | undefined;
-		onMouseUpCapture?: MouseEventHandler<T> | undefined;
+		onAuxClick?: MouseEventHandler_SoAoU<T>;
+		onAuxClickCapture?: MouseEventHandler_SoAoU<T>;
+		onClick?: MouseEventHandler_SoAoU<T>;
+		onClickCapture?: MouseEventHandler_SoAoU<T>;
+		onContextMenu?: MouseEventHandler_SoAoU<T>;
+		onContextMenuCapture?: MouseEventHandler_SoAoU<T>;
+		onDoubleClick?: MouseEventHandler_SoAoU<T>;
+		onDoubleClickCapture?: MouseEventHandler_SoAoU<T>;
+		onDrag?: DragEventHandler_SoAoU<T>;
+		onDragCapture?: DragEventHandler_SoAoU<T>;
+		onDragEnd?: DragEventHandler_SoAoU<T>;
+		onDragEndCapture?: DragEventHandler_SoAoU<T>;
+		onDragEnter?: DragEventHandler_SoAoU<T>;
+		onDragEnterCapture?: DragEventHandler_SoAoU<T>;
+		onDragExit?: DragEventHandler_SoAoU<T>;
+		onDragExitCapture?: DragEventHandler_SoAoU<T>;
+		onDragLeave?: DragEventHandler_SoAoU<T>;
+		onDragLeaveCapture?: DragEventHandler_SoAoU<T>;
+		onDragOver?: DragEventHandler_SoAoU<T>;
+		onDragOverCapture?: DragEventHandler_SoAoU<T>;
+		onDragStart?: DragEventHandler_SoAoU<T>;
+		onDragStartCapture?: DragEventHandler_SoAoU<T>;
+		onDrop?: DragEventHandler_SoAoU<T>;
+		onDropCapture?: DragEventHandler_SoAoU<T>;
+		onMouseDown?: MouseEventHandler_SoAoU<T>;
+		onMouseDownCapture?: MouseEventHandler_SoAoU<T>;
+		onMouseEnter?: MouseEventHandler_SoAoU<T>;
+		onMouseLeave?: MouseEventHandler_SoAoU<T>;
+		onMouseMove?: MouseEventHandler_SoAoU<T>;
+		onMouseMoveCapture?: MouseEventHandler_SoAoU<T>;
+		onMouseOut?: MouseEventHandler_SoAoU<T>;
+		onMouseOutCapture?: MouseEventHandler_SoAoU<T>;
+		onMouseOver?: MouseEventHandler_SoAoU<T>;
+		onMouseOverCapture?: MouseEventHandler_SoAoU<T>;
+		onMouseUp?: MouseEventHandler_SoAoU<T>;
+		onMouseUpCapture?: MouseEventHandler_SoAoU<T>;
 
 		// Selection Events
-		onSelect?: LestinEventHandler<T> | undefined;
-		onSelectCapture?: LestinEventHandler<T> | undefined;
+		onSelect?: LestinEventHandler_SoAoU<T>;
+		onSelectCapture?: LestinEventHandler_SoAoU<T>;
 
 		// Touch Events
-		onTouchCancel?: TouchEventHandler<T> | undefined;
-		onTouchCancelCapture?: TouchEventHandler<T> | undefined;
-		onTouchEnd?: TouchEventHandler<T> | undefined;
-		onTouchEndCapture?: TouchEventHandler<T> | undefined;
-		onTouchMove?: TouchEventHandler<T> | undefined;
-		onTouchMoveCapture?: TouchEventHandler<T> | undefined;
-		onTouchStart?: TouchEventHandler<T> | undefined;
-		onTouchStartCapture?: TouchEventHandler<T> | undefined;
+		onTouchCancel?: TouchEventHandler_SoAoU<T>;
+		onTouchCancelCapture?: TouchEventHandler_SoAoU<T>;
+		onTouchEnd?: TouchEventHandler_SoAoU<T>;
+		onTouchEndCapture?: TouchEventHandler_SoAoU<T>;
+		onTouchMove?: TouchEventHandler_SoAoU<T>;
+		onTouchMoveCapture?: TouchEventHandler_SoAoU<T>;
+		onTouchStart?: TouchEventHandler_SoAoU<T>;
+		onTouchStartCapture?: TouchEventHandler_SoAoU<T>;
 
 		// Pointer Events
-		onPointerDown?: PointerEventHandler<T> | undefined;
-		onPointerDownCapture?: PointerEventHandler<T> | undefined;
-		onPointerMove?: PointerEventHandler<T> | undefined;
-		onPointerMoveCapture?: PointerEventHandler<T> | undefined;
-		onPointerUp?: PointerEventHandler<T> | undefined;
-		onPointerUpCapture?: PointerEventHandler<T> | undefined;
-		onPointerCancel?: PointerEventHandler<T> | undefined;
-		onPointerCancelCapture?: PointerEventHandler<T> | undefined;
-		onPointerEnter?: PointerEventHandler<T> | undefined;
-		onPointerEnterCapture?: PointerEventHandler<T> | undefined;
-		onPointerLeave?: PointerEventHandler<T> | undefined;
-		onPointerLeaveCapture?: PointerEventHandler<T> | undefined;
-		onPointerOver?: PointerEventHandler<T> | undefined;
-		onPointerOverCapture?: PointerEventHandler<T> | undefined;
-		onPointerOut?: PointerEventHandler<T> | undefined;
-		onPointerOutCapture?: PointerEventHandler<T> | undefined;
-		onGotPointerCapture?: PointerEventHandler<T> | undefined;
-		onGotPointerCaptureCapture?: PointerEventHandler<T> | undefined;
-		onLostPointerCapture?: PointerEventHandler<T> | undefined;
-		onLostPointerCaptureCapture?: PointerEventHandler<T> | undefined;
+		onPointerDown?: PointerEventHandler_SoAoU<T>;
+		onPointerDownCapture?: PointerEventHandler_SoAoU<T>;
+		onPointerMove?: PointerEventHandler_SoAoU<T>;
+		onPointerMoveCapture?: PointerEventHandler_SoAoU<T>;
+		onPointerUp?: PointerEventHandler_SoAoU<T>;
+		onPointerUpCapture?: PointerEventHandler_SoAoU<T>;
+		onPointerCancel?: PointerEventHandler_SoAoU<T>;
+		onPointerCancelCapture?: PointerEventHandler_SoAoU<T>;
+		onPointerEnter?: PointerEventHandler_SoAoU<T>;
+		onPointerEnterCapture?: PointerEventHandler_SoAoU<T>;
+		onPointerLeave?: PointerEventHandler_SoAoU<T>;
+		onPointerLeaveCapture?: PointerEventHandler_SoAoU<T>;
+		onPointerOver?: PointerEventHandler_SoAoU<T>;
+		onPointerOverCapture?: PointerEventHandler_SoAoU<T>;
+		onPointerOut?: PointerEventHandler_SoAoU<T>;
+		onPointerOutCapture?: PointerEventHandler_SoAoU<T>;
+		onGotPointerCapture?: PointerEventHandler_SoAoU<T>;
+		onGotPointerCaptureCapture?: PointerEventHandler_SoAoU<T>;
+		onLostPointerCapture?: PointerEventHandler_SoAoU<T>;
+		onLostPointerCaptureCapture?: PointerEventHandler_SoAoU<T>;
 
 		// UI Events
-		onScroll?: UIEventHandler<T> | undefined;
-		onScrollCapture?: UIEventHandler<T> | undefined;
+		onScroll?: UIEventHandler_SoAoU<T>;
+		onScrollCapture?: UIEventHandler_SoAoU<T>;
 
 		// Wheel Events
-		onWheel?: WheelEventHandler<T> | undefined;
-		onWheelCapture?: WheelEventHandler<T> | undefined;
+		onWheel?: WheelEventHandler_SoAoU<T>;
+		onWheelCapture?: WheelEventHandler_SoAoU<T>;
 
 		// Animation Events
-		onAnimationStart?: AnimationEventHandler<T> | undefined;
-		onAnimationStartCapture?: AnimationEventHandler<T> | undefined;
-		onAnimationEnd?: AnimationEventHandler<T> | undefined;
-		onAnimationEndCapture?: AnimationEventHandler<T> | undefined;
-		onAnimationIteration?: AnimationEventHandler<T> | undefined;
-		onAnimationIterationCapture?: AnimationEventHandler<T> | undefined;
+		onAnimationStart?: AnimationEventHandler_SoAoU<T>;
+		onAnimationStartCapture?: AnimationEventHandler_SoAoU<T>;
+		onAnimationEnd?: AnimationEventHandler_SoAoU<T>;
+		onAnimationEndCapture?: AnimationEventHandler_SoAoU<T>;
+		onAnimationIteration?: AnimationEventHandler_SoAoU<T>;
+		onAnimationIterationCapture?: AnimationEventHandler_SoAoU<T>;
 
 		// Transition Events
-		onTransitionEnd?: TransitionEventHandler<T> | undefined;
-		onTransitionEndCapture?: TransitionEventHandler<T> | undefined;
+		onTransitionEnd?: TransitionEventHandler_SoAoU<T>;
+		onTransitionEndCapture?: TransitionEventHandler_SoAoU<T>;
 	}
 
 	export interface CSSProperties extends CSS.Properties<string | number> {
@@ -1007,7 +1028,7 @@ declare namespace Lestin {
 
 	interface DetailsHTMLAttributes<T> extends HTMLAttributes<T> {
 		open?: boolean | "open" | undefined;
-		onToggle?: LestinEventHandler<T> | undefined;
+		onToggle?: LestinEventHandler_SoAoU<T>;
 	}
 
 	interface DelHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -1016,8 +1037,8 @@ declare namespace Lestin {
 	}
 
 	interface DialogHTMLAttributes<T> extends HTMLAttributes<T> {
-		onCancel?: LestinEventHandler<T> | undefined;
-		onClose?: LestinEventHandler<T> | undefined;
+		onCancel?: LestinEventHandler_SoAoU<T>;
+		onClose?: LestinEventHandler_SoAoU<T>;
 		open?: boolean | "open" | undefined;
 	}
 
@@ -1128,7 +1149,7 @@ declare namespace Lestin {
 		value?: string | ReadonlyArray<string> | number | undefined;
 		width?: number | string | undefined;
 
-		onChange?: ChangeEventHandler<T> | undefined;
+		onChange?: ChangeEventHandler_SoAoU<T>;
 	}
 
 	interface KeygenHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -1283,7 +1304,7 @@ declare namespace Lestin {
 		required?: boolean | "required" | undefined;
 		size?: number | undefined;
 		value?: string | ReadonlyArray<string> | number | undefined;
-		onChange?: ChangeEventHandler<T> | undefined;
+		onChange?: ChangeEventHandler_SoAoU<T>;
 	}
 
 	interface SourceHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -1332,7 +1353,7 @@ declare namespace Lestin {
 		value?: string | ReadonlyArray<string> | number | undefined;
 		wrap?: string | undefined;
 
-		onChange?: ChangeEventHandler<T> | undefined;
+		onChange?: ChangeEventHandler_SoAoU<T>;
 	}
 
 	interface TdHTMLAttributes<T> extends HTMLAttributes<T> {
