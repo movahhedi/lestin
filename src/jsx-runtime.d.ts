@@ -1,4 +1,4 @@
-// Type definitions for React 18.0
+// Type definitions for Lestin 18.0
 // Project: http://facebook.github.io/react/
 // Definitions by: Asana <https://asana.com>
 //                 AssureSign <http://www.assuresign.com>
@@ -29,7 +29,7 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.8
 
-// NOTE: Users of the `experimental` builds of React should add a reference
+// NOTE: Users of the `experimental` builds of Lestin should add a reference
 // to 'react/experimental' in their project. See experimental.d.ts's top comment
 // for reference and documentation on how exactly to do it.
 
@@ -59,12 +59,12 @@ type Destructor = () => void | { [UNDEFINED_VOID_ONLY]: never };
 type VoidOrUndefinedOnly = void | { [UNDEFINED_VOID_ONLY]: never };
 
 // tslint:disable-next-line:export-just-namespace
-export = React;
-export as namespace React;
+export = Lestin;
+export as namespace Lestin;
 
-declare namespace React {
+declare namespace Lestin {
 	//
-	// React Elements
+	// Lestin Elements
 	// ----------------------------------------------------------------------
 
 	type ElementType<P = any> =
@@ -74,7 +74,7 @@ declare namespace React {
 		| ComponentType<P>;
 	type ComponentType<P = {}> = ComponentClass<P> | FunctionComponent<P>;
 
-	type JSXElementConstructor<P> = ((props: P) => ReactElement<any, any> | null) | (new (props: P) => Component<any, any>);
+	type JSXElementConstructor<P> = ((props: P) => LestinElement<any, any> | null) | (new (props: P) => Component<any, any>);
 
 	interface RefObject<T> {
 		readonly current: T | null;
@@ -84,23 +84,23 @@ declare namespace React {
 	type Ref<T> = RefCallback<T> | RefObject<T> | null;
 	type LegacyRef<T> = string | Ref<T>;
 	/**
-	 * Gets the instance type for a React element. The instance will be different for various component types:
+	 * Gets the instance type for a Lestin element. The instance will be different for various component types:
 	 *
-	 * - React class components will be the class instance. So if you had `class Foo extends React.Component<{}> {}`
-	 *   and used `React.ElementRef<typeof Foo>` then the type would be the instance of `Foo`.
-	 * - React stateless functional components do not have a backing instance and so `React.ElementRef<typeof Bar>`
+	 * - Lestin class components will be the class instance. So if you had `class Foo extends Lestin.Component<{}> {}`
+	 *   and used `Lestin.ElementRef<typeof Foo>` then the type would be the instance of `Foo`.
+	 * - Lestin stateless functional components do not have a backing instance and so `Lestin.ElementRef<typeof Bar>`
 	 *   (when `Bar` is `function Bar() {}`) will give you the `undefined` type.
-	 * - JSX intrinsics like `div` will give you their DOM instance. For `React.ElementRef<'div'>` that would be
-	 *   `HTMLDivElement`. For `React.ElementRef<'input'>` that would be `HTMLInputElement`.
-	 * - React stateless functional components that forward a `ref` will give you the `ElementRef` of the forwarded
+	 * - JSX intrinsics like `div` will give you their DOM instance. For `Lestin.ElementRef<'div'>` that would be
+	 *   `HTMLDivElement`. For `Lestin.ElementRef<'input'>` that would be `HTMLInputElement`.
+	 * - Lestin stateless functional components that forward a `ref` will give you the `ElementRef` of the forwarded
 	 *   to component.
 	 *
-	 * `C` must be the type _of_ a React component so you need to use typeof as in React.ElementRef<typeof MyComponent>.
+	 * `C` must be the type _of_ a Lestin component so you need to use typeof as in Lestin.ElementRef<typeof MyComponent>.
 	 *
 	 * @todo In Flow, this works a little different with forwarded refs and the `AbstractComponent` that
-	 *       `React.forwardRef()` returns.
+	 *       `Lestin.forwardRef()` returns.
 	 */
-	type ElementRef<C extends ForwardRefExoticComponent<any> | { new (props: any): Component<any> } | ((props: any, context?: any) => ReactElement | null) | keyof JSX.IntrinsicElements> =
+	type ElementRef<C extends ForwardRefExoticComponent<any> | { new (props: any): Component<any> } | ((props: any, context?: any) => LestinElement | null) | keyof JSX.IntrinsicElements> =
 		// need to check first if `ref` is a valid prop for ts@3.0
 		// otherwise it will infer `{}` instead of `never`
 		"ref" extends keyof ComponentPropsWithRef<C> ? (NonNullable<ComponentPropsWithRef<C>["ref"]> extends Ref<infer Instance> ? Instance : never) : never;
@@ -123,100 +123,100 @@ declare namespace React {
 		ref?: LegacyRef<T> | undefined;
 	}
 
-	interface ReactElement<P = any, T extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>> {
+	interface LestinElement<P = any, T extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>> {
 		type: T;
 		props: P;
 		key: Key | null;
 	}
 
-	interface ReactComponentElement<T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>, P = Pick<ComponentProps<T>, Exclude<keyof ComponentProps<T>, "key" | "ref">>> extends ReactElement<P, Exclude<T, number>> {}
+	interface LestinComponentElement<T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>, P = Pick<ComponentProps<T>, Exclude<keyof ComponentProps<T>, "key" | "ref">>> extends LestinElement<P, Exclude<T, number>> {}
 
-	interface FunctionComponentElement<P> extends ReactElement<P, FunctionComponent<P>> {
+	interface FunctionComponentElement<P> extends LestinElement<P, FunctionComponent<P>> {
 		ref?: ("ref" extends keyof P ? (P extends { ref?: infer R | undefined } ? R : never) : never) | undefined;
 	}
 
 	type CElement<P, T extends Component<P, ComponentState>> = ComponentElement<P, T>;
-	interface ComponentElement<P, T extends Component<P, ComponentState>> extends ReactElement<P, ComponentClass<P>> {
+	interface ComponentElement<P, T extends Component<P, ComponentState>> extends LestinElement<P, ComponentClass<P>> {
 		ref?: LegacyRef<T> | undefined;
 	}
 
 	type ClassicElement<P> = CElement<P, ClassicComponent<P, ComponentState>>;
 
 	// string fallback for custom web-components
-	interface DOMElement<P extends HTMLAttributes<T> | SVGAttributes<T>, T extends Element> extends ReactElement<P, string> {
+	interface DOMElement<P extends HTMLAttributes<T> | SVGAttributes<T>, T extends Element> extends LestinElement<P, string> {
 		ref: LegacyRef<T>;
 	}
 
-	// ReactHTML for ReactHTMLElement
-	interface ReactHTMLElement<T extends HTMLElement> extends DetailedReactHTMLElement<AllHTMLAttributes<T>, T> {}
+	// LestinHTML for LestinHTMLElement
+	interface LestinHTMLElement<T extends HTMLElement> extends DetailedLestinHTMLElement<AllHTMLAttributes<T>, T> {}
 
-	interface DetailedReactHTMLElement<P extends HTMLAttributes<T>, T extends HTMLElement> extends DOMElement<P, T> {
-		type: keyof ReactHTML;
+	interface DetailedLestinHTMLElement<P extends HTMLAttributes<T>, T extends HTMLElement> extends DOMElement<P, T> {
+		type: keyof LestinHTML;
 	}
 
-	// ReactSVG for ReactSVGElement
-	interface ReactSVGElement extends DOMElement<SVGAttributes<SVGElement>, SVGElement> {
-		type: keyof ReactSVG;
+	// LestinSVG for LestinSVGElement
+	interface LestinSVGElement extends DOMElement<SVGAttributes<SVGElement>, SVGElement> {
+		type: keyof LestinSVG;
 	}
 
-	interface ReactPortal extends ReactElement {
+	interface LestinPortal extends LestinElement {
 		key: Key | null;
-		children: ReactNode;
+		children: LestinNode;
 	}
 
 	//
 	// Factories
 	// ----------------------------------------------------------------------
 
-	type Factory<P> = (props?: Attributes & P, ...children: ReactNode[]) => ReactElement<P>;
+	type Factory<P> = (props?: Attributes & P, ...children: LestinNode[]) => LestinElement<P>;
 
 	/**
 	 * @deprecated Please use `FunctionComponentFactory`
 	 */
 	type SFCFactory<P> = FunctionComponentFactory<P>;
 
-	type FunctionComponentFactory<P> = (props?: Attributes & P, ...children: ReactNode[]) => FunctionComponentElement<P>;
+	type FunctionComponentFactory<P> = (props?: Attributes & P, ...children: LestinNode[]) => FunctionComponentElement<P>;
 
-	type ComponentFactory<P, T extends Component<P, ComponentState>> = (props?: ClassAttributes<T> & P, ...children: ReactNode[]) => CElement<P, T>;
+	type ComponentFactory<P, T extends Component<P, ComponentState>> = (props?: ClassAttributes<T> & P, ...children: LestinNode[]) => CElement<P, T>;
 
 	type CFactory<P, T extends Component<P, ComponentState>> = ComponentFactory<P, T>;
 	type ClassicFactory<P> = CFactory<P, ClassicComponent<P, ComponentState>>;
 
-	type DOMFactory<P extends DOMAttributes<T>, T extends Element> = (props?: (ClassAttributes<T> & P) | null, ...children: ReactNode[]) => DOMElement<P, T>;
+	type DOMFactory<P extends DOMAttributes<T>, T extends Element> = (props?: (ClassAttributes<T> & P) | null, ...children: LestinNode[]) => DOMElement<P, T>;
 
 	interface HTMLFactory<T extends HTMLElement> extends DetailedHTMLFactory<AllHTMLAttributes<T>, T> {}
 
 	interface DetailedHTMLFactory<P extends HTMLAttributes<T>, T extends HTMLElement> extends DOMFactory<P, T> {
-		(props?: (ClassAttributes<T> & P) | null, ...children: ReactNode[]): DetailedReactHTMLElement<P, T>;
+		(props?: (ClassAttributes<T> & P) | null, ...children: LestinNode[]): DetailedLestinHTMLElement<P, T>;
 	}
 
 	interface SVGFactory extends DOMFactory<SVGAttributes<SVGElement>, SVGElement> {
-		(props?: (ClassAttributes<SVGElement> & SVGAttributes<SVGElement>) | null, ...children: ReactNode[]): ReactSVGElement;
+		(props?: (ClassAttributes<SVGElement> & SVGAttributes<SVGElement>) | null, ...children: LestinNode[]): LestinSVGElement;
 	}
 
 	/**
-	 * @deprecated - This type is not relevant when using React. Inline the type instead to make the intent clear.
+	 * @deprecated - This type is not relevant when using Lestin. Inline the type instead to make the intent clear.
 	 */
-	type ReactText = string | number;
+	type LestinText = string | number;
 	/**
-	 * @deprecated - This type is not relevant when using React. Inline the type instead to make the intent clear.
+	 * @deprecated - This type is not relevant when using Lestin. Inline the type instead to make the intent clear.
 	 */
-	type ReactChild = ReactElement | string | number;
+	type LestinChild = LestinElement | string | number;
 
 	/**
-	 * @deprecated Use either `ReactNode[]` if you need an array or `Iterable<ReactNode>` if its passed to a host component.
+	 * @deprecated Use either `LestinNode[]` if you need an array or `Iterable<LestinNode>` if its passed to a host component.
 	 */
-	interface ReactNodeArray extends ReadonlyArray<ReactNode> {}
-	type ReactFragment = Iterable<ReactNode>;
-	type ReactNode = ReactElement | string | number | ReactFragment | ReactPortal | boolean | null | undefined;
+	interface LestinNodeArray extends ReadonlyArray<LestinNode> {}
+	type LestinFragment = Iterable<LestinNode>;
+	type LestinNode = LestinElement | string | number | LestinFragment | LestinPortal | boolean | null | undefined;
 
 	//
 	// Top Level API
 	// ----------------------------------------------------------------------
 
 	// DOM Elements
-	function createFactory<T extends HTMLElement>(type: keyof ReactHTML): HTMLFactory<T>;
-	function createFactory(type: keyof ReactSVG): SVGFactory;
+	function createFactory<T extends HTMLElement>(type: keyof LestinHTML): HTMLFactory<T>;
+	function createFactory(type: keyof LestinSVG): SVGFactory;
 	function createFactory<P extends DOMAttributes<T>, T extends Element>(type: string): DOMFactory<P, T>;
 
 	// Custom components
@@ -226,47 +226,47 @@ declare namespace React {
 	function createFactory<P>(type: ComponentClass<P>): Factory<P>;
 
 	// DOM Elements
-	// TODO: generalize this to everything in `keyof ReactHTML`, not just "input"
-	function createElement(type: "input", props?: (InputHTMLAttributes<HTMLInputElement> & ClassAttributes<HTMLInputElement>) | null, ...children: ReactNode[]): DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-	function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(type: keyof ReactHTML, props?: (ClassAttributes<T> & P) | null, ...children: ReactNode[]): DetailedReactHTMLElement<P, T>;
-	function createElement<P extends SVGAttributes<T>, T extends SVGElement>(type: keyof ReactSVG, props?: (ClassAttributes<T> & P) | null, ...children: ReactNode[]): ReactSVGElement;
-	function createElement<P extends DOMAttributes<T>, T extends Element>(type: string, props?: (ClassAttributes<T> & P) | null, ...children: ReactNode[]): DOMElement<P, T>;
+	// TODO: generalize this to everything in `keyof LestinHTML`, not just "input"
+	function createElement(type: "input", props?: (InputHTMLAttributes<HTMLInputElement> & ClassAttributes<HTMLInputElement>) | null, ...children: LestinNode[]): DetailedLestinHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+	function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(type: keyof LestinHTML, props?: (ClassAttributes<T> & P) | null, ...children: LestinNode[]): DetailedLestinHTMLElement<P, T>;
+	function createElement<P extends SVGAttributes<T>, T extends SVGElement>(type: keyof LestinSVG, props?: (ClassAttributes<T> & P) | null, ...children: LestinNode[]): LestinSVGElement;
+	function createElement<P extends DOMAttributes<T>, T extends Element>(type: string, props?: (ClassAttributes<T> & P) | null, ...children: LestinNode[]): DOMElement<P, T>;
 
 	// Custom components
 
-	function createElement<P extends {}>(type: FunctionComponent<P>, props?: (Attributes & P) | null, ...children: ReactNode[]): FunctionComponentElement<P>;
-	function createElement<P extends {}>(type: ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>, props?: (ClassAttributes<ClassicComponent<P, ComponentState>> & P) | null, ...children: ReactNode[]): CElement<P, ClassicComponent<P, ComponentState>>;
-	function createElement<P extends {}, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(type: ClassType<P, T, C>, props?: (ClassAttributes<T> & P) | null, ...children: ReactNode[]): CElement<P, T>;
-	function createElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string, props?: (Attributes & P) | null, ...children: ReactNode[]): ReactElement<P>;
+	function createElement<P extends {}>(type: FunctionComponent<P>, props?: (Attributes & P) | null, ...children: LestinNode[]): FunctionComponentElement<P>;
+	function createElement<P extends {}>(type: ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>, props?: (ClassAttributes<ClassicComponent<P, ComponentState>> & P) | null, ...children: LestinNode[]): CElement<P, ClassicComponent<P, ComponentState>>;
+	function createElement<P extends {}, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(type: ClassType<P, T, C>, props?: (ClassAttributes<T> & P) | null, ...children: LestinNode[]): CElement<P, T>;
+	function createElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string, props?: (Attributes & P) | null, ...children: LestinNode[]): LestinElement<P>;
 
 	// DOM Elements
-	// ReactHTMLElement
-	function cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(element: DetailedReactHTMLElement<P, T>, props?: P, ...children: ReactNode[]): DetailedReactHTMLElement<P, T>;
-	// ReactHTMLElement, less specific
-	function cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(element: ReactHTMLElement<T>, props?: P, ...children: ReactNode[]): ReactHTMLElement<T>;
+	// LestinHTMLElement
+	function cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(element: DetailedLestinHTMLElement<P, T>, props?: P, ...children: LestinNode[]): DetailedLestinHTMLElement<P, T>;
+	// LestinHTMLElement, less specific
+	function cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(element: LestinHTMLElement<T>, props?: P, ...children: LestinNode[]): LestinHTMLElement<T>;
 	// SVGElement
-	function cloneElement<P extends SVGAttributes<T>, T extends SVGElement>(element: ReactSVGElement, props?: P, ...children: ReactNode[]): ReactSVGElement;
+	function cloneElement<P extends SVGAttributes<T>, T extends SVGElement>(element: LestinSVGElement, props?: P, ...children: LestinNode[]): LestinSVGElement;
 	// DOM Element (has to be the last, because type checking stops at first overload that fits)
-	function cloneElement<P extends DOMAttributes<T>, T extends Element>(element: DOMElement<P, T>, props?: DOMAttributes<T> & P, ...children: ReactNode[]): DOMElement<P, T>;
+	function cloneElement<P extends DOMAttributes<T>, T extends Element>(element: DOMElement<P, T>, props?: DOMAttributes<T> & P, ...children: LestinNode[]): DOMElement<P, T>;
 
 	// Custom components
-	function cloneElement<P>(element: FunctionComponentElement<P>, props?: Partial<P> & Attributes, ...children: ReactNode[]): FunctionComponentElement<P>;
-	function cloneElement<P, T extends Component<P, ComponentState>>(element: CElement<P, T>, props?: Partial<P> & ClassAttributes<T>, ...children: ReactNode[]): CElement<P, T>;
-	function cloneElement<P>(element: ReactElement<P>, props?: Partial<P> & Attributes, ...children: ReactNode[]): ReactElement<P>;
+	function cloneElement<P>(element: FunctionComponentElement<P>, props?: Partial<P> & Attributes, ...children: LestinNode[]): FunctionComponentElement<P>;
+	function cloneElement<P, T extends Component<P, ComponentState>>(element: CElement<P, T>, props?: Partial<P> & ClassAttributes<T>, ...children: LestinNode[]): CElement<P, T>;
+	function cloneElement<P>(element: LestinElement<P>, props?: Partial<P> & Attributes, ...children: LestinNode[]): LestinElement<P>;
 
 	// Context via RenderProps
 	interface ProviderProps<T> {
 		value: T;
-		children?: ReactNode | undefined;
+		children?: LestinNode | undefined;
 	}
 
 	interface ConsumerProps<T> {
-		children: (value: T) => ReactNode;
+		children: (value: T) => LestinNode;
 	}
 
 	// TODO: similar to how Fragment is actually a symbol, the values returned from createContext,
 	// forwardRef and memo are actually objects that are treated specially by the renderer; see:
-	// https://github.com/facebook/react/blob/v16.6.0/packages/react/src/ReactContext.js#L35-L48
+	// https://github.com/facebook/react/blob/v16.6.0/packages/react/src/LestinContext.js#L35-L48
 	// https://github.com/facebook/react/blob/v16.6.0/packages/react/src/forwardRef.js#L42-L45
 	// https://github.com/facebook/react/blob/v16.6.0/packages/react/src/memo.js#L27-L31
 	// However, we have no way of telling the JSX parser that it's a JSX element type or its props other than
@@ -278,7 +278,7 @@ declare namespace React {
 		/**
 		 * **NOTE**: Exotic components are not callable.
 		 */
-		(props: P): ReactElement | null;
+		(props: P): LestinElement | null;
 		readonly $$typeof: symbol;
 	}
 
@@ -307,24 +307,24 @@ declare namespace React {
 		defaultValue: T
 	): Context<T>;
 
-	function isValidElement<P>(object: {} | null | undefined): object is ReactElement<P>;
+	function isValidElement<P>(object: {} | null | undefined): object is LestinElement<P>;
 
-	// Sync with `ReactChildren` until `ReactChildren` is removed.
+	// Sync with `LestinChildren` until `LestinChildren` is removed.
 	const Children: {
 		map<T, C>(children: C | ReadonlyArray<C>, fn: (child: C, index: number) => T): C extends null | undefined ? C : Array<Exclude<T, boolean | null | undefined>>;
 		forEach<C>(children: C | ReadonlyArray<C>, fn: (child: C, index: number) => void): void;
 		count(children: any): number;
 		only<C>(children: C): C extends any[] ? never : C;
-		toArray(children: ReactNode | ReactNode[]): Array<Exclude<ReactNode, boolean | null | undefined>>;
+		toArray(children: LestinNode | LestinNode[]): Array<Exclude<LestinNode, boolean | null | undefined>>;
 	};
-	const Fragment: ExoticComponent<{ children?: ReactNode | undefined }>;
-	const StrictMode: ExoticComponent<{ children?: ReactNode | undefined }>;
+	const Fragment: ExoticComponent<{ children?: LestinNode | undefined }>;
+	const StrictMode: ExoticComponent<{ children?: LestinNode | undefined }>;
 
 	interface SuspenseProps {
-		children?: ReactNode | undefined;
+		children?: LestinNode | undefined;
 
-		/** A fallback react tree to show when a Suspense child (like React.lazy) suspends */
-		fallback?: ReactNode;
+		/** A fallback react tree to show when a Suspense child (like Lestin.lazy) suspends */
+		fallback?: LestinNode;
 	}
 
 	const Suspense: ExoticComponent<SuspenseProps>;
@@ -335,7 +335,7 @@ declare namespace React {
 	 */
 	// type ProfilerOnRenderCallback = (id: string, phase: "mount" | "update", actualDuration: number, baseDuration: number, startTime: number, commitTime: number, interactions: Set<SchedulerInteraction>) => void;
 	interface ProfilerProps {
-		children?: ReactNode | undefined;
+		children?: LestinNode | undefined;
 		id: string;
 		// onRender: ProfilerOnRenderCallback;
 	}
@@ -346,7 +346,7 @@ declare namespace React {
 	// Component API
 	// ----------------------------------------------------------------------
 
-	type ReactInstance = Component<any> | Element;
+	type LestinInstance = Component<any> | Element;
 
 	// Base component for plain JS classes
 	interface Component<P = {}, S = {}, SS = any> extends ComponentLifecycle<P, S, SS> {}
@@ -359,11 +359,11 @@ declare namespace React {
 		 *
 		 * ```ts
 		 * type MyContext = number
-		 * const Ctx = React.createContext<MyContext>(0)
+		 * const Ctx = Lestin.createContext<MyContext>(0)
 		 *
-		 * class Foo extends React.Component {
+		 * class Foo extends Lestin.Component {
 		 *   static contextType = Ctx
-		 *   context!: React.ContextType<typeof Ctx>
+		 *   context!: Lestin.ContextType<typeof Ctx>
 		 *   render () {
 		 *     return <>My context's value: {this.context}</>;
 		 *   }
@@ -376,15 +376,15 @@ declare namespace React {
 
 		/**
 		 * If using the new style context, re-declare this in your class to be the
-		 * `React.ContextType` of your `static contextType`.
+		 * `Lestin.ContextType` of your `static contextType`.
 		 * Should be used with type annotation or static contextType.
 		 *
 		 * ```ts
 		 * static contextType = MyContext
 		 * // For TS pre-3.7:
-		 * context!: React.ContextType<typeof MyContext>
+		 * context!: Lestin.ContextType<typeof MyContext>
 		 * // For TS 3.7 and above:
-		 * declare context: React.ContextType<typeof MyContext>
+		 * declare context: Lestin.ContextType<typeof MyContext>
 		 * ```
 		 *
 		 * @see https://reactjs.org/docs/context.html
@@ -404,7 +404,7 @@ declare namespace React {
 		setState<K extends keyof S>(state: ((prevState: Readonly<S>, props: Readonly<P>) => Pick<S, K> | S | null) | (Pick<S, K> | S | null), callback?: () => void): void;
 
 		forceUpdate(callback?: () => void): void;
-		render(): ReactNode;
+		render(): LestinNode;
 
 		readonly props: Readonly<P>;
 		state: Readonly<S>;
@@ -413,7 +413,7 @@ declare namespace React {
 		 * https://reactjs.org/docs/refs-and-the-dom.html#legacy-api-string-refs
 		 */
 		refs: {
-			[key: string]: ReactInstance;
+			[key: string]: LestinInstance;
 		};
 	}
 
@@ -436,7 +436,7 @@ declare namespace React {
 	type FC<P = {}> = FunctionComponent<P>;
 
 	interface FunctionComponent<P = {}> {
-		(props: P, context?: any): ReactElement<any, any> | null;
+		(props: P, context?: any): LestinElement<any, any> | null;
 		propTypes?: WeakValidationMap<P> | undefined;
 		contextTypes?: ValidationMap<any> | undefined;
 		defaultProps?: Partial<P> | undefined;
@@ -444,15 +444,15 @@ declare namespace React {
 	}
 
 	/**
-	 * @deprecated - Equivalent with `React.FC`.
+	 * @deprecated - Equivalent with `Lestin.FC`.
 	 */
 	type VFC<P = {}> = VoidFunctionComponent<P>;
 
 	/**
-	 * @deprecated - Equivalent with `React.FunctionComponent`.
+	 * @deprecated - Equivalent with `Lestin.FunctionComponent`.
 	 */
 	interface VoidFunctionComponent<P = {}> {
-		(props: P, context?: any): ReactElement<any, any> | null;
+		(props: P, context?: any): LestinElement<any, any> | null;
 		propTypes?: WeakValidationMap<P> | undefined;
 		contextTypes?: ValidationMap<any> | undefined;
 		defaultProps?: Partial<P> | undefined;
@@ -462,7 +462,7 @@ declare namespace React {
 	type ForwardedRef<T> = ((instance: T | null) => void) | MutableRefObject<T | null> | null;
 
 	interface ForwardRefRenderFunction<T, P = {}> {
-		(props: P, ref: ForwardedRef<T>): ReactElement | null;
+		(props: P, ref: ForwardedRef<T>): LestinElement | null;
 		displayName?: string | undefined;
 		// explicit rejected with `never` required due to
 		// https://github.com/microsoft/TypeScript/issues/36826
@@ -503,7 +503,7 @@ declare namespace React {
 	// ----------------------------------------------------------------------
 
 	// This should actually be something like `Lifecycle<P, S> | DeprecatedLifecycle<P, S>`,
-	// as React will _not_ call the deprecated lifecycle methods if any of the new lifecycle
+	// as Lestin will _not_ call the deprecated lifecycle methods if any of the new lifecycle
 	// methods are present.
 	interface ComponentLifecycle<P, S, SS = any> extends NewLifecycle<P, S, SS>, DeprecatedLifecycle<P, S> {
 		/**
@@ -559,7 +559,7 @@ declare namespace React {
 	// This should be "infer SS" but can't use it yet
 	interface NewLifecycle<P, S, SS> {
 		/**
-		 * Runs before React applies the result of `render` to the document, and
+		 * Runs before Lestin applies the result of `render` to the document, and
 		 * returns an object to be given to componentDidUpdate. Useful for saving
 		 * things such as scroll position before `render` causes changes to it.
 		 *
@@ -583,7 +583,7 @@ declare namespace React {
 		 * Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
 		 * prevents this from being invoked.
 		 *
-		 * @deprecated 16.3, use componentDidMount or the constructor instead; will stop working in React 17
+		 * @deprecated 16.3, use componentDidMount or the constructor instead; will stop working in Lestin 17
 		 * @see https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#initializing-state
 		 * @see https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path
 		 */
@@ -592,7 +592,7 @@ declare namespace React {
 		 * Called immediately before mounting occurs, and before `Component#render`.
 		 * Avoid introducing any side-effects or subscriptions in this method.
 		 *
-		 * This method will not stop working in React 17.
+		 * This method will not stop working in Lestin 17.
 		 *
 		 * Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
 		 * prevents this from being invoked.
@@ -604,7 +604,7 @@ declare namespace React {
 		UNSAFE_componentWillMount?(): void;
 		/**
 		 * Called when the component may be receiving new props.
-		 * React may call this even if props have not changed, so be sure to compare new and existing
+		 * Lestin may call this even if props have not changed, so be sure to compare new and existing
 		 * props if you only want to handle changes.
 		 *
 		 * Calling `Component#setState` generally does not trigger this method.
@@ -612,19 +612,19 @@ declare namespace React {
 		 * Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
 		 * prevents this from being invoked.
 		 *
-		 * @deprecated 16.3, use static getDerivedStateFromProps instead; will stop working in React 17
+		 * @deprecated 16.3, use static getDerivedStateFromProps instead; will stop working in Lestin 17
 		 * @see https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#updating-state-based-on-props
 		 * @see https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path
 		 */
 		componentWillReceiveProps?(nextProps: Readonly<P>, nextContext: any): void;
 		/**
 		 * Called when the component may be receiving new props.
-		 * React may call this even if props have not changed, so be sure to compare new and existing
+		 * Lestin may call this even if props have not changed, so be sure to compare new and existing
 		 * props if you only want to handle changes.
 		 *
 		 * Calling `Component#setState` generally does not trigger this method.
 		 *
-		 * This method will not stop working in React 17.
+		 * This method will not stop working in Lestin 17.
 		 *
 		 * Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
 		 * prevents this from being invoked.
@@ -642,7 +642,7 @@ declare namespace React {
 		 * Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
 		 * prevents this from being invoked.
 		 *
-		 * @deprecated 16.3, use getSnapshotBeforeUpdate instead; will stop working in React 17
+		 * @deprecated 16.3, use getSnapshotBeforeUpdate instead; will stop working in Lestin 17
 		 * @see https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#reading-dom-properties-before-an-update
 		 * @see https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path
 		 */
@@ -652,7 +652,7 @@ declare namespace React {
 		 *
 		 * Note: You cannot call `Component#setState` here.
 		 *
-		 * This method will not stop working in React 17.
+		 * This method will not stop working in Lestin 17.
 		 *
 		 * Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
 		 * prevents this from being invoked.
@@ -682,7 +682,7 @@ declare namespace React {
 	}
 
 	interface ComponentSpec<P, S> extends Mixin<P, S> {
-		render(): ReactNode;
+		render(): LestinNode;
 
 		[propertyName: string]: any;
 	}
@@ -709,7 +709,7 @@ declare namespace React {
 		// Just "P extends { ref?: infer R }" looks sufficient, but R will infer as {} if P is {}.
 		"ref" extends keyof P ? (P extends { ref?: infer R | undefined } ? (string extends R ? PropsWithoutRef<P> & { ref?: Exclude<R, string> | undefined } : P) : P) : P;
 
-	type PropsWithChildren<P = unknown> = P & { children?: ReactNode | undefined };
+	type PropsWithChildren<P = unknown> = P & { children?: LestinNode | undefined };
 
 	/**
 	 * NOTE: prefer ComponentPropsWithRef, if the ref is forwarded,
@@ -737,7 +737,7 @@ declare namespace React {
 	function lazy<T extends ComponentType<any>>(factory: () => Promise<{ default: T }>): LazyExoticComponent<T>;
 
 	//
-	// React Hooks
+	// Lestin Hooks
 	// ----------------------------------------------------------------------
 
 	// based on the code in https://github.com/facebook/react/pull/13968
@@ -770,7 +770,7 @@ declare namespace React {
 
 	// This will technically work if you give a Consumer<T> or Provider<T> but it's deprecated and warns
 	/**
-	 * Accepts a context object (the value returned from `React.createContext`) and returns the current
+	 * Accepts a context object (the value returned from `Lestin.createContext`) and returns the current
 	 * context value, as given by the nearest context provider for the given context.
 	 *
 	 * @version 16.8.0
@@ -931,7 +931,7 @@ declare namespace React {
 	 * `useImperativeHandle` customizes the instance value that is exposed to parent components when using
 	 * `ref`. As always, imperative code using refs should be avoided in most cases.
 	 *
-	 * `useImperativeHandle` should be used with `React.forwardRef`.
+	 * `useImperativeHandle` should be used with `Lestin.forwardRef`.
 	 *
 	 * @version 16.8.0
 	 * @see https://reactjs.org/docs/hooks-reference.html#useimperativehandle
@@ -959,7 +959,7 @@ declare namespace React {
 	// allow undefined, but don't make it optional as that is very likely a mistake
 	function useMemo<T>(factory: () => T, deps: DependencyList | undefined): T;
 	/**
-	 * `useDebugValue` can be used to display a label for custom hooks in React DevTools.
+	 * `useDebugValue` can be used to display a label for custom hooks in Lestin DevTools.
 	 *
 	 * NOTE: We don’t recommend adding debug values to every custom hook.
 	 * It’s most valuable for custom hooks that are part of shared libraries.
@@ -1007,8 +1007,8 @@ declare namespace React {
 	 *
 	 * The `useTransition` hook returns two values in an array.
 	 *
-	 * The first is a boolean, React’s way of informing us whether we’re waiting for the transition to finish.
-	 * The second is a function that takes a callback. We can use it to tell React which state we want to defer.
+	 * The first is a boolean, Lestin’s way of informing us whether we’re waiting for the transition to finish.
+	 * The second is a function that takes a callback. We can use it to tell Lestin which state we want to defer.
 	 *
 	 * **If some state update causes a component to suspend, that state update should be wrapped in a transition.**`
 	 *
@@ -1204,7 +1204,7 @@ declare namespace React {
 
 	type EventHandler<E extends SyntheticEvent<any>> = { bivarianceHack(event: E): void }["bivarianceHack"];
 
-	type ReactEventHandler<T = Element> = EventHandler<SyntheticEvent<T>>;
+	type LestinEventHandler<T = Element> = EventHandler<SyntheticEvent<T>>;
 
 	type ClipboardEventHandler<T = Element> = EventHandler<ClipboardEvent<T>>;
 	type CompositionEventHandler<T = Element> = EventHandler<CompositionEvent<T>>;
@@ -1232,7 +1232,7 @@ declare namespace React {
 	interface SVGProps<T> extends SVGAttributes<T>, ClassAttributes<T> {}
 
 	interface DOMAttributes<T> {
-		children?: ReactNode | undefined;
+		children?: LestinNode | undefined;
 		dangerouslySetInnerHTML?:
 			| {
 					// Should be InnerHTML['innerHTML'].
@@ -1278,10 +1278,10 @@ declare namespace React {
 		onInvalidCapture?: FormEventHandler<T> | undefined;
 
 		// Image Events
-		onLoad?: ReactEventHandler<T> | undefined;
-		onLoadCapture?: ReactEventHandler<T> | undefined;
-		onError?: ReactEventHandler<T> | undefined; // also a Media Event
-		onErrorCapture?: ReactEventHandler<T> | undefined; // also a Media Event
+		onLoad?: LestinEventHandler<T> | undefined;
+		onLoadCapture?: LestinEventHandler<T> | undefined;
+		onError?: LestinEventHandler<T> | undefined; // also a Media Event
+		onErrorCapture?: LestinEventHandler<T> | undefined; // also a Media Event
 
 		// Keyboard Events
 		onKeyDown?: KeyboardEventHandler<T> | undefined;
@@ -1294,50 +1294,50 @@ declare namespace React {
 		onKeyUpCapture?: KeyboardEventHandler<T> | undefined;
 
 		// Media Events
-		onAbort?: ReactEventHandler<T> | undefined;
-		onAbortCapture?: ReactEventHandler<T> | undefined;
-		onCanPlay?: ReactEventHandler<T> | undefined;
-		onCanPlayCapture?: ReactEventHandler<T> | undefined;
-		onCanPlayThrough?: ReactEventHandler<T> | undefined;
-		onCanPlayThroughCapture?: ReactEventHandler<T> | undefined;
-		onDurationChange?: ReactEventHandler<T> | undefined;
-		onDurationChangeCapture?: ReactEventHandler<T> | undefined;
-		onEmptied?: ReactEventHandler<T> | undefined;
-		onEmptiedCapture?: ReactEventHandler<T> | undefined;
-		onEncrypted?: ReactEventHandler<T> | undefined;
-		onEncryptedCapture?: ReactEventHandler<T> | undefined;
-		onEnded?: ReactEventHandler<T> | undefined;
-		onEndedCapture?: ReactEventHandler<T> | undefined;
-		onLoadedData?: ReactEventHandler<T> | undefined;
-		onLoadedDataCapture?: ReactEventHandler<T> | undefined;
-		onLoadedMetadata?: ReactEventHandler<T> | undefined;
-		onLoadedMetadataCapture?: ReactEventHandler<T> | undefined;
-		onLoadStart?: ReactEventHandler<T> | undefined;
-		onLoadStartCapture?: ReactEventHandler<T> | undefined;
-		onPause?: ReactEventHandler<T> | undefined;
-		onPauseCapture?: ReactEventHandler<T> | undefined;
-		onPlay?: ReactEventHandler<T> | undefined;
-		onPlayCapture?: ReactEventHandler<T> | undefined;
-		onPlaying?: ReactEventHandler<T> | undefined;
-		onPlayingCapture?: ReactEventHandler<T> | undefined;
-		onProgress?: ReactEventHandler<T> | undefined;
-		onProgressCapture?: ReactEventHandler<T> | undefined;
-		onRateChange?: ReactEventHandler<T> | undefined;
-		onRateChangeCapture?: ReactEventHandler<T> | undefined;
-		onSeeked?: ReactEventHandler<T> | undefined;
-		onSeekedCapture?: ReactEventHandler<T> | undefined;
-		onSeeking?: ReactEventHandler<T> | undefined;
-		onSeekingCapture?: ReactEventHandler<T> | undefined;
-		onStalled?: ReactEventHandler<T> | undefined;
-		onStalledCapture?: ReactEventHandler<T> | undefined;
-		onSuspend?: ReactEventHandler<T> | undefined;
-		onSuspendCapture?: ReactEventHandler<T> | undefined;
-		onTimeUpdate?: ReactEventHandler<T> | undefined;
-		onTimeUpdateCapture?: ReactEventHandler<T> | undefined;
-		onVolumeChange?: ReactEventHandler<T> | undefined;
-		onVolumeChangeCapture?: ReactEventHandler<T> | undefined;
-		onWaiting?: ReactEventHandler<T> | undefined;
-		onWaitingCapture?: ReactEventHandler<T> | undefined;
+		onAbort?: LestinEventHandler<T> | undefined;
+		onAbortCapture?: LestinEventHandler<T> | undefined;
+		onCanPlay?: LestinEventHandler<T> | undefined;
+		onCanPlayCapture?: LestinEventHandler<T> | undefined;
+		onCanPlayThrough?: LestinEventHandler<T> | undefined;
+		onCanPlayThroughCapture?: LestinEventHandler<T> | undefined;
+		onDurationChange?: LestinEventHandler<T> | undefined;
+		onDurationChangeCapture?: LestinEventHandler<T> | undefined;
+		onEmptied?: LestinEventHandler<T> | undefined;
+		onEmptiedCapture?: LestinEventHandler<T> | undefined;
+		onEncrypted?: LestinEventHandler<T> | undefined;
+		onEncryptedCapture?: LestinEventHandler<T> | undefined;
+		onEnded?: LestinEventHandler<T> | undefined;
+		onEndedCapture?: LestinEventHandler<T> | undefined;
+		onLoadedData?: LestinEventHandler<T> | undefined;
+		onLoadedDataCapture?: LestinEventHandler<T> | undefined;
+		onLoadedMetadata?: LestinEventHandler<T> | undefined;
+		onLoadedMetadataCapture?: LestinEventHandler<T> | undefined;
+		onLoadStart?: LestinEventHandler<T> | undefined;
+		onLoadStartCapture?: LestinEventHandler<T> | undefined;
+		onPause?: LestinEventHandler<T> | undefined;
+		onPauseCapture?: LestinEventHandler<T> | undefined;
+		onPlay?: LestinEventHandler<T> | undefined;
+		onPlayCapture?: LestinEventHandler<T> | undefined;
+		onPlaying?: LestinEventHandler<T> | undefined;
+		onPlayingCapture?: LestinEventHandler<T> | undefined;
+		onProgress?: LestinEventHandler<T> | undefined;
+		onProgressCapture?: LestinEventHandler<T> | undefined;
+		onRateChange?: LestinEventHandler<T> | undefined;
+		onRateChangeCapture?: LestinEventHandler<T> | undefined;
+		onSeeked?: LestinEventHandler<T> | undefined;
+		onSeekedCapture?: LestinEventHandler<T> | undefined;
+		onSeeking?: LestinEventHandler<T> | undefined;
+		onSeekingCapture?: LestinEventHandler<T> | undefined;
+		onStalled?: LestinEventHandler<T> | undefined;
+		onStalledCapture?: LestinEventHandler<T> | undefined;
+		onSuspend?: LestinEventHandler<T> | undefined;
+		onSuspendCapture?: LestinEventHandler<T> | undefined;
+		onTimeUpdate?: LestinEventHandler<T> | undefined;
+		onTimeUpdateCapture?: LestinEventHandler<T> | undefined;
+		onVolumeChange?: LestinEventHandler<T> | undefined;
+		onVolumeChangeCapture?: LestinEventHandler<T> | undefined;
+		onWaiting?: LestinEventHandler<T> | undefined;
+		onWaitingCapture?: LestinEventHandler<T> | undefined;
 
 		// MouseEvents
 		onAuxClick?: MouseEventHandler<T> | undefined;
@@ -1378,8 +1378,8 @@ declare namespace React {
 		onMouseUpCapture?: MouseEventHandler<T> | undefined;
 
 		// Selection Events
-		onSelect?: ReactEventHandler<T> | undefined;
-		onSelectCapture?: ReactEventHandler<T> | undefined;
+		onSelect?: LestinEventHandler<T> | undefined;
+		onSelectCapture?: LestinEventHandler<T> | undefined;
 
 		// Touch Events
 		onTouchCancel?: TouchEventHandler<T> | undefined;
@@ -1637,7 +1637,7 @@ declare namespace React {
 	type AriaRole = "alert" | "alertdialog" | "application" | "article" | "banner" | "button" | "cell" | "checkbox" | "columnheader" | "combobox" | "complementary" | "contentinfo" | "definition" | "dialog" | "directory" | "document" | "feed" | "figure" | "form" | "grid" | "gridcell" | "group" | "heading" | "img" | "link" | "list" | "listbox" | "listitem" | "log" | "main" | "marquee" | "math" | "menu" | "menubar" | "menuitem" | "menuitemcheckbox" | "menuitemradio" | "navigation" | "none" | "note" | "option" | "presentation" | "progressbar" | "radio" | "radiogroup" | "region" | "row" | "rowgroup" | "rowheader" | "scrollbar" | "search" | "searchbox" | "separator" | "slider" | "spinbutton" | "status" | "switch" | "tab" | "table" | "tablist" | "tabpanel" | "term" | "textbox" | "timer" | "toolbar" | "tooltip" | "tree" | "treegrid" | "treeitem" | (string & {});
 
 	interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
-		// React-specific Attributes
+		// Lestin-specific Attributes
 		defaultChecked?: boolean | undefined;
 		defaultValue?: string | number | ReadonlyArray<string> | undefined;
 		suppressContentEditableWarning?: boolean | undefined;
@@ -1888,7 +1888,7 @@ declare namespace React {
 
 	interface DetailsHTMLAttributes<T> extends HTMLAttributes<T> {
 		open?: boolean | undefined;
-		onToggle?: ReactEventHandler<T> | undefined;
+		onToggle?: LestinEventHandler<T> | undefined;
 	}
 
 	interface DelHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -1897,8 +1897,8 @@ declare namespace React {
 	}
 
 	interface DialogHTMLAttributes<T> extends HTMLAttributes<T> {
-		onCancel?: ReactEventHandler<T> | undefined;
-		onClose?: ReactEventHandler<T> | undefined;
+		onCancel?: LestinEventHandler<T> | undefined;
+		onClose?: LestinEventHandler<T> | undefined;
 		open?: boolean | undefined;
 	}
 
@@ -2259,7 +2259,7 @@ declare namespace React {
 	}
 
 	// this list is "complete" in that it contains every SVG attribute
-	// that React supports, but the types can be improved.
+	// that Lestin supports, but the types can be improved.
 	// Full list here: https://facebook.github.io/react/docs/dom-elements.html
 	//
 	// The three broad type categories are (in order of restrictiveness):
@@ -2555,10 +2555,10 @@ declare namespace React {
 	}
 
 	//
-	// React.DOM
+	// Lestin.DOM
 	// ----------------------------------------------------------------------
 
-	interface ReactHTML {
+	interface LestinHTML {
 		a: DetailedHTMLFactory<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 		abbr: DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>;
 		address: DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>;
@@ -2677,7 +2677,7 @@ declare namespace React {
 		webview: DetailedHTMLFactory<WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement>;
 	}
 
-	interface ReactSVG {
+	interface LestinSVG {
 		animate: SVGFactory;
 		circle: SVGFactory;
 		clipPath: SVGFactory;
@@ -2735,10 +2735,10 @@ declare namespace React {
 		view: SVGFactory;
 	}
 
-	interface ReactDOM extends ReactHTML, ReactSVG {}
+	interface LestinDOM extends LestinHTML, LestinSVG {}
 
 	//
-	// React.PropTypes
+	// Lestin.PropTypes
 	// ----------------------------------------------------------------------
 
 	type Validator<T> = PropTypes.Validator<T>;
@@ -2751,7 +2751,7 @@ declare namespace React {
 		[K in keyof T]?: null extends T[K] ? Validator<T[K] | null | undefined> : undefined extends T[K] ? Validator<T[K] | null | undefined> : Validator<T[K]>;
 	};
 
-	interface ReactPropTypes {
+	interface LestinPropTypes {
 		any: typeof PropTypes.any;
 		array: typeof PropTypes.array;
 		bool: typeof PropTypes.bool;
@@ -2771,19 +2771,19 @@ declare namespace React {
 	}
 
 	//
-	// React.Children
+	// Lestin.Children
 	// ----------------------------------------------------------------------
 
 	/**
-	 * @deprecated - Use `typeof React.Children` instead.
+	 * @deprecated - Use `typeof Lestin.Children` instead.
 	 */
 	// Sync with type of `const Children`.
-	interface ReactChildren {
+	interface LestinChildren {
 		map<T, C>(children: C | ReadonlyArray<C>, fn: (child: C, index: number) => T): C extends null | undefined ? C : Array<Exclude<T, boolean | null | undefined>>;
 		forEach<C>(children: C | ReadonlyArray<C>, fn: (child: C, index: number) => void): void;
 		count(children: any): number;
 		only<C>(children: C): C extends any[] ? never : C;
-		toArray(children: ReactNode | ReactNode[]): Array<Exclude<ReactNode, boolean | null | undefined>>;
+		toArray(children: LestinNode | LestinNode[]): Array<Exclude<LestinNode, boolean | null | undefined>>;
 	}
 
 	//
@@ -2858,13 +2858,13 @@ type InexactPartial<T> = { [K in keyof T]?: T[K] | undefined };
 // Wrap in an outer-level conditional type to allow distribution over props that are unions
 type Defaultize<P, D> = P extends any ? (string extends keyof P ? P : Pick<P, Exclude<keyof P, keyof D>> & InexactPartial<Pick<P, Extract<keyof P, keyof D>>> & InexactPartial<Pick<D, Exclude<keyof D, keyof P>>>) : never;
 
-type ReactManagedAttributes<C, P> = C extends { propTypes: infer T; defaultProps: infer D } ? Defaultize<MergePropTypes<P, PropTypes.InferProps<T>>, D> : C extends { propTypes: infer T } ? MergePropTypes<P, PropTypes.InferProps<T>> : C extends { defaultProps: infer D } ? Defaultize<P, D> : P;
+type LestinManagedAttributes<C, P> = C extends { propTypes: infer T; defaultProps: infer D } ? Defaultize<MergePropTypes<P, PropTypes.InferProps<T>>, D> : C extends { propTypes: infer T } ? MergePropTypes<P, PropTypes.InferProps<T>> : C extends { defaultProps: infer D } ? Defaultize<P, D> : P;
 
 declare global {
 	namespace JSX {
-		interface Element extends React.ReactElement<any, any> {}
-		interface ElementClass extends React.Component<any> {
-			render(): React.ReactNode;
+		interface Element extends Lestin.LestinElement<any, any> {}
+		interface ElementClass extends Lestin.Component<any> {
+			render(): Lestin.LestinNode;
 		}
 		interface ElementAttributesProperty {
 			props: {};
@@ -2874,193 +2874,192 @@ declare global {
 		}
 
 		// We can't recurse forever because `type` can't be self-referential;
-		// let's assume it's reasonable to do a single React.lazy() around a single React.memo() / vice-versa
-		type LibraryManagedAttributes<C, P> = C extends React.MemoExoticComponent<infer T> | React.LazyExoticComponent<infer T> ? (T extends React.MemoExoticComponent<infer U> | React.LazyExoticComponent<infer U> ? ReactManagedAttributes<U, P> : ReactManagedAttributes<T, P>) : ReactManagedAttributes<C, P>;
+		// let's assume it's reasonable to do a single Lestin.lazy() around a single Lestin.memo() / vice-versa
+		type LibraryManagedAttributes<C, P> = C extends Lestin.MemoExoticComponent<infer T> | Lestin.LazyExoticComponent<infer T> ? (T extends Lestin.MemoExoticComponent<infer U> | Lestin.LazyExoticComponent<infer U> ? LestinManagedAttributes<U, P> : LestinManagedAttributes<T, P>) : LestinManagedAttributes<C, P>;
 
-		interface IntrinsicAttributes extends React.Attributes {}
-		interface IntrinsicClassAttributes<T> extends React.ClassAttributes<T> {}
+		interface IntrinsicAttributes extends Lestin.Attributes {}
+		interface IntrinsicClassAttributes<T> extends Lestin.ClassAttributes<T> {}
 
 		interface IntrinsicElements {
 			// HTML
-			a: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
-			abbr: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			address: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			area: React.DetailedHTMLProps<React.AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement>;
-			article: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			aside: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			audio: React.DetailedHTMLProps<React.AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement>;
-			b: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			base: React.DetailedHTMLProps<React.BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement>;
-			bdi: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			bdo: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			big: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			blockquote: React.DetailedHTMLProps<React.BlockquoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>;
-			body: React.DetailedHTMLProps<React.HTMLAttributes<HTMLBodyElement>, HTMLBodyElement>;
-			br: React.DetailedHTMLProps<React.HTMLAttributes<HTMLBRElement>, HTMLBRElement>;
-			button: React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
-			canvas: React.DetailedHTMLProps<React.CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement>;
-			caption: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			cite: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			code: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			col: React.DetailedHTMLProps<React.ColHTMLAttributes<HTMLTableColElement>, HTMLTableColElement>;
-			colgroup: React.DetailedHTMLProps<React.ColgroupHTMLAttributes<HTMLTableColElement>, HTMLTableColElement>;
-			data: React.DetailedHTMLProps<React.DataHTMLAttributes<HTMLDataElement>, HTMLDataElement>;
-			datalist: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDataListElement>, HTMLDataListElement>;
-			dd: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			del: React.DetailedHTMLProps<React.DelHTMLAttributes<HTMLModElement>, HTMLModElement>;
-			details: React.DetailedHTMLProps<React.DetailsHTMLAttributes<HTMLDetailsElement>, HTMLDetailsElement>;
-			dfn: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			dialog: React.DetailedHTMLProps<React.DialogHTMLAttributes<HTMLDialogElement>, HTMLDialogElement>;
-			div: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
-			dl: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDListElement>, HTMLDListElement>;
-			dt: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			em: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			embed: React.DetailedHTMLProps<React.EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement>;
-			fieldset: React.DetailedHTMLProps<React.FieldsetHTMLAttributes<HTMLFieldSetElement>, HTMLFieldSetElement>;
-			figcaption: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			figure: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			footer: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			form: React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
-			h1: React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
-			h2: React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
-			h3: React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
-			h4: React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
-			h5: React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
-			h6: React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
-			head: React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadElement>, HTMLHeadElement>;
-			header: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			hgroup: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			hr: React.DetailedHTMLProps<React.HTMLAttributes<HTMLHRElement>, HTMLHRElement>;
-			html: React.DetailedHTMLProps<React.HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>;
-			i: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			iframe: React.DetailedHTMLProps<React.IframeHTMLAttributes<HTMLIFrameElement>, HTMLIFrameElement>;
-			img: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>;
-			input: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-			ins: React.DetailedHTMLProps<React.InsHTMLAttributes<HTMLModElement>, HTMLModElement>;
-			kbd: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			keygen: React.DetailedHTMLProps<React.KeygenHTMLAttributes<HTMLElement>, HTMLElement>;
-			label: React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>;
-			legend: React.DetailedHTMLProps<React.HTMLAttributes<HTMLLegendElement>, HTMLLegendElement>;
-			li: React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>;
-			link: React.DetailedHTMLProps<React.LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement>;
-			main: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			map: React.DetailedHTMLProps<React.MapHTMLAttributes<HTMLMapElement>, HTMLMapElement>;
-			mark: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			menu: React.DetailedHTMLProps<React.MenuHTMLAttributes<HTMLElement>, HTMLElement>;
-			menuitem: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			meta: React.DetailedHTMLProps<React.MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement>;
-			meter: React.DetailedHTMLProps<React.MeterHTMLAttributes<HTMLMeterElement>, HTMLMeterElement>;
-			nav: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			noindex: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			noscript: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			object: React.DetailedHTMLProps<React.ObjectHTMLAttributes<HTMLObjectElement>, HTMLObjectElement>;
-			ol: React.DetailedHTMLProps<React.OlHTMLAttributes<HTMLOListElement>, HTMLOListElement>;
-			optgroup: React.DetailedHTMLProps<React.OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement>;
-			option: React.DetailedHTMLProps<React.OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>;
-			output: React.DetailedHTMLProps<React.OutputHTMLAttributes<HTMLOutputElement>, HTMLOutputElement>;
-			p: React.DetailedHTMLProps<React.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>;
-			param: React.DetailedHTMLProps<React.ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement>;
-			picture: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			pre: React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement>;
-			progress: React.DetailedHTMLProps<React.ProgressHTMLAttributes<HTMLProgressElement>, HTMLProgressElement>;
-			q: React.DetailedHTMLProps<React.QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>;
-			rp: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			rt: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			ruby: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			s: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			samp: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			slot: React.DetailedHTMLProps<React.SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement>;
-			script: React.DetailedHTMLProps<React.ScriptHTMLAttributes<HTMLScriptElement>, HTMLScriptElement>;
-			section: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			select: React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
-			small: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			source: React.DetailedHTMLProps<React.SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement>;
-			span: React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>;
-			strong: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			style: React.DetailedHTMLProps<React.StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement>;
-			sub: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			summary: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			sup: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			table: React.DetailedHTMLProps<React.TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>;
-			template: React.DetailedHTMLProps<React.HTMLAttributes<HTMLTemplateElement>, HTMLTemplateElement>;
-			tbody: React.DetailedHTMLProps<React.HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>;
-			td: React.DetailedHTMLProps<React.TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>;
-			textarea: React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
-			tfoot: React.DetailedHTMLProps<React.HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>;
-			th: React.DetailedHTMLProps<React.ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>;
-			thead: React.DetailedHTMLProps<React.HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>;
-			time: React.DetailedHTMLProps<React.TimeHTMLAttributes<HTMLTimeElement>, HTMLTimeElement>;
-			title: React.DetailedHTMLProps<React.HTMLAttributes<HTMLTitleElement>, HTMLTitleElement>;
-			tr: React.DetailedHTMLProps<React.HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>;
-			track: React.DetailedHTMLProps<React.TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement>;
-			u: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			ul: React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement>;
-			var: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			video: React.DetailedHTMLProps<React.VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>;
-			wbr: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-			webview: React.DetailedHTMLProps<React.WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement>;
+			a: Lestin.DetailedHTMLProps<Lestin.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+			abbr: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			address: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			area: Lestin.DetailedHTMLProps<Lestin.AreaHTMLAttributes<HTMLAreaElement>, HTMLAreaElement>;
+			article: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			aside: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			audio: Lestin.DetailedHTMLProps<Lestin.AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement>;
+			b: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			base: Lestin.DetailedHTMLProps<Lestin.BaseHTMLAttributes<HTMLBaseElement>, HTMLBaseElement>;
+			bdi: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			bdo: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			big: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			blockquote: Lestin.DetailedHTMLProps<Lestin.BlockquoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>;
+			body: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLBodyElement>, HTMLBodyElement>;
+			br: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLBRElement>, HTMLBRElement>;
+			button: Lestin.DetailedHTMLProps<Lestin.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+			canvas: Lestin.DetailedHTMLProps<Lestin.CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement>;
+			caption: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			cite: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			code: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			col: Lestin.DetailedHTMLProps<Lestin.ColHTMLAttributes<HTMLTableColElement>, HTMLTableColElement>;
+			colgroup: Lestin.DetailedHTMLProps<Lestin.ColgroupHTMLAttributes<HTMLTableColElement>, HTMLTableColElement>;
+			data: Lestin.DetailedHTMLProps<Lestin.DataHTMLAttributes<HTMLDataElement>, HTMLDataElement>;
+			datalist: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLDataListElement>, HTMLDataListElement>;
+			dd: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			del: Lestin.DetailedHTMLProps<Lestin.DelHTMLAttributes<HTMLModElement>, HTMLModElement>;
+			details: Lestin.DetailedHTMLProps<Lestin.DetailsHTMLAttributes<HTMLDetailsElement>, HTMLDetailsElement>;
+			dfn: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			dialog: Lestin.DetailedHTMLProps<Lestin.DialogHTMLAttributes<HTMLDialogElement>, HTMLDialogElement>;
+			div: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+			dl: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLDListElement>, HTMLDListElement>;
+			dt: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			em: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			embed: Lestin.DetailedHTMLProps<Lestin.EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement>;
+			fieldset: Lestin.DetailedHTMLProps<Lestin.FieldsetHTMLAttributes<HTMLFieldSetElement>, HTMLFieldSetElement>;
+			figcaption: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			figure: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			footer: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			form: Lestin.DetailedHTMLProps<Lestin.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
+			h1: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
+			h2: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
+			h3: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
+			h4: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
+			h5: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
+			h6: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
+			head: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLHeadElement>, HTMLHeadElement>;
+			header: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			hgroup: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			hr: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLHRElement>, HTMLHRElement>;
+			html: Lestin.DetailedHTMLProps<Lestin.HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>;
+			i: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			iframe: Lestin.DetailedHTMLProps<Lestin.IframeHTMLAttributes<HTMLIFrameElement>, HTMLIFrameElement>;
+			img: Lestin.DetailedHTMLProps<Lestin.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>;
+			input: Lestin.DetailedHTMLProps<Lestin.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+			ins: Lestin.DetailedHTMLProps<Lestin.InsHTMLAttributes<HTMLModElement>, HTMLModElement>;
+			kbd: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			keygen: Lestin.DetailedHTMLProps<Lestin.KeygenHTMLAttributes<HTMLElement>, HTMLElement>;
+			label: Lestin.DetailedHTMLProps<Lestin.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>;
+			legend: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLLegendElement>, HTMLLegendElement>;
+			li: Lestin.DetailedHTMLProps<Lestin.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>;
+			link: Lestin.DetailedHTMLProps<Lestin.LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement>;
+			main: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			map: Lestin.DetailedHTMLProps<Lestin.MapHTMLAttributes<HTMLMapElement>, HTMLMapElement>;
+			mark: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			menu: Lestin.DetailedHTMLProps<Lestin.MenuHTMLAttributes<HTMLElement>, HTMLElement>;
+			menuitem: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			meta: Lestin.DetailedHTMLProps<Lestin.MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement>;
+			meter: Lestin.DetailedHTMLProps<Lestin.MeterHTMLAttributes<HTMLMeterElement>, HTMLMeterElement>;
+			nav: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			noindex: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			noscript: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			object: Lestin.DetailedHTMLProps<Lestin.ObjectHTMLAttributes<HTMLObjectElement>, HTMLObjectElement>;
+			ol: Lestin.DetailedHTMLProps<Lestin.OlHTMLAttributes<HTMLOListElement>, HTMLOListElement>;
+			optgroup: Lestin.DetailedHTMLProps<Lestin.OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement>;
+			option: Lestin.DetailedHTMLProps<Lestin.OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>;
+			output: Lestin.DetailedHTMLProps<Lestin.OutputHTMLAttributes<HTMLOutputElement>, HTMLOutputElement>;
+			p: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>;
+			param: Lestin.DetailedHTMLProps<Lestin.ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement>;
+			picture: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			pre: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLPreElement>, HTMLPreElement>;
+			progress: Lestin.DetailedHTMLProps<Lestin.ProgressHTMLAttributes<HTMLProgressElement>, HTMLProgressElement>;
+			q: Lestin.DetailedHTMLProps<Lestin.QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>;
+			rp: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			rt: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			ruby: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			s: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			samp: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			slot: Lestin.DetailedHTMLProps<Lestin.SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement>;
+			script: Lestin.DetailedHTMLProps<Lestin.ScriptHTMLAttributes<HTMLScriptElement>, HTMLScriptElement>;
+			section: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			select: Lestin.DetailedHTMLProps<Lestin.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
+			small: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			source: Lestin.DetailedHTMLProps<Lestin.SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement>;
+			span: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>;
+			strong: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			style: Lestin.DetailedHTMLProps<Lestin.StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement>;
+			sub: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			summary: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			sup: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			table: Lestin.DetailedHTMLProps<Lestin.TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>;
+			template: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTemplateElement>, HTMLTemplateElement>;
+			tbody: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>;
+			td: Lestin.DetailedHTMLProps<Lestin.TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>;
+			textarea: Lestin.DetailedHTMLProps<Lestin.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
+			tfoot: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>;
+			th: Lestin.DetailedHTMLProps<Lestin.ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>;
+			thead: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>;
+			time: Lestin.DetailedHTMLProps<Lestin.TimeHTMLAttributes<HTMLTimeElement>, HTMLTimeElement>;
+			title: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTitleElement>, HTMLTitleElement>;
+			tr: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>;
+			track: Lestin.DetailedHTMLProps<Lestin.TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement>;
+			u: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			ul: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLUListElement>, HTMLUListElement>;
+			var: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			video: Lestin.DetailedHTMLProps<Lestin.VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>;
+			wbr: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
+			webview: Lestin.DetailedHTMLProps<Lestin.WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement>;
 
 			// SVG
-			svg: React.SVGProps<SVGSVGElement>;
+			svg: Lestin.SVGProps<SVGSVGElement>;
 
-			animate: React.SVGProps<SVGElement>; // TODO: It is SVGAnimateElement but is not in TypeScript's lib.dom.d.ts for now.
-			animateMotion: React.SVGProps<SVGElement>;
-			animateTransform: React.SVGProps<SVGElement>; // TODO: It is SVGAnimateTransformElement but is not in TypeScript's lib.dom.d.ts for now.
-			circle: React.SVGProps<SVGCircleElement>;
-			clipPath: React.SVGProps<SVGClipPathElement>;
-			defs: React.SVGProps<SVGDefsElement>;
-			desc: React.SVGProps<SVGDescElement>;
-			ellipse: React.SVGProps<SVGEllipseElement>;
-			feBlend: React.SVGProps<SVGFEBlendElement>;
-			feColorMatrix: React.SVGProps<SVGFEColorMatrixElement>;
-			feComponentTransfer: React.SVGProps<SVGFEComponentTransferElement>;
-			feComposite: React.SVGProps<SVGFECompositeElement>;
-			feConvolveMatrix: React.SVGProps<SVGFEConvolveMatrixElement>;
-			feDiffuseLighting: React.SVGProps<SVGFEDiffuseLightingElement>;
-			feDisplacementMap: React.SVGProps<SVGFEDisplacementMapElement>;
-			feDistantLight: React.SVGProps<SVGFEDistantLightElement>;
-			feDropShadow: React.SVGProps<SVGFEDropShadowElement>;
-			feFlood: React.SVGProps<SVGFEFloodElement>;
-			feFuncA: React.SVGProps<SVGFEFuncAElement>;
-			feFuncB: React.SVGProps<SVGFEFuncBElement>;
-			feFuncG: React.SVGProps<SVGFEFuncGElement>;
-			feFuncR: React.SVGProps<SVGFEFuncRElement>;
-			feGaussianBlur: React.SVGProps<SVGFEGaussianBlurElement>;
-			feImage: React.SVGProps<SVGFEImageElement>;
-			feMerge: React.SVGProps<SVGFEMergeElement>;
-			feMergeNode: React.SVGProps<SVGFEMergeNodeElement>;
-			feMorphology: React.SVGProps<SVGFEMorphologyElement>;
-			feOffset: React.SVGProps<SVGFEOffsetElement>;
-			fePointLight: React.SVGProps<SVGFEPointLightElement>;
-			feSpecularLighting: React.SVGProps<SVGFESpecularLightingElement>;
-			feSpotLight: React.SVGProps<SVGFESpotLightElement>;
-			feTile: React.SVGProps<SVGFETileElement>;
-			feTurbulence: React.SVGProps<SVGFETurbulenceElement>;
-			filter: React.SVGProps<SVGFilterElement>;
-			foreignObject: React.SVGProps<SVGForeignObjectElement>;
-			g: React.SVGProps<SVGGElement>;
-			image: React.SVGProps<SVGImageElement>;
-			line: React.SVGProps<SVGLineElement>;
-			linearGradient: React.SVGProps<SVGLinearGradientElement>;
-			marker: React.SVGProps<SVGMarkerElement>;
-			mask: React.SVGProps<SVGMaskElement>;
-			metadata: React.SVGProps<SVGMetadataElement>;
-			mpath: React.SVGProps<SVGElement>;
-			path: React.SVGProps<SVGPathElement>;
-			pattern: React.SVGProps<SVGPatternElement>;
-			polygon: React.SVGProps<SVGPolygonElement>;
-			polyline: React.SVGProps<SVGPolylineElement>;
-			radialGradient: React.SVGProps<SVGRadialGradientElement>;
-			rect: React.SVGProps<SVGRectElement>;
-			stop: React.SVGProps<SVGStopElement>;
-			switch: React.SVGProps<SVGSwitchElement>;
-			symbol: React.SVGProps<SVGSymbolElement>;
-			text: React.SVGProps<SVGTextElement>;
-			textPath: React.SVGProps<SVGTextPathElement>;
-			tspan: React.SVGProps<SVGTSpanElement>;
-			use: React.SVGProps<SVGUseElement>;
-			view: React.SVGProps<SVGViewElement>;
+			animate: Lestin.SVGProps<SVGElement>; // TODO: It is SVGAnimateElement but is not in TypeScript's lib.dom.d.ts for now.
+			animateMotion: Lestin.SVGProps<SVGElement>;
+			animateTransform: Lestin.SVGProps<SVGElement>; // TODO: It is SVGAnimateTransformElement but is not in TypeScript's lib.dom.d.ts for now.
+			circle: Lestin.SVGProps<SVGCircleElement>;
+			clipPath: Lestin.SVGProps<SVGClipPathElement>;
+			defs: Lestin.SVGProps<SVGDefsElement>;
+			desc: Lestin.SVGProps<SVGDescElement>;
+			ellipse: Lestin.SVGProps<SVGEllipseElement>;
+			feBlend: Lestin.SVGProps<SVGFEBlendElement>;
+			feColorMatrix: Lestin.SVGProps<SVGFEColorMatrixElement>;
+			feComponentTransfer: Lestin.SVGProps<SVGFEComponentTransferElement>;
+			feComposite: Lestin.SVGProps<SVGFECompositeElement>;
+			feConvolveMatrix: Lestin.SVGProps<SVGFEConvolveMatrixElement>;
+			feDiffuseLighting: Lestin.SVGProps<SVGFEDiffuseLightingElement>;
+			feDisplacementMap: Lestin.SVGProps<SVGFEDisplacementMapElement>;
+			feDistantLight: Lestin.SVGProps<SVGFEDistantLightElement>;
+			feDropShadow: Lestin.SVGProps<SVGFEDropShadowElement>;
+			feFlood: Lestin.SVGProps<SVGFEFloodElement>;
+			feFuncA: Lestin.SVGProps<SVGFEFuncAElement>;
+			feFuncB: Lestin.SVGProps<SVGFEFuncBElement>;
+			feFuncG: Lestin.SVGProps<SVGFEFuncGElement>;
+			feFuncR: Lestin.SVGProps<SVGFEFuncRElement>;
+			feGaussianBlur: Lestin.SVGProps<SVGFEGaussianBlurElement>;
+			feImage: Lestin.SVGProps<SVGFEImageElement>;
+			feMerge: Lestin.SVGProps<SVGFEMergeElement>;
+			feMergeNode: Lestin.SVGProps<SVGFEMergeNodeElement>;
+			feMorphology: Lestin.SVGProps<SVGFEMorphologyElement>;
+			feOffset: Lestin.SVGProps<SVGFEOffsetElement>;
+			fePointLight: Lestin.SVGProps<SVGFEPointLightElement>;
+			feSpecularLighting: Lestin.SVGProps<SVGFESpecularLightingElement>;
+			feSpotLight: Lestin.SVGProps<SVGFESpotLightElement>;
+			feTile: Lestin.SVGProps<SVGFETileElement>;
+			feTurbulence: Lestin.SVGProps<SVGFETurbulenceElement>;
+			filter: Lestin.SVGProps<SVGFilterElement>;
+			foreignObject: Lestin.SVGProps<SVGForeignObjectElement>;
+			g: Lestin.SVGProps<SVGGElement>;
+			image: Lestin.SVGProps<SVGImageElement>;
+			line: Lestin.SVGProps<SVGLineElement>;
+			linearGradient: Lestin.SVGProps<SVGLinearGradientElement>;
+			marker: Lestin.SVGProps<SVGMarkerElement>;
+			mask: Lestin.SVGProps<SVGMaskElement>;
+			metadata: Lestin.SVGProps<SVGMetadataElement>;
+			mpath: Lestin.SVGProps<SVGElement>;
+			path: Lestin.SVGProps<SVGPathElement>;
+			pattern: Lestin.SVGProps<SVGPatternElement>;
+			polygon: Lestin.SVGProps<SVGPolygonElement>;
+			polyline: Lestin.SVGProps<SVGPolylineElement>;
+			radialGradient: Lestin.SVGProps<SVGRadialGradientElement>;
+			rect: Lestin.SVGProps<SVGRectElement>;
+			stop: Lestin.SVGProps<SVGStopElement>;
+			switch: Lestin.SVGProps<SVGSwitchElement>;
+			symbol: Lestin.SVGProps<SVGSymbolElement>;
+			text: Lestin.SVGProps<SVGTextElement>;
+			textPath: Lestin.SVGProps<SVGTextPathElement>;
+			tspan: Lestin.SVGProps<SVGTSpanElement>;
+			use: Lestin.SVGProps<SVGUseElement>;
+			view: Lestin.SVGProps<SVGViewElement>;
 		}
 	}
 }
-

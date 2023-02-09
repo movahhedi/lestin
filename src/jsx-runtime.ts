@@ -34,10 +34,10 @@ export function createElement(type: any, props: (DOMAttributes) | null = null, .
 // export function createElement<P extends {}, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(type: ClassType<P, T, C>, props?: (Attributes<T> & P) | null, ...children: HTMLElement[]): CElement<P, T>;
 // export function createElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string, props?: (Attributes & P) | null, ...children: HTMLElement[]): LestinElement<P>;
 
-export function createElement<P extends {}>(type: (props?: (React.Attributes & P) | null, ...children: HTMLElement[] | React.ReactNode[]) => HTMLElement, props?: (React.Attributes & P) | null, ...children: HTMLElement[]): HTMLElement;
-export function createElement<P extends React.DOMAttributes<T>, T extends HTMLElement>(type: string, props?: (React.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement;
-export function createElement<P extends React.HTMLAttributes<T>, T extends HTMLElement>(type: keyof JSX.IntrinsicElements, props?: (React.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement;
-export function createElement<P extends React.HTMLAttributes<T>, T extends HTMLElement>(type: string | keyof JSX.IntrinsicElements | ((props?: (React.Attributes & P) | null, ...children: HTMLElement[]) => HTMLElement), props?: (React.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement {
+export function createElement<P extends {}>(type: (props?: (Lestin.Attributes & P) | null, ...children: HTMLElement[] | Lestin.LestinNode[]) => HTMLElement, props?: (Lestin.Attributes & P) | null, ...children: HTMLElement[]): HTMLElement;
+export function createElement<P extends Lestin.DOMAttributes<T>, T extends HTMLElement>(type: string, props?: (Lestin.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement;
+export function createElement<P extends Lestin.HTMLAttributes<T>, T extends HTMLElement>(type: keyof JSX.IntrinsicElements, props?: (Lestin.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement;
+export function createElement<P extends Lestin.HTMLAttributes<T>, T extends HTMLElement>(type: string | keyof JSX.IntrinsicElements | ((props?: (Lestin.Attributes & P) | null, ...children: HTMLElement[]) => HTMLElement), props?: (Lestin.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement {
 // export function createElement(type: IntrinsicElements, props: (HTMLAttributes<HTMLDivElement>), ...children: ComponentChildren[]): HTMLElement {
 
 	// let newChildren = children || props.children || [];
