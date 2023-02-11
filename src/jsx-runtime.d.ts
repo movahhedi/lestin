@@ -1,5 +1,7 @@
 /// <reference path="global.d.ts" />
 
+// Credits of this file goes to the contributors of @types/react (https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react)
+
 import * as CSS from "csstype";
 import * as PropTypes from "prop-types";
 // import { Interaction as SchedulerInteraction } from "scheduler/tracing";
@@ -75,16 +77,7 @@ declare namespace Lestin {
 		(props?: (Attributes<SVGElement> & SVGAttributes<SVGElement>) | null, ...children: LestinNode[]): LestinSVGElement;
 	}
 
-	/**
-	 * @deprecated - This type is not relevant when using Lestin. Inline the type instead to make the intent clear.
-	 */
-	type LestinText = string | number;
-	/**
-	 * @deprecated - This type is not relevant when using Lestin. Inline the type instead to make the intent clear.
-	 */
-	type LestinChild = LestinElement | string | number;
-
-	type LestinFragment = Iterable<LestinNode>;
+	type LestinFragment = LestinNode[] /*Iterable<LestinNode>*/;
 	type LestinNode = LestinElement | string | number | LestinFragment | boolean | null | undefined;
 
 	//
@@ -100,7 +93,7 @@ declare namespace Lestin {
 
 	// Custom components
 
-	// function createElement<P extends {}>(type: ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>, props?: (Attributes<ClassicComponent<P, ComponentState>> & P) | null, ...children: LestinNode[]): CElement<P, ClassicComponent<P, ComponentState>>;
+	// function createElement<P extends {}>(type: ClassType<P, Component<P, ComponentState>, ComponentClass<P>>, props?: (Attributes<Component<P, ComponentState>> & P) | null, ...children: LestinNode[]): CElement<P, Component<P, ComponentState>>;
 	// function createElement<P extends {}, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(type: ClassType<P, T, C>, props?: (Attributes<T> & P) | null, ...children: LestinNode[]): CElement<P, T>;
 	function createElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string, props?: (Attributes & P) | null, ...children: LestinNode[]): LestinElement<P>;
 
@@ -136,15 +129,12 @@ declare namespace Lestin {
 	interface Component<P = {}, S = {}, SS = any> {}
 	class Component<P, S> {}
 
-	interface ClassicComponent<P = {}, S = {}> extends Component<P, S> {}
-
 	//
 	// Class Interfaces
 	// ----------------------------------------------------------------------
 
 	interface FunctionComponent<P = {}> {}
 	interface ComponentClass<P = {}, S = ComponentState> {}
-	interface ClassicComponentClass<P = {}> extends ComponentClass<P> {}
 
 	/**
 	 * We use an intersection type to infer multiple type parameters from

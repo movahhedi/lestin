@@ -2,45 +2,11 @@
 
 // import _isEmpty from "lodash/isEmpty";
 
-// export type ComponentChild = HTMLElement | string; // object | string | number | bigint | boolean | null | undefined;
-// export type ComponentChildren = HTMLElement[] | HTMLElement | string;
-/*
-export interface LestinDOMAttributes {
-	children?: HTMLElement[] | HTMLElement | string;
-	dangerouslySetInnerHTML?: {
-		__html: string;
-	};
-}*/
+export function createElement<P extends {}>(type: (props?: (Lestin.Attributes & P) | null, children?: Lestin.LestinNode) => Lestin.LestinNode, props?: (Lestin.Attributes & P) | null, ...children: HTMLElement[]): Lestin.LestinNode;
+export function createElement<P extends Lestin.DOMAttributes<T>, T extends HTMLElement>(type: string, props?: (Lestin.HTMLAttributes<T> & P) | null, children?: Lestin.LestinNode): Lestin.LestinNode;
+export function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lestin.LestinNode>(type: keyof JSX.IntrinsicElements, props?: (Lestin.HTMLAttributes<T> & P) | null, children?: Lestin.LestinNode): Lestin.LestinNode;
+export function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lestin.LestinNode>(type: string | keyof JSX.IntrinsicElements | ((props?: (Lestin.Attributes & P) | null, children?: Lestin.LestinNode) => Lestin.LestinNode), props?: (Lestin.HTMLAttributes<T> & P) | null, children?: Lestin.LestinNode): Lestin.LestinNode {
 
-/*
-// export function createElement(type: "input", props: DOMAttributes<HTMLInputElement> | null, ...children: ComponentChildren[]): HTMLElement;
-export function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(type: keyof IntrinsicElements, props: (DOMAttributes<T> & P) | null, ...children: ComponentChildren[]): HTMLElement;
-export function createElement<P extends SVGAttributes<T>, T extends HTMLElement>(type: keyof IntrinsicElements, props: (DOMAttributes<T> & P) | null, ...children: ComponentChildren[]): HTMLElement;
-export function createElement<T extends HTMLElement>(type: string, props: (DOMAttributes<T> & HTMLAttributes & SVGAttributes) | null, ...children: ComponentChildren[]): HTMLElement;
-// export function createElement<P>(type: ComponentType<P>, props: (DOMAttributes<P> & P) | null, ...children: ComponentChildren[]): HTMLElement;
-export function createElement(type: any, props: (DOMAttributes) | null = null, ...children: ComponentChildren[]) {*/
-
-// export function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(type: keyof IntrinsicElements, props: (DOMAttributes<T> & P) | null, ...children: ComponentChildren[]): HTMLElement {
-
-
-
-// export function createElement(type: "input", props?: (InputHTMLAttributes<HTMLInputElement> & Attributes<HTMLInputElement>) | null, ...children: HTMLElement[]): DetailedLestinHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-// export function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(type: keyof LestinHTML, props?: (Attributes<T> & P) | null, ...children: HTMLElement[]): DetailedLestinHTMLElement<P, T>;
-// export function createElement<P extends SVGAttributes<T>, T extends SVGElement>(type: keyof LestinSVG, props?: (Attributes<T> & P) | null, ...children: HTMLElement[]): LestinSVGElement;
-// export function createElement<P extends DOMAttributes<T>, T extends Element>(type: string, props?: (Attributes<T> & P) | null, ...children: HTMLElement[]): DOMElement<P, T>;
-
-// export function createElement<P extends {}>(type: FunctionComponent<P>, props?: (Attributes & P) | null, ...children: HTMLElement[]): FunctionComponentElement<P>;
-// export function createElement<P extends {}>(type: ClassType<P, ClassicComponent<P, ComponentState>, ClassicComponentClass<P>>, props?: (Attributes<ClassicComponent<P, ComponentState>> & P) | null, ...children: HTMLElement[]): CElement<P, ClassicComponent<P, ComponentState>>;
-// export function createElement<P extends {}, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(type: ClassType<P, T, C>, props?: (Attributes<T> & P) | null, ...children: HTMLElement[]): CElement<P, T>;
-// export function createElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string, props?: (Attributes & P) | null, ...children: HTMLElement[]): LestinElement<P>;
-
-export function createElement<P extends {}>(type: (props?: (Lestin.Attributes & P) | null, ...children: HTMLElement[] | Lestin.LestinNode[]) => HTMLElement, props?: (Lestin.Attributes & P) | null, ...children: HTMLElement[]): HTMLElement;
-export function createElement<P extends Lestin.DOMAttributes<T>, T extends HTMLElement>(type: string, props?: (Lestin.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement;
-export function createElement<P extends Lestin.HTMLAttributes<T>, T extends HTMLElement>(type: keyof JSX.IntrinsicElements, props?: (Lestin.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement;
-export function createElement<P extends Lestin.HTMLAttributes<T>, T extends HTMLElement>(type: string | keyof JSX.IntrinsicElements | ((props?: (Lestin.Attributes & P) | null, ...children: HTMLElement[]) => HTMLElement), props?: (Lestin.HTMLAttributes<T> & P) | null, ...children: HTMLElement[]): HTMLElement {
-// export function createElement(type: IntrinsicElements, props: (HTMLAttributes<HTMLDivElement>), ...children: ComponentChildren[]): HTMLElement {
-
-	// let newChildren = children || props.children || [];
 	let newChildren = props.children || [];
 	delete props["children"];
 
@@ -58,13 +24,21 @@ export function createElement<P extends Lestin.HTMLAttributes<T>, T extends HTML
 
 	let element: HTMLElement = document.createElement(type);
 
-	Object.entries(props || {}).forEach(([name, value]) => {
+	Object.entries(props).forEach(([name, value]) => {
+
+		if (!name || value === undefined || value === null) return;
 
 		if (name.startsWith("on") && name.toLowerCase() in window) {
 			let EventName = name.toLowerCase().substring(2);
 			if (Array.isArray(value)) {
-				value.forEach((value_i) => element.addEventListener(EventName, value_i));
-			} else element.addEventListener(EventName, value);
+				value.forEach((value_i) => {
+					if (EventName && value_i) {
+						element.addEventListener(EventName, value_i);
+					}
+				});
+			} else if (EventName && value) {
+				element.addEventListener(EventName, value);
+			}
 		}
 
 		else if (name === "style") {

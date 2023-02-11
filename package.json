@@ -1,6 +1,6 @@
 {
 	"name": "lestin",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Vanilla JSX, No Virtual-DOM, No React",
 	"main": "dist/jsx-runtime.js",
 	"module": "dist/jsx-runtime.mjs",
@@ -27,12 +27,8 @@
 	"scripts": {
 		"build": "rollup -c"
 	},
-	"dependencies": {
-		"lodash": "^4.17.21"
-	},
 	"devDependencies": {
 		"@rollup/plugin-terser": "^0.4.0",
-		"@types/lodash": "^4.14.191",
 		"csstype": "^3.1.1",
 		"esbuild": "^0.17.5",
 		"prop-types": "^15.8.1",

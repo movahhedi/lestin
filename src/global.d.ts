@@ -7,6 +7,8 @@ Warning: all of these interfaces are empty. If you want type definitions for var
 (such as HTMLInputElement.prototype.value), you need to add `--lib DOM` (via command line or tsconfig.json).
 */
 
+// Credits of this file goes to the contributors of @types/react (https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react)
+
 interface Event { }
 interface AnimationEvent extends Event { }
 interface ClipboardEvent extends Event { }
