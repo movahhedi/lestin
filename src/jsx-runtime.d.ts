@@ -336,23 +336,7 @@ declare namespace Lestin {
 	type TransitionEventHandler<T = Element> = EventHandler<TransitionEvent<T>>;
 
 	// SoAoU: single or array or undefined
-
-	type LestinEventHandler_SoAoU<T = Element> = LestinEventHandler<T> | LestinEventHandler<T>[] | undefined;
-
-	type ClipboardEventHandler_SoAoU<T = Element> = ClipboardEventHandler<T> | ClipboardEventHandler<T>[] | undefined;
-	type CompositionEventHandler_SoAoU<T = Element> = CompositionEventHandler<T> | CompositionEventHandler<T>[] | undefined;
-	type DragEventHandler_SoAoU<T = Element> = DragEventHandler<T> | DragEventHandler<T>[] | undefined;
-	type FocusEventHandler_SoAoU<T = Element> = FocusEventHandler<T> | FocusEventHandler<T>[] | undefined;
-	type FormEventHandler_SoAoU<T = Element> = FormEventHandler<T> | FormEventHandler<T>[] | undefined;
-	type ChangeEventHandler_SoAoU<T = Element> = ChangeEventHandler<T> | ChangeEventHandler<T>[] | undefined;
-	type KeyboardEventHandler_SoAoU<T = Element> = KeyboardEventHandler<T> | KeyboardEventHandler<T>[] | undefined;
-	type MouseEventHandler_SoAoU<T = Element> = MouseEventHandler<T> | MouseEventHandler<T>[] | undefined;
-	type TouchEventHandler_SoAoU<T = Element> = TouchEventHandler<T> | TouchEventHandler<T>[] | undefined;
-	type PointerEventHandler_SoAoU<T = Element> = PointerEventHandler<T> | PointerEventHandler<T>[] | undefined;
-	type UIEventHandler_SoAoU<T = Element> = UIEventHandler<T> | UIEventHandler<T>[] | undefined;
-	type WheelEventHandler_SoAoU<T = Element> = WheelEventHandler<T> | WheelEventHandler<T>[] | undefined;
-	type AnimationEventHandler_SoAoU<T = Element> = AnimationEventHandler<T> | AnimationEventHandler<T>[] | undefined;
-	type TransitionEventHandler_SoAoU<T = Element> = TransitionEventHandler<T> | TransitionEventHandler<T>[] | undefined;
+	type SoAoU<P = LestinEventHandler> = P | P[] | undefined;
 
 	//
 	// Props / DOM Attributes
@@ -364,203 +348,201 @@ declare namespace Lestin {
 
 	interface SVGProps<T> extends SVGAttributes<T>, Attributes<T> {}
 
-	type ClipboardEventHandler_SoA<T> = ClipboardEventHandler<T> | ClipboardEventHandler<T>[] | undefined;
-
 	interface DOMAttributes<T> {
 		children?: LestinNode | undefined;
-		innerHTML?: string | TrustedHTML | undefined;
+		innerHTML?: string | undefined;
 
 		// Clipboard Events
-		onCopy?: ClipboardEventHandler_SoAoU<T>;
-		onCopyCapture?: ClipboardEventHandler_SoAoU<T>;
-		onCut?: ClipboardEventHandler_SoAoU<T>;
-		onCutCapture?: ClipboardEventHandler_SoAoU<T>;
-		onPaste?: ClipboardEventHandler_SoAoU<T>;
-		onPasteCapture?: ClipboardEventHandler_SoAoU<T>;
+		onCopy?: SoAoU<ClipboardEventHandler<T>>;
+		onCopyCapture?: SoAoU<ClipboardEventHandler<T>>;
+		onCut?: SoAoU<ClipboardEventHandler<T>>;
+		onCutCapture?: SoAoU<ClipboardEventHandler<T>>;
+		onPaste?: SoAoU<ClipboardEventHandler<T>>;
+		onPasteCapture?: SoAoU<ClipboardEventHandler<T>>;
 
 		// Composition Events
-		onCompositionEnd?: CompositionEventHandler_SoAoU<T>;
-		onCompositionEndCapture?: CompositionEventHandler_SoAoU<T>;
-		onCompositionStart?: CompositionEventHandler_SoAoU<T>;
-		onCompositionStartCapture?: CompositionEventHandler_SoAoU<T>;
-		onCompositionUpdate?: CompositionEventHandler_SoAoU<T>;
-		onCompositionUpdateCapture?: CompositionEventHandler_SoAoU<T>;
+		onCompositionEnd?: SoAoU<CompositionEventHandler<T>>;
+		onCompositionEndCapture?: SoAoU<CompositionEventHandler<T>>;
+		onCompositionStart?: SoAoU<CompositionEventHandler<T>>;
+		onCompositionStartCapture?: SoAoU<CompositionEventHandler<T>>;
+		onCompositionUpdate?: SoAoU<CompositionEventHandler<T>>;
+		onCompositionUpdateCapture?: SoAoU<CompositionEventHandler<T>>;
 
 		// Focus Events
-		onFocus?: FocusEventHandler_SoAoU<T>;
-		onFocusCapture?: FocusEventHandler_SoAoU<T>;
-		onBlur?: FocusEventHandler_SoAoU<T>;
-		onBlurCapture?: FocusEventHandler_SoAoU<T>;
+		onFocus?: SoAoU<FocusEventHandler<T>>;
+		onFocusCapture?: SoAoU<FocusEventHandler<T>>;
+		onBlur?: SoAoU<FocusEventHandler<T>>;
+		onBlurCapture?: SoAoU<FocusEventHandler<T>>;
 
 		// Form Events
-		onChange?: FormEventHandler_SoAoU<T>;
-		onChangeCapture?: FormEventHandler_SoAoU<T>;
-		onBeforeInput?: FormEventHandler_SoAoU<T>;
-		onBeforeInputCapture?: FormEventHandler_SoAoU<T>;
-		onInput?: FormEventHandler_SoAoU<T>;
-		onInputCapture?: FormEventHandler_SoAoU<T>;
-		onReset?: FormEventHandler_SoAoU<T>;
-		onResetCapture?: FormEventHandler_SoAoU<T>;
-		onSubmit?: FormEventHandler_SoAoU<T>;
-		onSubmitCapture?: FormEventHandler_SoAoU<T>;
-		onInvalid?: FormEventHandler_SoAoU<T>;
-		onInvalidCapture?: FormEventHandler_SoAoU<T>;
+		onChange?: SoAoU<FormEventHandler<T>>;
+		onChangeCapture?: SoAoU<FormEventHandler<T>>;
+		onBeforeInput?: SoAoU<FormEventHandler<T>>;
+		onBeforeInputCapture?: SoAoU<FormEventHandler<T>>;
+		onInput?: SoAoU<FormEventHandler<T>>;
+		onInputCapture?: SoAoU<FormEventHandler<T>>;
+		onReset?: SoAoU<FormEventHandler<T>>;
+		onResetCapture?: SoAoU<FormEventHandler<T>>;
+		onSubmit?: SoAoU<FormEventHandler<T>>;
+		onSubmitCapture?: SoAoU<FormEventHandler<T>>;
+		onInvalid?: SoAoU<FormEventHandler<T>>;
+		onInvalidCapture?: SoAoU<FormEventHandler<T>>;
 
 		// Image Events
-		onLoad?: LestinEventHandler_SoAoU<T>;
-		onLoadCapture?: LestinEventHandler_SoAoU<T>;
-		onError?: LestinEventHandler_SoAoU<T>; // also a Media Event
-		onErrorCapture?: LestinEventHandler_SoAoU<T>; // also a Media Event
+		onLoad?: SoAoU<LestinEventHandler<T>>;
+		onLoadCapture?: SoAoU<LestinEventHandler<T>>;
+		onError?: SoAoU<LestinEventHandler<T>>; // also a Media Event
+		onErrorCapture?: SoAoU<LestinEventHandler<T>>; // also a Media Event
 
 		// Keyboard Events
-		onKeyDown?: KeyboardEventHandler_SoAoU<T>;
-		onKeyDownCapture?: KeyboardEventHandler_SoAoU<T>;
+		onKeyDown?: SoAoU<KeyboardEventHandler<T>>;
+		onKeyDownCapture?: SoAoU<KeyboardEventHandler<T>>;
 		/** @deprecated */
-		onKeyPress?: KeyboardEventHandler_SoAoU<T>;
+		onKeyPress?: SoAoU<KeyboardEventHandler<T>>;
 		/** @deprecated */
-		onKeyPressCapture?: KeyboardEventHandler_SoAoU<T>;
-		onKeyUp?: KeyboardEventHandler_SoAoU<T>;
-		onKeyUpCapture?: KeyboardEventHandler_SoAoU<T>;
+		onKeyPressCapture?: SoAoU<KeyboardEventHandler<T>>;
+		onKeyUp?: SoAoU<KeyboardEventHandler<T>>;
+		onKeyUpCapture?: SoAoU<KeyboardEventHandler<T>>;
 
 		// Media Events
-		onAbort?: LestinEventHandler_SoAoU<T>;
-		onAbortCapture?: LestinEventHandler_SoAoU<T>;
-		onCanPlay?: LestinEventHandler_SoAoU<T>;
-		onCanPlayCapture?: LestinEventHandler_SoAoU<T>;
-		onCanPlayThrough?: LestinEventHandler_SoAoU<T>;
-		onCanPlayThroughCapture?: LestinEventHandler_SoAoU<T>;
-		onDurationChange?: LestinEventHandler_SoAoU<T>;
-		onDurationChangeCapture?: LestinEventHandler_SoAoU<T>;
-		onEmptied?: LestinEventHandler_SoAoU<T>;
-		onEmptiedCapture?: LestinEventHandler_SoAoU<T>;
-		onEncrypted?: LestinEventHandler_SoAoU<T>;
-		onEncryptedCapture?: LestinEventHandler_SoAoU<T>;
-		onEnded?: LestinEventHandler_SoAoU<T>;
-		onEndedCapture?: LestinEventHandler_SoAoU<T>;
-		onLoadedData?: LestinEventHandler_SoAoU<T>;
-		onLoadedDataCapture?: LestinEventHandler_SoAoU<T>;
-		onLoadedMetadata?: LestinEventHandler_SoAoU<T>;
-		onLoadedMetadataCapture?: LestinEventHandler_SoAoU<T>;
-		onLoadStart?: LestinEventHandler_SoAoU<T>;
-		onLoadStartCapture?: LestinEventHandler_SoAoU<T>;
-		onPause?: LestinEventHandler_SoAoU<T>;
-		onPauseCapture?: LestinEventHandler_SoAoU<T>;
-		onPlay?: LestinEventHandler_SoAoU<T>;
-		onPlayCapture?: LestinEventHandler_SoAoU<T>;
-		onPlaying?: LestinEventHandler_SoAoU<T>;
-		onPlayingCapture?: LestinEventHandler_SoAoU<T>;
-		onProgress?: LestinEventHandler_SoAoU<T>;
-		onProgressCapture?: LestinEventHandler_SoAoU<T>;
-		onRateChange?: LestinEventHandler_SoAoU<T>;
-		onRateChangeCapture?: LestinEventHandler_SoAoU<T>;
-		onSeeked?: LestinEventHandler_SoAoU<T>;
-		onSeekedCapture?: LestinEventHandler_SoAoU<T>;
-		onSeeking?: LestinEventHandler_SoAoU<T>;
-		onSeekingCapture?: LestinEventHandler_SoAoU<T>;
-		onStalled?: LestinEventHandler_SoAoU<T>;
-		onStalledCapture?: LestinEventHandler_SoAoU<T>;
-		onSuspend?: LestinEventHandler_SoAoU<T>;
-		onSuspendCapture?: LestinEventHandler_SoAoU<T>;
-		onTimeUpdate?: LestinEventHandler_SoAoU<T>;
-		onTimeUpdateCapture?: LestinEventHandler_SoAoU<T>;
-		onVolumeChange?: LestinEventHandler_SoAoU<T>;
-		onVolumeChangeCapture?: LestinEventHandler_SoAoU<T>;
-		onWaiting?: LestinEventHandler_SoAoU<T>;
-		onWaitingCapture?: LestinEventHandler_SoAoU<T>;
+		onAbort?: SoAoU<LestinEventHandler<T>>;
+		onAbortCapture?: SoAoU<LestinEventHandler<T>>;
+		onCanPlay?: SoAoU<LestinEventHandler<T>>;
+		onCanPlayCapture?: SoAoU<LestinEventHandler<T>>;
+		onCanPlayThrough?: SoAoU<LestinEventHandler<T>>;
+		onCanPlayThroughCapture?: SoAoU<LestinEventHandler<T>>;
+		onDurationChange?: SoAoU<LestinEventHandler<T>>;
+		onDurationChangeCapture?: SoAoU<LestinEventHandler<T>>;
+		onEmptied?: SoAoU<LestinEventHandler<T>>;
+		onEmptiedCapture?: SoAoU<LestinEventHandler<T>>;
+		onEncrypted?: SoAoU<LestinEventHandler<T>>;
+		onEncryptedCapture?: SoAoU<LestinEventHandler<T>>;
+		onEnded?: SoAoU<LestinEventHandler<T>>;
+		onEndedCapture?: SoAoU<LestinEventHandler<T>>;
+		onLoadedData?: SoAoU<LestinEventHandler<T>>;
+		onLoadedDataCapture?: SoAoU<LestinEventHandler<T>>;
+		onLoadedMetadata?: SoAoU<LestinEventHandler<T>>;
+		onLoadedMetadataCapture?: SoAoU<LestinEventHandler<T>>;
+		onLoadStart?: SoAoU<LestinEventHandler<T>>;
+		onLoadStartCapture?: SoAoU<LestinEventHandler<T>>;
+		onPause?: SoAoU<LestinEventHandler<T>>;
+		onPauseCapture?: SoAoU<LestinEventHandler<T>>;
+		onPlay?: SoAoU<LestinEventHandler<T>>;
+		onPlayCapture?: SoAoU<LestinEventHandler<T>>;
+		onPlaying?: SoAoU<LestinEventHandler<T>>;
+		onPlayingCapture?: SoAoU<LestinEventHandler<T>>;
+		onProgress?: SoAoU<LestinEventHandler<T>>;
+		onProgressCapture?: SoAoU<LestinEventHandler<T>>;
+		onRateChange?: SoAoU<LestinEventHandler<T>>;
+		onRateChangeCapture?: SoAoU<LestinEventHandler<T>>;
+		onSeeked?: SoAoU<LestinEventHandler<T>>;
+		onSeekedCapture?: SoAoU<LestinEventHandler<T>>;
+		onSeeking?: SoAoU<LestinEventHandler<T>>;
+		onSeekingCapture?: SoAoU<LestinEventHandler<T>>;
+		onStalled?: SoAoU<LestinEventHandler<T>>;
+		onStalledCapture?: SoAoU<LestinEventHandler<T>>;
+		onSuspend?: SoAoU<LestinEventHandler<T>>;
+		onSuspendCapture?: SoAoU<LestinEventHandler<T>>;
+		onTimeUpdate?: SoAoU<LestinEventHandler<T>>;
+		onTimeUpdateCapture?: SoAoU<LestinEventHandler<T>>;
+		onVolumeChange?: SoAoU<LestinEventHandler<T>>;
+		onVolumeChangeCapture?: SoAoU<LestinEventHandler<T>>;
+		onWaiting?: SoAoU<LestinEventHandler<T>>;
+		onWaitingCapture?: SoAoU<LestinEventHandler<T>>;
 
 		// MouseEvents
-		onAuxClick?: MouseEventHandler_SoAoU<T>;
-		onAuxClickCapture?: MouseEventHandler_SoAoU<T>;
-		onClick?: MouseEventHandler_SoAoU<T>;
-		onClickCapture?: MouseEventHandler_SoAoU<T>;
-		onContextMenu?: MouseEventHandler_SoAoU<T>;
-		onContextMenuCapture?: MouseEventHandler_SoAoU<T>;
-		onDoubleClick?: MouseEventHandler_SoAoU<T>;
-		onDoubleClickCapture?: MouseEventHandler_SoAoU<T>;
-		onDrag?: DragEventHandler_SoAoU<T>;
-		onDragCapture?: DragEventHandler_SoAoU<T>;
-		onDragEnd?: DragEventHandler_SoAoU<T>;
-		onDragEndCapture?: DragEventHandler_SoAoU<T>;
-		onDragEnter?: DragEventHandler_SoAoU<T>;
-		onDragEnterCapture?: DragEventHandler_SoAoU<T>;
-		onDragExit?: DragEventHandler_SoAoU<T>;
-		onDragExitCapture?: DragEventHandler_SoAoU<T>;
-		onDragLeave?: DragEventHandler_SoAoU<T>;
-		onDragLeaveCapture?: DragEventHandler_SoAoU<T>;
-		onDragOver?: DragEventHandler_SoAoU<T>;
-		onDragOverCapture?: DragEventHandler_SoAoU<T>;
-		onDragStart?: DragEventHandler_SoAoU<T>;
-		onDragStartCapture?: DragEventHandler_SoAoU<T>;
-		onDrop?: DragEventHandler_SoAoU<T>;
-		onDropCapture?: DragEventHandler_SoAoU<T>;
-		onMouseDown?: MouseEventHandler_SoAoU<T>;
-		onMouseDownCapture?: MouseEventHandler_SoAoU<T>;
-		onMouseEnter?: MouseEventHandler_SoAoU<T>;
-		onMouseLeave?: MouseEventHandler_SoAoU<T>;
-		onMouseMove?: MouseEventHandler_SoAoU<T>;
-		onMouseMoveCapture?: MouseEventHandler_SoAoU<T>;
-		onMouseOut?: MouseEventHandler_SoAoU<T>;
-		onMouseOutCapture?: MouseEventHandler_SoAoU<T>;
-		onMouseOver?: MouseEventHandler_SoAoU<T>;
-		onMouseOverCapture?: MouseEventHandler_SoAoU<T>;
-		onMouseUp?: MouseEventHandler_SoAoU<T>;
-		onMouseUpCapture?: MouseEventHandler_SoAoU<T>;
+		onAuxClick?: SoAoU<MouseEventHandler<T>>;
+		onAuxClickCapture?: SoAoU<MouseEventHandler<T>>;
+		onClick?: SoAoU<MouseEventHandler<T>>;
+		onClickCapture?: SoAoU<MouseEventHandler<T>>;
+		onContextMenu?: SoAoU<MouseEventHandler<T>>;
+		onContextMenuCapture?: SoAoU<MouseEventHandler<T>>;
+		onDoubleClick?: SoAoU<MouseEventHandler<T>>;
+		onDoubleClickCapture?: SoAoU<MouseEventHandler<T>>;
+		onDrag?: SoAoU<DragEventHandler<T>>;
+		onDragCapture?: SoAoU<DragEventHandler<T>>;
+		onDragEnd?: SoAoU<DragEventHandler<T>>;
+		onDragEndCapture?: SoAoU<DragEventHandler<T>>;
+		onDragEnter?: SoAoU<DragEventHandler<T>>;
+		onDragEnterCapture?: SoAoU<DragEventHandler<T>>;
+		onDragExit?: SoAoU<DragEventHandler<T>>;
+		onDragExitCapture?: SoAoU<DragEventHandler<T>>;
+		onDragLeave?: SoAoU<DragEventHandler<T>>;
+		onDragLeaveCapture?: SoAoU<DragEventHandler<T>>;
+		onDragOver?: SoAoU<DragEventHandler<T>>;
+		onDragOverCapture?: SoAoU<DragEventHandler<T>>;
+		onDragStart?: SoAoU<DragEventHandler<T>>;
+		onDragStartCapture?: SoAoU<DragEventHandler<T>>;
+		onDrop?: SoAoU<DragEventHandler<T>>;
+		onDropCapture?: SoAoU<DragEventHandler<T>>;
+		onMouseDown?: SoAoU<MouseEventHandler<T>>;
+		onMouseDownCapture?: SoAoU<MouseEventHandler<T>>;
+		onMouseEnter?: SoAoU<MouseEventHandler<T>>;
+		onMouseLeave?: SoAoU<MouseEventHandler<T>>;
+		onMouseMove?: SoAoU<MouseEventHandler<T>>;
+		onMouseMoveCapture?: SoAoU<MouseEventHandler<T>>;
+		onMouseOut?: SoAoU<MouseEventHandler<T>>;
+		onMouseOutCapture?: SoAoU<MouseEventHandler<T>>;
+		onMouseOver?: SoAoU<MouseEventHandler<T>>;
+		onMouseOverCapture?: SoAoU<MouseEventHandler<T>>;
+		onMouseUp?: SoAoU<MouseEventHandler<T>>;
+		onMouseUpCapture?: SoAoU<MouseEventHandler<T>>;
 
 		// Selection Events
-		onSelect?: LestinEventHandler_SoAoU<T>;
-		onSelectCapture?: LestinEventHandler_SoAoU<T>;
+		onSelect?: SoAoU<LestinEventHandler<T>>;
+		onSelectCapture?: SoAoU<LestinEventHandler<T>>;
 
 		// Touch Events
-		onTouchCancel?: TouchEventHandler_SoAoU<T>;
-		onTouchCancelCapture?: TouchEventHandler_SoAoU<T>;
-		onTouchEnd?: TouchEventHandler_SoAoU<T>;
-		onTouchEndCapture?: TouchEventHandler_SoAoU<T>;
-		onTouchMove?: TouchEventHandler_SoAoU<T>;
-		onTouchMoveCapture?: TouchEventHandler_SoAoU<T>;
-		onTouchStart?: TouchEventHandler_SoAoU<T>;
-		onTouchStartCapture?: TouchEventHandler_SoAoU<T>;
+		onTouchCancel?: SoAoU<TouchEventHandler<T>>;
+		onTouchCancelCapture?: SoAoU<TouchEventHandler<T>>;
+		onTouchEnd?: SoAoU<TouchEventHandler<T>>;
+		onTouchEndCapture?: SoAoU<TouchEventHandler<T>>;
+		onTouchMove?: SoAoU<TouchEventHandler<T>>;
+		onTouchMoveCapture?: SoAoU<TouchEventHandler<T>>;
+		onTouchStart?: SoAoU<TouchEventHandler<T>>;
+		onTouchStartCapture?: SoAoU<TouchEventHandler<T>>;
 
 		// Pointer Events
-		onPointerDown?: PointerEventHandler_SoAoU<T>;
-		onPointerDownCapture?: PointerEventHandler_SoAoU<T>;
-		onPointerMove?: PointerEventHandler_SoAoU<T>;
-		onPointerMoveCapture?: PointerEventHandler_SoAoU<T>;
-		onPointerUp?: PointerEventHandler_SoAoU<T>;
-		onPointerUpCapture?: PointerEventHandler_SoAoU<T>;
-		onPointerCancel?: PointerEventHandler_SoAoU<T>;
-		onPointerCancelCapture?: PointerEventHandler_SoAoU<T>;
-		onPointerEnter?: PointerEventHandler_SoAoU<T>;
-		onPointerEnterCapture?: PointerEventHandler_SoAoU<T>;
-		onPointerLeave?: PointerEventHandler_SoAoU<T>;
-		onPointerLeaveCapture?: PointerEventHandler_SoAoU<T>;
-		onPointerOver?: PointerEventHandler_SoAoU<T>;
-		onPointerOverCapture?: PointerEventHandler_SoAoU<T>;
-		onPointerOut?: PointerEventHandler_SoAoU<T>;
-		onPointerOutCapture?: PointerEventHandler_SoAoU<T>;
-		onGotPointerCapture?: PointerEventHandler_SoAoU<T>;
-		onGotPointerCaptureCapture?: PointerEventHandler_SoAoU<T>;
-		onLostPointerCapture?: PointerEventHandler_SoAoU<T>;
-		onLostPointerCaptureCapture?: PointerEventHandler_SoAoU<T>;
+		onPointerDown?: SoAoU<PointerEventHandler<T>>;
+		onPointerDownCapture?: SoAoU<PointerEventHandler<T>>;
+		onPointerMove?: SoAoU<PointerEventHandler<T>>;
+		onPointerMoveCapture?: SoAoU<PointerEventHandler<T>>;
+		onPointerUp?: SoAoU<PointerEventHandler<T>>;
+		onPointerUpCapture?: SoAoU<PointerEventHandler<T>>;
+		onPointerCancel?: SoAoU<PointerEventHandler<T>>;
+		onPointerCancelCapture?: SoAoU<PointerEventHandler<T>>;
+		onPointerEnter?: SoAoU<PointerEventHandler<T>>;
+		onPointerEnterCapture?: SoAoU<PointerEventHandler<T>>;
+		onPointerLeave?: SoAoU<PointerEventHandler<T>>;
+		onPointerLeaveCapture?: SoAoU<PointerEventHandler<T>>;
+		onPointerOver?: SoAoU<PointerEventHandler<T>>;
+		onPointerOverCapture?: SoAoU<PointerEventHandler<T>>;
+		onPointerOut?: SoAoU<PointerEventHandler<T>>;
+		onPointerOutCapture?: SoAoU<PointerEventHandler<T>>;
+		onGotPointerCapture?: SoAoU<PointerEventHandler<T>>;
+		onGotPointerCaptureCapture?: SoAoU<PointerEventHandler<T>>;
+		onLostPointerCapture?: SoAoU<PointerEventHandler<T>>;
+		onLostPointerCaptureCapture?: SoAoU<PointerEventHandler<T>>;
 
 		// UI Events
-		onScroll?: UIEventHandler_SoAoU<T>;
-		onScrollCapture?: UIEventHandler_SoAoU<T>;
+		onScroll?: SoAoU<UIEventHandler<T>>;
+		onScrollCapture?: SoAoU<UIEventHandler<T>>;
 
 		// Wheel Events
-		onWheel?: WheelEventHandler_SoAoU<T>;
-		onWheelCapture?: WheelEventHandler_SoAoU<T>;
+		onWheel?: SoAoU<WheelEventHandler<T>>;
+		onWheelCapture?: SoAoU<WheelEventHandler<T>>;
 
 		// Animation Events
-		onAnimationStart?: AnimationEventHandler_SoAoU<T>;
-		onAnimationStartCapture?: AnimationEventHandler_SoAoU<T>;
-		onAnimationEnd?: AnimationEventHandler_SoAoU<T>;
-		onAnimationEndCapture?: AnimationEventHandler_SoAoU<T>;
-		onAnimationIteration?: AnimationEventHandler_SoAoU<T>;
-		onAnimationIterationCapture?: AnimationEventHandler_SoAoU<T>;
+		onAnimationStart?: SoAoU<AnimationEventHandler<T>>;
+		onAnimationStartCapture?: SoAoU<AnimationEventHandler<T>>;
+		onAnimationEnd?: SoAoU<AnimationEventHandler<T>>;
+		onAnimationEndCapture?: SoAoU<AnimationEventHandler<T>>;
+		onAnimationIteration?: SoAoU<AnimationEventHandler<T>>;
+		onAnimationIterationCapture?: SoAoU<AnimationEventHandler<T>>;
 
 		// Transition Events
-		onTransitionEnd?: TransitionEventHandler_SoAoU<T>;
-		onTransitionEndCapture?: TransitionEventHandler_SoAoU<T>;
+		onTransitionEnd?: SoAoU<TransitionEventHandler<T>>;
+		onTransitionEndCapture?: SoAoU<TransitionEventHandler<T>>;
 	}
 
 	export interface CSSProperties extends CSS.Properties<string | number> {
@@ -1018,7 +1000,7 @@ declare namespace Lestin {
 
 	interface DetailsHTMLAttributes<T> extends HTMLAttributes<T> {
 		open?: boolean | "open" | undefined;
-		onToggle?: LestinEventHandler_SoAoU<T>;
+		onToggle?: SoAoU<LestinEventHandler<T>>;
 	}
 
 	interface DelHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -1027,8 +1009,8 @@ declare namespace Lestin {
 	}
 
 	interface DialogHTMLAttributes<T> extends HTMLAttributes<T> {
-		onCancel?: LestinEventHandler_SoAoU<T>;
-		onClose?: LestinEventHandler_SoAoU<T>;
+		onCancel?: SoAoU<LestinEventHandler<T>>;
+		onClose?: SoAoU<LestinEventHandler<T>>;
 		open?: boolean | "open" | undefined;
 	}
 
@@ -1139,7 +1121,7 @@ declare namespace Lestin {
 		value?: string | ReadonlyArray<string> | number | undefined;
 		width?: number | string | undefined;
 
-		onChange?: ChangeEventHandler_SoAoU<T>;
+		onChange?: SoAoU<ChangeEventHandler<T>>;
 	}
 
 	interface KeygenHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -1294,7 +1276,7 @@ declare namespace Lestin {
 		required?: boolean | "required" | undefined;
 		size?: number | undefined;
 		value?: string | ReadonlyArray<string> | number | undefined;
-		onChange?: ChangeEventHandler_SoAoU<T>;
+		onChange?: SoAoU<ChangeEventHandler<T>>;
 	}
 
 	interface SourceHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -1343,7 +1325,7 @@ declare namespace Lestin {
 		value?: string | ReadonlyArray<string> | number | undefined;
 		wrap?: string | undefined;
 
-		onChange?: ChangeEventHandler_SoAoU<T>;
+		onChange?: SoAoU<ChangeEventHandler<T>>;
 	}
 
 	interface TdHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -1805,7 +1787,7 @@ declare namespace Lestin {
 		var: DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>;
 		video: DetailedHTMLFactory<VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>;
 		wbr: DetailedHTMLFactory<HTMLAttributes<HTMLElement>, HTMLElement>;
-		webview: DetailedHTMLFactory<WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement>;
+		// webview: DetailedHTMLFactory<WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement>;
 	}
 
 	interface LestinSVG {
@@ -2066,7 +2048,7 @@ declare global {
 			var: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			video: Lestin.DetailedHTMLProps<Lestin.VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>;
 			wbr: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
-			webview: Lestin.DetailedHTMLProps<Lestin.WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement>;
+			// webview: Lestin.DetailedHTMLProps<Lestin.WebViewHTMLAttributes<HTMLWebViewElement>, HTMLWebViewElement>;
 
 			// SVG
 			svg: Lestin.SVGProps<SVGSVGElement>;

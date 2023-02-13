@@ -98,7 +98,7 @@ interface StyleMedia { }
 // interface HTMLTrackElement extends HTMLElement { }
 // interface HTMLUListElement extends HTMLElement { }
 // interface HTMLVideoElement extends HTMLElement { }
-interface HTMLWebViewElement extends HTMLElement { }
+// interface HTMLWebViewElement extends HTMLElement { }
 
 interface TouchList { }
 

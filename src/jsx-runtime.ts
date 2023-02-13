@@ -1,7 +1,5 @@
 /// <reference path="jsx-runtime.d.ts" />
 
-// import _isEmpty from "lodash/isEmpty";
-
 export function createElement<P extends {}>(type: (props?: (Lestin.Attributes & P) | null, children?: Lestin.LestinNode) => Lestin.LestinNode, props?: (Lestin.Attributes & P) | null, ...children: HTMLElement[]): Lestin.LestinNode;
 export function createElement<P extends Lestin.DOMAttributes<T>, T extends HTMLElement>(type: string, props?: (Lestin.HTMLAttributes<T> & P) | null, children?: Lestin.LestinNode): Lestin.LestinNode;
 export function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lestin.LestinNode>(type: keyof JSX.IntrinsicElements, props?: (Lestin.HTMLAttributes<T> & P) | null, children?: Lestin.LestinNode): Lestin.LestinNode;
@@ -26,7 +24,7 @@ export function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lest
 
 	Object.entries(props).forEach(([name, value]) => {
 
-		if (!name || value === undefined || value === null) return;
+		if (!name || (!value && typeof value !== "number")) return;
 
 		if (name.startsWith("on") && name.toLowerCase() in window) {
 			let EventName = name.toLowerCase().substring(2);
@@ -65,7 +63,7 @@ export function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lest
 			else element.setAttributeNS(null, name, value.toString());
 		}*/
 
-		else if (name === "children" || name === "childrenQ") {}
+		// else if (name === "children") {}
 
 		else element.setAttribute(name, value.toString());
 	});
