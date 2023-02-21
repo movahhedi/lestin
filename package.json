@@ -1,6 +1,6 @@
 {
 	"name": "lestin",
-	"version": "0.0.5",
+	"version": "0.0.7",
 	"description": "Vanilla JSX, No Virtual-DOM, No React",
 	"main": "dist/jsx-runtime.js",
 	"module": "dist/jsx-runtime.mjs",
@@ -29,7 +29,6 @@
 	},
 	"devDependencies": {
 		"@rollup/plugin-terser": "^0.4.0",
-		"csstype": "^3.1.1",
 		"esbuild": "^0.17.5",
 		"prop-types": "^15.8.1",
 		"rollup": "^3.13.0",
@@ -37,5 +36,8 @@
 		"rollup-plugin-esbuild": "^5.0.0",
 		"scheduler": "^0.23.0",
 		"typescript": "^4.9.5"
+	},
+	"dependencies": {
+		"csstype": "^3.1.1"
 	}
 }

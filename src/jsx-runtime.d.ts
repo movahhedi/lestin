@@ -768,7 +768,7 @@ declare namespace Lestin {
 		placeholder?: string | undefined;
 		slot?: string | undefined;
 		spellCheck?: Booleanish | undefined;
-		style?: CSSProperties | undefined;
+		style?: CSSProperties | string | undefined;
 		tabIndex?: number | undefined;
 		title?: string | undefined;
 		translate?: "yes" | "no" | undefined;
@@ -1392,7 +1392,7 @@ declare namespace Lestin {
 		method?: string | undefined;
 		min?: number | string | undefined;
 		name?: string | undefined;
-		style?: CSSProperties | undefined;
+		style?: CSSProperties | string | undefined;
 		target?: string | undefined;
 		type?: string | undefined;
 		width?: number | string | undefined;
