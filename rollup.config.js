@@ -1,7 +1,7 @@
 import dts from "rollup-plugin-dts";
 import esbuild from "rollup-plugin-esbuild";
 import terser from "@rollup/plugin-terser";
-import packageJson from "./package.json" assert { type: "json" };
+// import packageJson from "./package.json" assert { type: "json" };
 
 const name = "dist/jsx-runtime";
 // const name = packageJson.main.replace(/\.js$/, "");

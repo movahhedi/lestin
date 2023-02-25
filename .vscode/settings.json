@@ -14,7 +14,7 @@
 		"**/.git": true,
 		"**/.DS_Store": true,
 		"**/Thumbs.db": true,
-		"node_modules": true
+		"**/node_modules": true
 	},
 	"search.exclude": {
 		"build": true,
@@ -25,7 +25,7 @@
 	"gitlens.views.contributors.showStatistics": true,
 	"typescript.format.semicolons": "insert",
 	"prettier.endOfLine": "crlf",
-	"prettier.printWidth": 150,
+	"prettier.printWidth": 128,
 	"prettier.semi": true,
 	"prettier.useTabs": true,
 	"prettier.tabWidth": 4,

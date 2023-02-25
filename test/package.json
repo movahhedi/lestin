@@ -1,0 +1,12 @@
+{
+	"name": "lestin-test",
+	"version": "0.0.1",
+	"main": "index.tsx",
+	"author": "Shahab Movahhedi",
+	"license": "MIT",
+	"private": false,
+	"devDependencies": {
+		"typescript": "^4.9.5",
+		"vite": "^4.1.4"
+	}
+}
