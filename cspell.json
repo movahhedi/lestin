@@ -8,23 +8,26 @@
 	],
 	"minWordLength": 4,
 	"allowCompoundWords": true,
-	"dictionaryDefinitions": [
-		{
-			"name": "lestin",
-			"path": "./.cspell/lestin.txt",
-			"addWords": true
-		},
-		{
-			"name": "common",
-			"path": "./.cspell/common.txt",
-			"addWords": true
-		}
-	],
-	"dictionaries": [
+	"words": [
 		"lestin",
-		"common"
+		"movahhedi",
+		"esbuild",
+		"horiz",
+		"stemh",
+		"stemv",
+		"bbox",
+		"xlink",
+		"panose",
+		"wmode",
+		"inlist",
+		"labelledby",
+		"bivariance",
+		"describedby",
+		"jsxs",
+		"mpath",
+		"noindex",
+		"bgcolor"
 	],
-	"words": [],
 	"ignoreWords": [],
 	"import": []
 }

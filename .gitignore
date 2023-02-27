@@ -14,5 +14,5 @@
 **/node_modules/**
 
 # Build
-/build
-/dist
+build
+dist
