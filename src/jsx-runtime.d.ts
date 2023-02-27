@@ -1,10 +1,39 @@
-/// <reference path="global.d.ts" />
+// Credits of this file goes to the contributors of @types/react
+// (https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react)
 
-// Credits of this file goes to the contributors of @types/react (https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react)
+// Type definitions for Lestin
+// Definitions by: Asana <https://asana.com>
+//                 AssureSign <http://www.assuresign.com>
+//                 Microsoft <https://microsoft.com>
+//                 John Reilly <https://github.com/johnnyreilly>
+//                 Benoit Benezech <https://github.com/bbenezech>
+//                 Patricio Zavolinsky <https://github.com/pzavolinsky>
+//                 Eric Anderson <https://github.com/ericanderson>
+//                 Dovydas Navickas <https://github.com/DovydasNavickas>
+//                 Josh Rutherford <https://github.com/theruther4d>
+//                 Guilherme Hübner <https://github.com/guilhermehubner>
+//                 Ferdy Budhidharma <https://github.com/ferdaber>
+//                 Johann Rakotoharisoa <https://github.com/jrakotoharisoa>
+//                 Olivier Pascal <https://github.com/pascaloliv>
+//                 Martin Hochel <https://github.com/hotell>
+//                 Frank Li <https://github.com/franklixuefei>
+//                 Jessica Franco <https://github.com/Jessidhia>
+//                 Saransh Kataria <https://github.com/saranshkataria>
+//                 Kanitkorn Sujautra <https://github.com/lukyth>
+//                 Sebastian Silbermann <https://github.com/eps1lon>
+//                 Kyle Scully <https://github.com/zieka>
+//                 Cong Zhang <https://github.com/dancerphil>
+//                 Dimitri Mitropoulos <https://github.com/dimitropoulos>
+//                 JongChan Choi <https://github.com/disjukr>
+//                 Victor Magalhães <https://github.com/vhfmag>
+//                 Dale Tan <https://github.com/hellatan>
+//                 Priyanshu Rav <https://github.com/priyanshurav>
+//                 Dmitry Semigradsky <https://github.com/Semigradsky>
+//                 Shahab Movahhedi <https://github.com/movahhedi>
+// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 import * as CSS from "csstype";
 import * as PropTypes from "prop-types";
-// import { Interaction as SchedulerInteraction } from "scheduler/tracing";
 
 type NativeAnimationEvent = AnimationEvent;
 type NativeClipboardEvent = ClipboardEvent;

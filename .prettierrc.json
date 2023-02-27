@@ -1,10 +1,10 @@
 {
-	"trailingComma": "es5",
+	"trailingComma": "all",
 	"eslintIntegration": true,
 	"useTabs": true,
 	"doubleQuote": true,
 	"semi": true,
-	"printWidth": 200,
+	"printWidth": 128,
 	"singleQuote": false,
 	"singleAttributePerLine": false,
 	"jsxSingleQuote": false,

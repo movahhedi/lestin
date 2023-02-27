@@ -1,6 +1,60 @@
 # Lestin
 **UNDER DEVELOPMENT, UNSTABLE**
 
-Created by Shahab Movahhedi [shmovahhedi.com](https://shmovahhedi.com)
+Developed by Shahab Movahhedi [shmovahhedi.com](https://shmovahhedi.com).
 
-Special Thanks to [React](https://reactjs.org), [Preact](https://preactjs.com), and [How to Use JSX without React](https://betterprogramming.pub/how-to-use-jsx-without-react-21d23346e5dc).
+Lestin has one job: Transform JSX codes to pure HTML elements using `document.createElement()`.
+
+Lestin is DOM-based. There's no virtual-DOM, and thus, no additional overhead. We can theoretically say its performance is ~equal to vanilla JS (it's just three functions). (Please contribute on testing Lestin performance).
+
+Lestin adds **only 750 bytes** to bundles, but reduces the project size much more than this, as it simplifies component and element creations by supporting JSX; Compared to React (~30KB) and Preact (~3KB).
+
+## Using Lestin
+
+To use Lestin, install it with TypeScript and Vite, and add the two configs described below to `tsconfig.json`.
+
+### Installing Lestin
+
+Installing using Yarn:
+```
+yarn add -D lestin typescript vite
+```
+
+Installing using NPM:
+```
+npm install -D lestin typescript vite
+```
+
+### Configuring JSX for Lestin
+
+After installing, to support JSX, add these configs to your `tsconfig.json` in the root of your project:
+
+```json
+{
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "lestin"
+	}
+}
+```
+
+You don't need to import Lestin in your scripts for JSX. TypeScript and Vite automatically import them upon build. This is due to setting `lestin` as the `jsxImportSource` in `tsconfig.json`.
+Although you may import it to use it's type declarations such as `Lestin.PropsWithChildren`.
+
+Lestin uses Vite as its primarily supported bundler. Vite is extremely fast⚡️, and reliable.
+
+**Quick reminder:** If you choose not to use JSX in your project, using Lestin does nothing, and you can safely remove it. But I really can't find a reason not to use JSX in new projects.
+
+## SSR with Lestin
+[Puppeteer](https://pptr.dev/) and [Prerender](https://prerender.io/) are excellent renderers (technically headless browser middlewares) for SSR. Lestin is tested on them too. Read [*Headless Chrome: an answer to server-side rendering JS sites* @ Chrome Developers](https://developer.chrome.com/docs/puppeteer/ssr/).
+
+
+## Thank You
+Special thanks to [React](https://reactjs.org), [@types/react](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react), [*How to Use JSX without React* by Kartik Nair](https://betterprogramming.pub/how-to-use-jsx-without-react-21d23346e5dc), future contributors to this project, and you, for using Lestin.
+
+## License
+Lestin is [MIT licensed](https://github.com/movahhedi/lestin/blob/main/LICENSE).
+
+Copyright 2023-present Shahab Movahhedi.
+
+Copyrights on the type definition files are respective of each contributor listed at the beginning of each definition file. Their licenses apply.
