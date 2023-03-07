@@ -1,0 +1,19 @@
+{
+	"name": "lestin-test",
+	"version": "0.0.1",
+	"main": "index.tsx",
+	"author": {
+		"name" : "Shahab Movahhedi",
+		"email" : "dev@shmovahhedi.com",
+		"url" : "https://shmovahhedi.com/"
+	},
+	"license": "MIT",
+	"scripts": {
+		"start": "vite",
+		"build": "vite build --force"
+	},
+	"devDependencies": {
+		"preact": "^10.13.0",
+		"typescript": "^4.9.5"
+	}
+}
