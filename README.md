@@ -11,7 +11,7 @@ Lestin adds **only 750 bytes** to bundles, but reduces the project size much mor
 
 ## Using Lestin
 
-To use Lestin, install it with TypeScript and Vite, and add the two configs described below to `tsconfig.json`.
+To use Lestin, install it with TypeScript and Vite, and add the configs described below to `tsconfig.json`.
 
 ### Installing Lestin
 
@@ -33,9 +33,37 @@ After installing, to support JSX, add these configs to your `tsconfig.json` in t
 {
 	"compilerOptions": {
 		"jsx": "react-jsx",
-		"jsxImportSource": "lestin"
+		"jsxImportSource": "lestin",
+		"moduleResolution": "node"
 	}
 }
+```
+
+## Examples
+Check out [`/examples`](examples) for more examples.
+These are some examples of other libraries like React and their equivalents in Lestin:
+
+### React Example
+
+What it's like in React ([Source](https://github.com/facebook/react#examples)):
+```js
+import { createRoot } from 'react-dom/client';
+
+function HelloMessage({ name }) {
+  return <div>Hello {name}</div>;
+}
+
+const root = createRoot(document.body);
+root.render(<HelloMessage name="Taylor" />);
+```
+
+The same in Lestin:
+```js
+function HelloMessage({ name }) {
+	return <div>Hello {name}</div>;
+}
+
+document.body.appendChild(<HelloMessage name="Taylor" />);
 ```
 
 You don't need to import Lestin in your scripts for JSX. TypeScript and Vite automatically import them upon build. This is due to setting `lestin` as the `jsxImportSource` in `tsconfig.json`.

@@ -2,19 +2,6 @@
 	"name": "lestin",
 	"version": "0.0.7",
 	"description": "Vanilla JSX, No Virtual-DOM",
-	"main": "dist/jsx-runtime.js",
-	"module": "dist/jsx-runtime.mjs",
-	"typings": "dist/jsx-runtime.d.ts",
-	"type": "module",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/movahhedi/lestin.git",
-		"directory": "/"
-	},
-	"homepage": "https://github.com/movahhedi/lestin",
-	"bugs": "https://github.com/movahhedi/lestin/issues",
-	"author": "Shahab Movahhedi <dev@shmovahhedi.com>",
-	"license": "MIT",
 	"keywords": [
 		"lestin",
 		"jsx",
@@ -25,19 +12,37 @@
 		"react",
 		"preact"
 	],
+	"homepage": "https://github.com/movahhedi/lestin",
+	"bugs": "https://github.com/movahhedi/lestin/issues",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/movahhedi/lestin.git",
+		"directory": "/"
+	},
+	"author": {
+		"name": "Shahab Movahhedi",
+		"email": "dev@shmovahhedi.com",
+		"url": "https://shmovahhedi.com/"
+	},
+	"type": "module",
+	"main": "dist/jsx-runtime.js",
+	"module": "dist/jsx-runtime.mjs",
+	"typings": "dist/jsx-runtime.d.ts",
 	"private": false,
 	"scripts": {
 		"build": "rollup -c"
 	},
+	"dependencies": {
+		"csstype": "^3.1.1"
+	},
 	"devDependencies": {
 		"@rollup/plugin-terser": "^0.4.0",
+		"esbuild": "^0.17.10",
 		"prop-types": "^15.8.1",
 		"rollup": "^3.17.3",
 		"rollup-plugin-dts": "^5.2.0",
 		"rollup-plugin-esbuild": "^5.0.0",
 		"typescript": "^4.9.5"
-	},
-	"dependencies": {
-		"csstype": "^3.1.1"
 	}
 }

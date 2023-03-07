@@ -156,7 +156,31 @@ declare namespace Lestin {
 
 	// Base component for plain JS classes
 	interface Component<P = {}, S = {}, SS = any> {}
-	class Component<P, S> {}
+	class Component<P = {}, S = {}> {
+		render(): LestinNode;
+		componentWillMount?(): void;
+		componentDidMount?(): void;
+		componentWillUnmount?(): void;
+		getChildContext?(): object;
+		componentWillReceiveProps?(nextProps: Readonly<P>, nextContext: any): void;
+		shouldComponentUpdate?(
+			nextProps: Readonly<P>,
+			nextState: Readonly<S>,
+			nextContext: any
+		): boolean;
+		componentWillUpdate?(
+			nextProps: Readonly<P>,
+			nextState: Readonly<S>,
+			nextContext: any
+		): boolean;
+		getSnapshotBeforeUpdate?(oldProps: Readonly<P>, oldState: Readonly<S>): any;
+		componentDidUpdate?(
+			previousProps: Readonly<P>,
+			previousState: Readonly<S>,
+			snapshot: any
+		): void;
+		componentDidCatch?(error: any, errorInfo: any): void;
+	}
 
 	//
 	// Class Interfaces
@@ -188,6 +212,7 @@ declare namespace Lestin {
 	//
 	// Event System
 	// ----------------------------------------------------------------------
+
 	// TODO: change any to unknown when moving to TS v3
 	interface BaseSyntheticEvent<E = object, C = any, T = any> {
 		nativeEvent: E;
