@@ -54,8 +54,10 @@ export function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lest
 			if (typeof value === "string") element.style.cssText = value;
 			else Object.assign(element, value);
 			// else Object.assign(element.style, value);
+		} else if (name === "dataset") {
+			Object.assign(element.dataset, value);
 		}
-		else if (["className", "innerHTML", "htmlFor", "dataset"].includes(name)) {
+		else if (["className", "innerHTML", "htmlFor"].includes(name)) {
 			element[name] = value;
 		}
 
