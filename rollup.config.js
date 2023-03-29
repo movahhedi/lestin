@@ -4,6 +4,7 @@ import terser from "@rollup/plugin-terser";
 // import packageJson from "./package.json" assert { type: "json" };
 
 const name = "dist/jsx-runtime";
+const nameDev = "dist/jsx-dev-runtime";
 // const name = packageJson.main.replace(/\.js$/, "");
 // const name = require("./package.json").main.replace(/\.js$/, "");
 
@@ -14,7 +15,7 @@ const bundle = (config) => ({
 	// dir: "dist",
 });
 
-export default [
+const node = (name) => ([
 	bundle({
 		plugins: [esbuild(), terser()],
 		output: [
@@ -37,4 +38,9 @@ export default [
 			format: "es",
 		},
 	}),
+]);
+
+export default [
+	...node(name),
+	...node(nameDev),
 ];
