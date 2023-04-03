@@ -1,24 +1,6 @@
-/// <reference path="jsx-runtime.d.ts" />
+/// <reference path="index.d.ts" />
 
-export function createElement<P extends {}>(
-	type: (props?: (Lestin.Attributes & P) | null, children?: Lestin.LestinNode) => Lestin.LestinNode,
-	props?: (Lestin.Attributes & P) | null,
-): Lestin.LestinNode;
-export function createElement<P extends Lestin.DOMAttributes<T>, T extends HTMLElement>(
-	type: string,
-	props?: (Lestin.HTMLAttributes<T> & P) | null,
-): Lestin.LestinNode;
-export function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lestin.LestinNode>(
-	type: keyof JSX.IntrinsicElements,
-	props?: (Lestin.HTMLAttributes<T> & P) | null,
-): Lestin.LestinNode;
-export function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lestin.LestinNode>(
-	type:
-		| string
-		| keyof JSX.IntrinsicElements
-		| ((props?: (Lestin.Attributes & P) | null, children?: Lestin.LestinNode) => Lestin.LestinNode),
-	props?: (Lestin.HTMLAttributes<T> & P) | null,
-): Lestin.LestinNode {
+export function createElement(type, props = null) {
 	let newChildren = props.children || [];
 	delete props.children;
 
@@ -26,7 +8,7 @@ export function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lest
 		newChildren = [newChildren];
 	}
 
-	newChildren.forEach((child: any, index: any, object: any) => {
+	newChildren.forEach((child, index, object) => {
 		if (typeof child !== "number" && (!child || child == false)) {
 			object.splice(index, 1);
 		}
@@ -34,18 +16,19 @@ export function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lest
 
 	if (typeof type === "function") return type(props, ...newChildren);
 
-	let element: HTMLElement = document.createElement(type);
+	let element = document.createElement(type);
 
 	Object.entries(props).forEach(([name, value]) => {
 		if (!name || (!value && typeof value !== "number")) return;
 
 		if (name.startsWith("on")) {
+			// TODO ondblclick doesn't work (onDoubleClick)
 			let EventName = name.toLowerCase().substring(2);
 
 			if (!Array.isArray(value)) {
 				value = [value];
 			}
-			value.forEach((value_i: any) => {
+			value.forEach((value_i) => {
 				if (EventName && value_i) {
 					element.addEventListener(EventName, value_i);
 				}
@@ -69,16 +52,14 @@ export function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lest
 		else element.setAttribute(name, value.toString());
 	});
 
-	newChildren?.forEach((child: any) => appendChild(element, child));
+	newChildren?.forEach((child) => appendChild(element, child));
 
 	return element;
 }
 
-export const Fragment = (props: any, ...children: any) => children;
+export const Fragment = (props, ...children) => children;
 
-export function appendChild(parent: HTMLElement, text: string): void;
-export function appendChild(parent: HTMLElement, child: HTMLElement): void;
-export function appendChild(parent: HTMLElement, childOrText: HTMLElement | string): void {
+export function appendChild(parent, childOrText) {
 	if (Array.isArray(childOrText)) {
 		childOrText.forEach((nestedChild) => appendChild(parent, nestedChild));
 	} else {

@@ -1,0 +1,21 @@
+{
+	"name": "jsx-runtime",
+	"version": "0.0.1",
+	"private": true,
+	"description": "Lestin JSX runtime",
+	"main": "dist/jsx-runtime.cjs",
+	"module": "dist/jsx-runtime.mjs",
+	"umd:main": "dist/jsx-runtime.umd.js",
+	"source": "src/index.js",
+	"types": "src/index.d.ts",
+	"license": "MIT",
+	"exports": {
+		".": {
+			"types": "./src/index.d.ts",
+			"browser": "./dist/jsx-runtime.module.js",
+			"umd": "./dist/jsx-runtime.umd.js",
+			"import": "./dist/jsx-runtime.mjs",
+			"require": "./dist/jsx-runtime.cjs"
+		}
+	}
+}

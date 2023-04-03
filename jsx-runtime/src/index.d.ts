@@ -120,26 +120,31 @@ declare namespace Lestin {
 	function createElement<P extends SVGAttributes<T>, T extends SVGElement>(type: keyof LestinSVG, props?: (Attributes<T> & P) | null, ...children: LestinNode[]): LestinSVGElement;
 	function createElement<P extends DOMAttributes<T>, T extends Element>(type: string, props?: (Attributes<T> & P) | null, ...children: LestinNode[]): DOMElement<P, T>;
 
+	function createElement<P extends {}>(
+		type: (props?: (Lestin.Attributes & P) | null, children?: Lestin.LestinNode) => Lestin.LestinNode,
+		props?: (Lestin.Attributes & P) | null,
+	): Lestin.LestinNode;
+	function createElement<P extends Lestin.DOMAttributes<T>, T extends HTMLElement>(
+		type: string,
+		props?: (Lestin.HTMLAttributes<T> & P) | null,
+	): Lestin.LestinNode;
+	function createElement<P extends Lestin.HTMLAttributes<T>, T extends Lestin.LestinNode>(
+		type: keyof JSX.IntrinsicElements,
+		props?: (Lestin.HTMLAttributes<T> & P) | null,
+	): Lestin.LestinNode;
+
+	function Fragment(props: any, ...children: Lestin.LestinNode[]): Lestin.LestinNode[];
+
+	function appendChild(parent: HTMLElement, text: string): void;
+	function appendChild(parent: HTMLElement, child: HTMLElement): void;
+	function appendChild(parent: HTMLElement, childOrText: HTMLElement | string): void;
+
+
 	// Custom components
 
 	// function createElement<P extends {}>(type: ClassType<P, Component<P, ComponentState>, ComponentClass<P>>, props?: (Attributes<Component<P, ComponentState>> & P) | null, ...children: LestinNode[]): CElement<P, Component<P, ComponentState>>;
 	// function createElement<P extends {}, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(type: ClassType<P, T, C>, props?: (Attributes<T> & P) | null, ...children: LestinNode[]): CElement<P, T>;
 	function createElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string, props?: (Attributes & P) | null, ...children: LestinNode[]): LestinElement<P>;
-
-	// DOM Elements
-	// LestinHTMLElement
-	function cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(element: DetailedLestinHTMLElement<P, T>, props?: P, ...children: LestinNode[]): DetailedLestinHTMLElement<P, T>;
-	// LestinHTMLElement, less specific
-	function cloneElement<P extends HTMLAttributes<T>, T extends HTMLElement>(element: LestinHTMLElement<T>, props?: P, ...children: LestinNode[]): LestinHTMLElement<T>;
-	// SVGElement
-	function cloneElement<P extends SVGAttributes<T>, T extends SVGElement>(element: LestinSVGElement, props?: P, ...children: LestinNode[]): LestinSVGElement;
-	// DOM Element (has to be the last, because type checking stops at first overload that fits)
-	function cloneElement<P extends DOMAttributes<T>, T extends Element>(element: DOMElement<P, T>, props?: DOMAttributes<T> & P, ...children: LestinNode[]): DOMElement<P, T>;
-
-	// Custom components
-	function cloneElement<P>(element: LestinElement<P>, props?: Partial<P> & Attributes, ...children: LestinNode[]): LestinElement<P>;
-
-	function isValidElement<P>(object: {} | null | undefined): object is LestinElement<P>;
 
 	// Sync with `LestinChildren` until `LestinChildren` is removed.
 	const Children: {
