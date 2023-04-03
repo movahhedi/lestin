@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"description": "Lestin JSX runtime",
-	"main": "dist/jsx-runtime.cjs",
+	"main": "dist/jsx-runtime.js",
 	"module": "dist/jsx-runtime.mjs",
 	"umd:main": "dist/jsx-runtime.umd.js",
 	"source": "src/index.js",
@@ -15,7 +15,7 @@
 			"browser": "./dist/jsx-runtime.module.js",
 			"umd": "./dist/jsx-runtime.umd.js",
 			"import": "./dist/jsx-runtime.mjs",
-			"require": "./dist/jsx-runtime.cjs"
+			"require": "./dist/jsx-runtime.js"
 		}
 	}
 }
