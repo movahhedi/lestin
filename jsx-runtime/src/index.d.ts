@@ -602,6 +602,38 @@ declare namespace Lestin {
 		// Transition Events
 		onTransitionEnd?: SoAoU<TransitionEventHandler<T>>;
 		onTransitionEndCapture?: SoAoU<TransitionEventHandler<T>>;
+
+		/*
+		# Undefined Events: (https://developer.mozilla.org/en-US/docs/Web/Events#event_listing)
+		animationcancel
+		auxclick
+		dblclick
+		focusin
+		focusout
+		fullscreenchange
+		fullscreenerror
+		gesturechange
+		gestureend
+		gesturestart
+		scrollend
+		securitypolicyviolation
+		transitioncancel
+		transitionrun
+		transitionstart
+		/ afterscriptexecute
+		/ beforematch
+		/ beforescriptexecute
+		/ beforexrselect
+		/ contentvisibilityautostatechange
+		/ DOMActivate
+		/ DOMMouseScroll
+		/ mousewheel
+		/ MozMousePixelScroll
+		/ webkitmouseforcechanged
+		/ webkitmouseforcedown
+		/ webkitmouseforceup
+		/ webkitmouseforcewillbegin
+		*/
 	}
 
 	export interface CSSProperties extends CSS.Properties<string | number> {

@@ -9,7 +9,8 @@ export function createElement(type, props = null) {
 	}
 
 	newChildren.forEach((child, index, object) => {
-		if (typeof child !== "number" && (!child || child == false)) {
+		// if ((typeof child !== "number" && !child) || (child?.length && !child?.length)) {
+		if (!((Boolean(child) && !(Array.isArray(child) && !child.length)) || child === 0)) {
 			object.splice(index, 1);
 		}
 	});
