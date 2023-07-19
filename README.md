@@ -41,7 +41,16 @@ After installing, to support JSX, add these configs to your `tsconfig.json` in t
 
 ## Examples
 Check out [`/examples`](examples) for more examples.
-These are some examples of other libraries like React and their equivalents in Lestin:
+
+These are some mini projects built with Lestin as examples:
+- [Toastification - Toast notifications for DOM WebApps](https://github.com/movahhedi/Toastification)
+- [ImageSort - A simple picture categorizer for the exhaust of photos on phone](https://github.com/movahhedi/ImageSort)
+- [A presentation about RegEx based on code-presentation](https://github.com/movahhedi/regex-basics)
+- [A client-side SVG creator](https://github.com/movahhedi/iau-profile-pic-creator)
+- [A simple code presentation](https://github.com/movahhedi/code-presentation)
+- [A very basic event adder for Google Calendar](https://github.com/movahhedi/GoogleCalendar-EventCreator)
+
+Below are some examples of other libraries like React and their equivalents in Lestin:
 
 ### React Example
 
@@ -50,7 +59,7 @@ What it's like in React ([Source](https://github.com/facebook/react#examples)):
 import { createRoot } from 'react-dom/client';
 
 function HelloMessage({ name }) {
-  return <div>Hello {name}</div>;
+    return <div>Hello {name}</div>;
 }
 
 const root = createRoot(document.body);
@@ -60,7 +69,7 @@ root.render(<HelloMessage name="Taylor" />);
 The same in Lestin:
 ```js
 function HelloMessage({ name }) {
-	return <div>Hello {name}</div>;
+    return <div>Hello {name}</div>;
 }
 
 document.body.appendChild(<HelloMessage name="Taylor" />);
