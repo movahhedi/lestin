@@ -36,13 +36,27 @@ export function createElement(type, props = null) {
 			});
 		} else if (name === "style") {
 			if (typeof value === "string") element.style.cssText = value;
-			else Object.assign(element, value);
-			// else Object.assign(element.style, value);
+			// else Object.assign(element, value);
+			else Object.assign(element.style, value);
 		} else if (name === "dataset") {
 			Object.assign(element.dataset, value);
 		}
-		else if (["className", "innerHTML", "htmlFor"].includes(name)) {
+		else if (["innerHTML", "htmlFor"].includes(name)) {
 			element[name] = value;
+		}
+		else if (["class", "className"].includes(name)) {
+			let className = "";
+			if (value) {
+				if (Array.isArray(value)) {
+					const arrayLength = value.length;
+					for (let i = 0; i < arrayLength; i++) {
+						if (value[i]) {
+							className += (className ? " " : "") + value[i].trim();
+						}
+					}
+				}
+				element.className = value;
+			}
 		}
 
 		/*else if (type == "svg" || type == "path" || type == "circle") {

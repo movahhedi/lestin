@@ -4,7 +4,7 @@
 		"target": "ES2015",
 		"module": "ES2015",
 		"lib": ["ES2017", "DOM"],
-		"moduleResolution": "nodenext",
+		"moduleResolution": "Node",
 		"sourceMap": false,
 		"declaration": false,
 		"declarationDir": null,

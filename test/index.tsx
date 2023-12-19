@@ -1,4 +1,4 @@
-import { createElement } from "../src/jsx-runtime";
+import { createElement } from "../jsx-runtime/src";
 
 let a = createElement("a");
 let c = createElement("label");

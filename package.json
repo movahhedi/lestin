@@ -1,6 +1,6 @@
 {
 	"name": "lestin",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"description": "Vanilla JSX, No Virtual-DOM",
 	"keywords": [
 		"lestin",
@@ -25,6 +25,7 @@
 		"email": "dev@shmovahhedi.com",
 		"url": "https://shmovahhedi.com/"
 	},
+	"packageManager": "yarn@4.0.2",
 	"type": "module",
 	"source": "jsx-runtime/src/index.js",
 	"main": "jsx-runtime/dist/jsx-runtime.js",
@@ -82,15 +83,17 @@
 		"build:dev": "microbundle build --tsconfig tsconfig.json --raw true --no-generateType -f modern,esm,cjs,umd --cwd \"jsx-dev-runtime\"",
 		"watch:jsx": "microbundle watch --tsconfig tsconfig.json --raw true --no-generateType -f modern,esm,cjs,umd --cwd \"jsx-runtime\"",
 		"watch:dev": "microbundle watch --tsconfig tsconfig.json --raw true --no-generateType -f modern,esm,cjs,umd --cwd \"jsx-dev-runtime\"",
-		"dev": "microbundle watch -f modern,esm,cjs,umd --cwd \"jsx-runtime\""
+		"dev": "microbundle watch -f modern,esm,cjs,umd --cwd \"jsx-runtime\"",
+		"update": "npx npm-check-updates -i"
 	},
 	"dependencies": {
-		"csstype": "^3.1.2"
+		"csstype": "^3.1.3"
 	},
 	"devDependencies": {
-		"concurrently": "^8.2.0",
+		"concurrently": "^8.2.2",
 		"microbundle": "^0.15.1",
+		"npm-check-updates": "^16.14.12",
 		"prop-types": "^15.8.1",
-		"typescript": "^5.1.5"
+		"typescript": "^5.3.3"
 	}
 }

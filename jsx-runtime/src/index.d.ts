@@ -847,8 +847,8 @@ declare namespace Lestin {
 
 		// Standard HTML Attributes
 		accessKey?: string | undefined;
-		class?: string | undefined;
-		className?: string | undefined;
+		class?: string | string[] | undefined;
+		className?: string | string[] | undefined;
 		contentEditable?: Booleanish | "inherit" | undefined;
 		contextMenu?: string | undefined;
 		dir?: string | undefined;
@@ -1472,8 +1472,8 @@ declare namespace Lestin {
 	interface SVGAttributes<T> extends AriaAttributes, DOMAttributes<T> {
 		// Attributes which also defined in HTMLAttributes
 		// See comment in SVGDOMPropertyConfig.js
-		class?: string | undefined;
-		className?: string | undefined;
+		class?: string | string[] | undefined;
+		className?: string | string[] | undefined;
 		color?: string | undefined;
 		height?: number | string | undefined;
 		id?: string | undefined;
