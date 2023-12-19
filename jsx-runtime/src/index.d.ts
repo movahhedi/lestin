@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable max-lines */
+
 // Credits of this file goes to the contributors of @types/react
 // (https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react)
 
@@ -32,8 +37,8 @@
 //                 Shahab Movahhedi <https://github.com/movahhedi>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-import * as CSS from "csstype";
-import * as PropTypes from "prop-types";
+import type * as CSS from "csstype";
+import type * as PropTypes from "prop-types";
 
 type NativeAnimationEvent = AnimationEvent;
 type NativeClipboardEvent = ClipboardEvent;
@@ -74,12 +79,19 @@ declare namespace Lestin {
 	 * @internal You shouldn't need to use this type since you never see these attributes
 	 * inside your component or have to validate them.
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	interface Attributes<T = {}> {}
 
 	interface LestinElement extends HTMLElement {}
-	interface LestinElement<P = any, T extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>> extends HTMLElement {}
 
-	interface LestinComponentElement<T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>, P = Pick<ComponentProps<T>, Exclude<keyof ComponentProps<T>, "key" | "ref">>> extends LestinElement<P, Exclude<T, number>> {}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	interface LestinElement<P = any, T extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>>
+		extends HTMLElement {}
+
+	interface LestinComponentElement<
+		T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>,
+		P = Pick<ComponentProps<T>, Exclude<keyof ComponentProps<T>, "key" | "ref">>,
+	> extends LestinElement<P, Exclude<T, number>> {}
 
 	// string fallback for custom web-components
 	interface DOMElement<P extends HTMLAttributes<T> | SVGAttributes<T>, T extends Element> extends LestinElement<P, string> {}
@@ -94,7 +106,10 @@ declare namespace Lestin {
 		type: keyof LestinSVG;
 	}
 
-	type DOMFactory<P extends DOMAttributes<T>, T extends Element> = (props?: (Attributes<T> & P) | null, ...children: LestinNode[]) => DOMElement<P, T>;
+	type DOMFactory<P extends DOMAttributes<T>, T extends Element> = (
+		props?: (Attributes<T> & P) | null,
+		...children: LestinNode[]
+	) => DOMElement<P, T>;
 
 	interface HTMLFactory<T extends HTMLElement> extends DetailedHTMLFactory<AllHTMLAttributes<T>, T> {}
 
@@ -115,10 +130,26 @@ declare namespace Lestin {
 
 	// DOM Elements
 	// TODO: generalize this to everything in `keyof LestinHTML`, not just "input"
-	function createElement(type: "input", props?: (InputHTMLAttributes<HTMLInputElement> & Attributes<HTMLInputElement>) | null, ...children: LestinNode[]): DetailedLestinHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-	function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(type: keyof LestinHTML, props?: (Attributes<T> & P) | null, ...children: LestinNode[]): DetailedLestinHTMLElement<P, T>;
-	function createElement<P extends SVGAttributes<T>, T extends SVGElement>(type: keyof LestinSVG, props?: (Attributes<T> & P) | null, ...children: LestinNode[]): LestinSVGElement;
-	function createElement<P extends DOMAttributes<T>, T extends Element>(type: string, props?: (Attributes<T> & P) | null, ...children: LestinNode[]): DOMElement<P, T>;
+	function createElement(
+		type: "input",
+		props?: (InputHTMLAttributes<HTMLInputElement> & Attributes<HTMLInputElement>) | null,
+		...children: LestinNode[]
+	): DetailedLestinHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+	function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
+		type: keyof LestinHTML,
+		props?: (Attributes<T> & P) | null,
+		...children: LestinNode[]
+	): DetailedLestinHTMLElement<P, T>;
+	function createElement<P extends SVGAttributes<T>, T extends SVGElement>(
+		type: keyof LestinSVG,
+		props?: (Attributes<T> & P) | null,
+		...children: LestinNode[]
+	): LestinSVGElement;
+	function createElement<P extends DOMAttributes<T>, T extends Element>(
+		type: string,
+		props?: (Attributes<T> & P) | null,
+		...children: LestinNode[]
+	): DOMElement<P, T>;
 
 	function createElement<P extends {}>(
 		type: (props?: (Lestin.Attributes & P) | null, children?: Lestin.LestinNode) => Lestin.LestinNode,
@@ -139,16 +170,22 @@ declare namespace Lestin {
 	function appendChild(parent: HTMLElement, child: HTMLElement): void;
 	function appendChild(parent: HTMLElement, childOrText: HTMLElement | string): void;
 
-
 	// Custom components
 
 	// function createElement<P extends {}>(type: ClassType<P, Component<P, ComponentState>, ComponentClass<P>>, props?: (Attributes<Component<P, ComponentState>> & P) | null, ...children: LestinNode[]): CElement<P, Component<P, ComponentState>>;
 	// function createElement<P extends {}, T extends Component<P, ComponentState>, C extends ComponentClass<P>>(type: ClassType<P, T, C>, props?: (Attributes<T> & P) | null, ...children: LestinNode[]): CElement<P, T>;
-	function createElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string, props?: (Attributes & P) | null, ...children: LestinNode[]): LestinElement<P>;
+	function createElement<P extends {}>(
+		type: FunctionComponent<P> | ComponentClass<P> | string,
+		props?: (Attributes & P) | null,
+		...children: LestinNode[]
+	): LestinElement<P>;
 
 	// Sync with `LestinChildren` until `LestinChildren` is removed.
 	const Children: {
-		map<T, C>(children: C | ReadonlyArray<C>, fn: (child: C, index: number) => T): C extends null | undefined ? C : Array<Exclude<T, boolean | null | undefined>>;
+		map<T, C>(
+			children: C | ReadonlyArray<C>,
+			fn: (child: C, index: number) => T,
+		): C extends null | undefined ? C : Array<Exclude<T, boolean | null | undefined>>;
 		forEach<C>(children: C | ReadonlyArray<C>, fn: (child: C, index: number) => void): void;
 		count(children: any): number;
 		only<C>(children: C): C extends any[] ? never : C;
@@ -160,7 +197,7 @@ declare namespace Lestin {
 	// ----------------------------------------------------------------------
 
 	// Base component for plain JS classes
-	interface Component<P = {}, S = {}, SS = any> {}
+	// interface Component<P = {}, S = {}, SS = any> {}
 	class Component<P = {}, S = {}> {
 		render(): LestinNode;
 		componentWillMount?(): void;
@@ -168,22 +205,10 @@ declare namespace Lestin {
 		componentWillUnmount?(): void;
 		getChildContext?(): object;
 		componentWillReceiveProps?(nextProps: Readonly<P>, nextContext: any): void;
-		shouldComponentUpdate?(
-			nextProps: Readonly<P>,
-			nextState: Readonly<S>,
-			nextContext: any
-		): boolean;
-		componentWillUpdate?(
-			nextProps: Readonly<P>,
-			nextState: Readonly<S>,
-			nextContext: any
-		): boolean;
+		shouldComponentUpdate?(nextProps: Readonly<P>, nextState: Readonly<S>, nextContext: any): boolean;
+		componentWillUpdate?(nextProps: Readonly<P>, nextState: Readonly<S>, nextContext: any): boolean;
 		getSnapshotBeforeUpdate?(oldProps: Readonly<P>, oldState: Readonly<S>): any;
-		componentDidUpdate?(
-			previousProps: Readonly<P>,
-			previousState: Readonly<S>,
-			snapshot: any
-		): void;
+		componentDidUpdate?(previousProps: Readonly<P>, previousState: Readonly<S>, snapshot: any): void;
 		componentDidCatch?(error: any, errorInfo: any): void;
 	}
 
@@ -191,7 +216,9 @@ declare namespace Lestin {
 	// Class Interfaces
 	// ----------------------------------------------------------------------
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	interface FunctionComponent<P = {}> {}
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	interface ComponentClass<P = {}, S = ComponentState> {}
 
 	/**
@@ -212,7 +239,13 @@ declare namespace Lestin {
 	 * NOTE: prefer ComponentPropsWithRef, if the ref is forwarded,
 	 * or ComponentPropsWithoutRef when refs are not supported.
 	 */
-	type ComponentProps<T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> = T extends JSXElementConstructor<infer P> ? P : T extends keyof JSX.IntrinsicElements ? JSX.IntrinsicElements[T] : {};
+	type ComponentProps<T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> = T extends JSXElementConstructor<
+		infer P
+	>
+		? P
+		: T extends keyof JSX.IntrinsicElements
+			? JSX.IntrinsicElements[T]
+			: {};
 
 	//
 	// Event System
@@ -790,7 +823,18 @@ declare namespace Lestin {
 		 * Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified.
 		 * @see aria-atomic.
 		 */
-		"aria-relevant"?: "additions" | "additions removals" | "additions text" | "all" | "removals" | "removals additions" | "removals text" | "text" | "text additions" | "text removals" | undefined;
+		"aria-relevant"?:
+			| "additions"
+			| "additions removals"
+			| "additions text"
+			| "all"
+			| "removals"
+			| "removals additions"
+			| "removals text"
+			| "text"
+			| "text additions"
+			| "text removals"
+			| undefined;
 		/** Indicates that user input is required on the element before a form may be submitted. */
 		"aria-required"?: Booleanish | undefined;
 		/** Defines a human-readable, author-localized description for the role of an element. */
@@ -836,7 +880,77 @@ declare namespace Lestin {
 	}
 
 	// All the WAI-ARIA 1.1 role attribute values from https://www.w3.org/TR/wai-aria-1.1/#role_definitions
-	type AriaRole = "alert" | "alertdialog" | "application" | "article" | "banner" | "button" | "cell" | "checkbox" | "columnheader" | "combobox" | "complementary" | "contentinfo" | "definition" | "dialog" | "directory" | "document" | "feed" | "figure" | "form" | "grid" | "gridcell" | "group" | "heading" | "img" | "link" | "list" | "listbox" | "listitem" | "log" | "main" | "marquee" | "math" | "menu" | "menubar" | "menuitem" | "menuitemcheckbox" | "menuitemradio" | "navigation" | "none" | "note" | "option" | "presentation" | "progressbar" | "radio" | "radiogroup" | "region" | "row" | "rowgroup" | "rowheader" | "scrollbar" | "search" | "searchbox" | "separator" | "slider" | "spinbutton" | "status" | "switch" | "tab" | "table" | "tablist" | "tabpanel" | "term" | "textbox" | "timer" | "toolbar" | "tooltip" | "tree" | "treegrid" | "treeitem" | (string & {});
+	type AriaRole =
+		| "alert"
+		| "alertdialog"
+		| "application"
+		| "article"
+		| "banner"
+		| "button"
+		| "cell"
+		| "checkbox"
+		| "columnheader"
+		| "combobox"
+		| "complementary"
+		| "contentinfo"
+		| "definition"
+		| "dialog"
+		| "directory"
+		| "document"
+		| "feed"
+		| "figure"
+		| "form"
+		| "grid"
+		| "gridcell"
+		| "group"
+		| "heading"
+		| "img"
+		| "link"
+		| "list"
+		| "listbox"
+		| "listitem"
+		| "log"
+		| "main"
+		| "marquee"
+		| "math"
+		| "menu"
+		| "menubar"
+		| "menuitem"
+		| "menuitemcheckbox"
+		| "menuitemradio"
+		| "navigation"
+		| "none"
+		| "note"
+		| "option"
+		| "presentation"
+		| "progressbar"
+		| "radio"
+		| "radiogroup"
+		| "region"
+		| "row"
+		| "rowgroup"
+		| "rowheader"
+		| "scrollbar"
+		| "search"
+		| "searchbox"
+		| "separator"
+		| "slider"
+		| "spinbutton"
+		| "status"
+		| "switch"
+		| "tab"
+		| "table"
+		| "tablist"
+		| "tabpanel"
+		| "term"
+		| "textbox"
+		| "timer"
+		| "toolbar"
+		| "tooltip"
+		| "tree"
+		| "treegrid"
+		| "treeitem"
+		| (string & {});
 
 	interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
 		// Lestin-specific Attributes
@@ -954,6 +1068,7 @@ declare namespace Lestin {
 		href?: string | undefined;
 		hrefLang?: string | undefined;
 		htmlFor?: string | undefined;
+		for?: string | undefined;
 		httpEquiv?: string | undefined;
 		integrity?: string | undefined;
 		keyParams?: string | undefined;
@@ -1017,7 +1132,16 @@ declare namespace Lestin {
 		wrap?: string | undefined;
 	}
 
-	type HTMLAttributeReferrerPolicy = "" | "no-referrer" | "no-referrer-when-downgrade" | "origin" | "origin-when-cross-origin" | "same-origin" | "strict-origin" | "strict-origin-when-cross-origin" | "unsafe-url";
+	type HTMLAttributeReferrerPolicy =
+		| ""
+		| "no-referrer"
+		| "no-referrer-when-downgrade"
+		| "origin"
+		| "origin-when-cross-origin"
+		| "same-origin"
+		| "strict-origin"
+		| "strict-origin-when-cross-origin"
+		| "unsafe-url";
 
 	type HTMLAttributeAnchorTarget = "_self" | "_blank" | "_parent" | "_top" | (string & {});
 
@@ -1175,7 +1299,30 @@ declare namespace Lestin {
 		dateTime?: string | undefined;
 	}
 
-	type HTMLInputTypeAttribute = "button" | "checkbox" | "color" | "date" | "datetime-local" | "email" | "file" | "hidden" | "image" | "month" | "number" | "password" | "radio" | "range" | "reset" | "search" | "submit" | "tel" | "text" | "time" | "url" | "week" | (string & {});
+	type HTMLInputTypeAttribute =
+		| "button"
+		| "checkbox"
+		| "color"
+		| "date"
+		| "datetime-local"
+		| "email"
+		| "file"
+		| "hidden"
+		| "image"
+		| "month"
+		| "number"
+		| "password"
+		| "radio"
+		| "range"
+		| "reset"
+		| "search"
+		| "submit"
+		| "tel"
+		| "text"
+		| "time"
+		| "url"
+		| "week"
+		| (string & {});
 
 	interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
 		accept?: string | undefined;
@@ -1228,6 +1375,7 @@ declare namespace Lestin {
 	interface LabelHTMLAttributes<T> extends HTMLAttributes<T> {
 		form?: string | undefined;
 		htmlFor?: string | undefined;
+		for?: string | undefined;
 	}
 
 	interface LiHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -1326,6 +1474,7 @@ declare namespace Lestin {
 	interface OutputHTMLAttributes<T> extends HTMLAttributes<T> {
 		form?: string | undefined;
 		htmlFor?: string | undefined;
+		for?: string | undefined;
 		name?: string | undefined;
 	}
 
@@ -1497,7 +1646,21 @@ declare namespace Lestin {
 		accentHeight?: number | string | undefined;
 		accumulate?: "none" | "sum" | undefined;
 		additive?: "replace" | "sum" | undefined;
-		alignmentBaseline?: "auto" | "baseline" | "before-edge" | "text-before-edge" | "middle" | "central" | "after-edge" | "text-after-edge" | "ideographic" | "alphabetic" | "hanging" | "mathematical" | "inherit" | undefined;
+		alignmentBaseline?:
+			| "auto"
+			| "baseline"
+			| "before-edge"
+			| "text-before-edge"
+			| "middle"
+			| "central"
+			| "after-edge"
+			| "text-after-edge"
+			| "ideographic"
+			| "alphabetic"
+			| "hanging"
+			| "mathematical"
+			| "inherit"
+			| undefined;
 		allowReorder?: "no" | "yes" | undefined;
 		alphabetic?: number | string | undefined;
 		amplitude?: number | string | undefined;
@@ -1973,7 +2136,10 @@ declare namespace Lestin {
 	 */
 	// Sync with type of `const Children`.
 	interface LestinChildren {
-		map<T, C>(children: C | ReadonlyArray<C>, fn: (child: C, index: number) => T): C extends null | undefined ? C : Array<Exclude<T, boolean | null | undefined>>;
+		map<T, C>(
+			children: C | ReadonlyArray<C>,
+			fn: (child: C, index: number) => T,
+		): C extends null | undefined ? C : Array<Exclude<T, boolean | null | undefined>>;
 		forEach<C>(children: C | ReadonlyArray<C>, fn: (child: C, index: number) => void): void;
 		count(children: any): number;
 		only<C>(children: C): C extends any[] ? never : C;

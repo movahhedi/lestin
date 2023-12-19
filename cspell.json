@@ -1,11 +1,6 @@
 {
 	"version": "0.2",
-	"ignorePaths": [
-		"**/node_modules/**",
-		"**/temp/**",
-		"build/**",
-		"dist/**"
-	],
+	"ignorePaths": ["node_modules/**", "**/vendor/**", "temp/**", "dist/**", "build/**"],
 	"minWordLength": 4,
 	"allowCompoundWords": true,
 	"words": [
@@ -26,8 +21,18 @@
 		"jsxs",
 		"mpath",
 		"noindex",
-		"bgcolor"
+		"bgcolor",
+		"csstype",
+		"micobundle"
 	],
 	"ignoreWords": [],
-	"import": []
+	"import": [],
+	"dictionaryDefinitions": [
+		{
+			"name": "ReactTypes",
+			"path": "./.cspell/ReactTypes.txt",
+			"addWords": true
+		}
+	],
+	"dictionaries": ["ReactTypes"]
 }
