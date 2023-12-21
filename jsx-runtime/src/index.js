@@ -46,7 +46,6 @@ export function CreateElement(type, props = null) {
 		// if ((typeof child !== "number" && !child) || (child?.length && !child?.length)) {
 		if (!((Boolean(child) && !(Array.isArray(child) && !child.length)) || child === 0)) {
 			newChildren.splice(i, 1);
-			i--;
 		}
 	}
 
