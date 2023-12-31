@@ -5,7 +5,7 @@
 		"module": "ESNext",
 		"lib": ["ESNext", "DOM"],
 		"jsx": "react-jsx",
-		"jsxImportSource": "../../../dist",
+		"jsxImportSource": "lestin",
 		"moduleResolution": "node",
 		"esModuleInterop": true,
 		"typeRoots": [

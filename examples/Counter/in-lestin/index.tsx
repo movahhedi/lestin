@@ -10,12 +10,9 @@ function Counter({ title, variable }) {
 	return button;
 }
 
-let CounterOne = -1,
-	CounterTwo = -1;
-
 document.body.appendChild(
 	<div>
-		<Counter title="Counter One: " variable={CounterOne} />
-		<Counter title="Counter Two: " variable={CounterTwo} />
+		<Counter title="Counter One: " variable={-1} />
+		<Counter title="Counter Two: " variable={-1} />
 	</div>,
 );

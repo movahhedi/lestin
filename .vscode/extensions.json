@@ -1,10 +1,8 @@
 {
 	"recommendations": [
 		"eamodio.gitlens",
-		"junstyle.php-cs-fixer",
 		"esbenp.prettier-vscode",
 		"streetsidesoftware.code-spell-checker",
-		"streetsidesoftware.code-spell-checker-persian",
 		"gruntfuggly.todo-tree",
 		"movahhedi.shahabix",
 		"aaron-bond.better-comments",
@@ -14,9 +12,6 @@
 		"christian-kohler.npm-intellisense",
 		"christian-kohler.path-intellisense",
 		"rvest.vs-code-prettier-eslint",
-		"alefragnani.project-manager",
-		"ms-vscode.remote-explorer",
-		"mrmlnc.vscode-scss",
 		"zobo.php-intellisense",
 	]
 }
