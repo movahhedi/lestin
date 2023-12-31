@@ -53,7 +53,6 @@ type NativeTransitionEvent = TransitionEvent;
 type NativeUIEvent = UIEvent;
 type NativeWheelEvent = WheelEvent;
 type Booleanish = boolean | "true" | "false";
-type ClassNameOrNested = string | ClassNameOrNested[];
 
 export = Lestin;
 export as namespace Lestin;
@@ -952,6 +951,8 @@ declare namespace Lestin {
 		| "treegrid"
 		| "treeitem"
 		| (string & {});
+
+	type ClassNameOrNested = string | ClassNameOrNested[];
 
 	interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
 		// Lestin-specific Attributes
