@@ -53,6 +53,7 @@ type NativeTransitionEvent = TransitionEvent;
 type NativeUIEvent = UIEvent;
 type NativeWheelEvent = WheelEvent;
 type Booleanish = boolean | "true" | "false";
+type ClassNameOrNested = string | ClassNameOrNested[];
 
 export = Lestin;
 export as namespace Lestin;
@@ -961,8 +962,8 @@ declare namespace Lestin {
 
 		// Standard HTML Attributes
 		accessKey?: string | undefined;
-		class?: string | string[] | undefined;
-		className?: string | string[] | undefined;
+		class?: ClassNameOrNested | undefined;
+		className?: ClassNameOrNested | undefined;
 		contentEditable?: Booleanish | "inherit" | undefined;
 		contextMenu?: string | undefined;
 		dir?: string | undefined;
@@ -1621,8 +1622,8 @@ declare namespace Lestin {
 	interface SVGAttributes<T> extends AriaAttributes, DOMAttributes<T> {
 		// Attributes which also defined in HTMLAttributes
 		// See comment in SVGDOMPropertyConfig.js
-		class?: string | string[] | undefined;
-		className?: string | string[] | undefined;
+		class?: ClassNameOrNested | undefined;
+		className?: ClassNameOrNested | undefined;
 		color?: string | undefined;
 		height?: number | string | undefined;
 		id?: string | undefined;

@@ -59,6 +59,8 @@ export function CreateElement(type, props = null) {
 		if (name == "class" || name == "className") {
 			let className = "";
 			if (Array.isArray(value)) {
+				value = value.flat(5);
+
 				const arrayLength = value.length;
 				for (let i = 0; i < arrayLength; i++) {
 					// eslint-disable-next-line max-depth
