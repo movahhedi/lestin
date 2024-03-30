@@ -1,8 +1,4 @@
 # Lestin
-**UNDER DEVELOPMENT, UNSTABLE**
-
-Developed by Shahab Movahhedi [shmovahhedi.com](https://shmovahhedi.com).
-
 Lestin has one job: Transform JSX codes to pure HTML elements using `document.createElement()`.
 
 Lestin is DOM-based. There's no virtual-DOM, and thus, no additional overhead. We can theoretically say its performance is ~equal to vanilla JS (it's just three functions). (Please contribute on testing Lestin performance).
@@ -92,6 +88,6 @@ Special thanks to [React](https://reactjs.org), [@types/react](https://github.co
 ## License
 Lestin is [MIT licensed](https://github.com/movahhedi/lestin/blob/main/LICENSE).
 
-Copyright 2023-present Shahab Movahhedi.
+Copyright 2023-present Shahab Movahhedi ([shmovahhedi.com](https://shmovahhedi.com)).
 
 Copyrights on the type definition files are respective of each contributor listed at the beginning of each definition file. Their licenses apply.

@@ -29,6 +29,7 @@ const booleanAttributes = [
 	"required",
 	"reversed",
 	"selected",
+	"hidden",
 ];
 
 export function CreateElement(type, props = null) {
@@ -53,51 +54,52 @@ export function CreateElement(type, props = null) {
 
 	const element = document.createElement(type);
 
-	Object.entries(props).forEach(([name, value]) => {
-		if (!name || (!value && typeof value !== "number")) return;
+	Object.entries(props).forEach(([propName, propValue]) => {
+		if (!propName || (!propValue && typeof propValue !== "number" && propValue !== "")) return;
 
-		if (name == "class" || name == "className") {
+		if (propName == "class" || propName == "className") {
 			let className = "";
-			if (Array.isArray(value)) {
-				value = value.flat(5);
+			if (Array.isArray(propValue)) {
+				propValue = propValue.flat(5);
 
-				const arrayLength = value.length;
+				const arrayLength = propValue.length;
 				for (let i = 0; i < arrayLength; i++) {
 					// eslint-disable-next-line max-depth
-					if (value[i]) {
-						className += (className ? " " : "") + value[i].trim();
+					if (propValue[i]) {
+						className += (className ? " " : "") + propValue[i].trim();
 					}
 				}
-				value = className;
+				propValue = className;
 			}
-			element.className = value;
-		} else if (name.startsWith("on")) {
+			element.className = propValue;
+		} else if (propName.startsWith("on")) {
 			// TODO ondblclick doesn't work (onDoubleClick)
-			const eventName = name.toLowerCase().substring(2);
+			const eventName = propName.toLowerCase().substring(2);
 
-			if (!Array.isArray(value)) {
-				value = [value];
+			if (!Array.isArray(propValue)) {
+				propValue = [propValue];
 			}
 
-			const arrayLength = value.length;
+			const arrayLength = propValue.length;
 			for (let i = 0; i < arrayLength; i++) {
-				if (eventName && value[i]) {
-					element.addEventListener(eventName, value[i]);
+				if (eventName && propValue[i]) {
+					element.addEventListener(eventName, propValue[i]);
 				}
 			}
-		} else if (name === "style") {
-			if (typeof value === "string") element.style.cssText = value;
+		} else if (propName === "style") {
+			if (typeof propValue === "string") element.style.cssText = propValue;
 			// else Object.assign(element, value);
-			else Object.assign(element.style, value);
-		} else if (name === "dataset") {
-			Object.assign(element.dataset, value);
-		} else if (name == "htmlFor" || name == "for") {
-			element.htmlFor = value;
-		} else if (["innerHTML", "innerText", "textContent"].includes(name)) {
-			element[name] = value;
-		} else if (booleanAttributes.includes(name) && value) {
-			element[name] = name;
-		} else element.setAttribute(name, value.toString());
+			else Object.assign(element.style, propValue);
+		} else if (propName === "dataset") {
+			Object.assign(element.dataset, propValue);
+		} else if (propName == "htmlFor" || propName == "for") {
+			element.htmlFor = propValue;
+		} else if (["innerHTML", "innerText", "textContent"].includes(propName)) {
+			element[propName] = propValue;
+		} else if (booleanAttributes.includes(propName) && propValue) {
+			// element[name] = name;
+			element.setAttribute(propName, propName);
+		} else element.setAttribute(propName, propValue.toString());
 
 		/*else if (type == "svg" || type == "path" || type == "circle") {
 			if (name == "xmlns") element.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.w3.org/2000/svg");
