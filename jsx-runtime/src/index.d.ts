@@ -956,6 +956,7 @@ declare namespace Lestin {
 
 	interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
 		// Lestin-specific Attributes
+		assign?: (element: T) => void;
 		defaultChecked?: boolean | "defaultChecked" | undefined;
 		defaultValue?: string | number | ReadonlyArray<string> | undefined;
 		suppressContentEditableWarning?: boolean | "suppressContentEditableWarning" | undefined;

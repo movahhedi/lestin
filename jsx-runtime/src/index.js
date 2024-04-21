@@ -99,6 +99,8 @@ export function CreateElement(type, props = null) {
 		} else if (booleanAttributes.includes(propName) && propValue) {
 			// element[name] = name;
 			element.setAttribute(propName, propName);
+		} else if (propName === "assign" && typeof propValue === "function") {
+			propValue(element);
 		} else element.setAttribute(propName, propValue.toString());
 
 		/*else if (type == "svg" || type == "path" || type == "circle") {
