@@ -3,12 +3,14 @@
 	"version": "0.1.4",
 	"description": "Vanilla JSX, No Virtual-DOM",
 	"keywords": [
-		"lestin",
 		"jsx",
 		"tsx",
 		"dom",
+		"vdom",
+		"virtual-dom",
 		"js",
 		"ts",
+		"babel",
 		"react",
 		"jsx-runtime"
 	],
