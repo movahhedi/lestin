@@ -1,6 +1,6 @@
 {
 	"name": "lestin",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"description": "Vanilla JSX, No Virtual-DOM",
 	"keywords": [
 		"jsx",
@@ -79,6 +79,7 @@
 		"jsx-dev-runtime/package.json"
 	],
 	"scripts": {
+		"prepublishOnly": "yarn build",
 		"build": "yarn build:jsx && yarn build:dev",
 		"watch": "concurrently -c \"bgBlue,bgGreen\" \"npm:watch:jsx\" \"npm:watch:dev\"",
 		"build:jsx": "microbundle build --tsconfig tsconfig.json --raw true --no-generateType -f modern,esm,cjs,umd --cwd \"jsx-runtime\"",
