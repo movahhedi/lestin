@@ -56,7 +56,7 @@ export function CreateElement(type, props = null) {
 
 	// Object.entries(props).forEach(([propName, propValue]) => {
 	for (const propName in props) {
-		if (!Object.hasOwn(props, key)) continue;
+		if (!Object.hasOwn(props, propName)) continue;
 
 		let propValue = props[propName];
 
