@@ -56,11 +56,15 @@ export function CreateElement(type, props = null) {
 
 	// Object.entries(props).forEach(([propName, propValue]) => {
 	for (const propName in props) {
-		if (!Object.hasOwn(props, propName)) continue;
+		if (!Object.hasOwn(props, propName)) {
+			continue;
+		}
 
 		let propValue = props[propName];
 
-		if (!propName || (!propValue && typeof propValue !== "number" && propValue !== "")) return;
+		if (!propName || (!propValue && typeof propValue !== "number" && propValue !== "")) {
+			continue;
+		}
 
 		if (propName == "class" || propName == "className") {
 			let className = "";
@@ -127,6 +131,7 @@ export function CreateElement(type, props = null) {
 	// for (const child of children) {
 	childrenArrayLength = children.length;
 	for (let i = 0; i < childrenArrayLength; i++) {
+		const child = children[i];
 		AppendChild(element, child);
 	}
 
@@ -145,8 +150,9 @@ export function AppendChild(parent, childOrText) {
 			AppendChild(parent, nestedChild);
 		}
 	} else {
-		// parent.appendChild(childOrText instanceof HTMLElement ? childOrText : document.createTextNode(childOrText));
-		parent.appendChild(typeof childOrText === "string" ? document.createTextNode(childOrText) : childOrText);
+		parent.appendChild(childOrText instanceof HTMLElement ? childOrText : document.createTextNode(childOrText));
+		// HTMLElement or string or number or object or...
+		// parent.appendChild(typeof childOrText === "" ? document.createTextNode(childOrText) : childOrText);
 	}
 }
 
