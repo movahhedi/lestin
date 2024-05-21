@@ -39,6 +39,7 @@
 
 import type * as CSS from "csstype";
 import type * as PropTypes from "prop-types";
+import type { Falsy } from "./TypeScriptUtilities";
 
 type NativeAnimationEvent = AnimationEvent;
 type NativeClipboardEvent = ClipboardEvent;
@@ -952,7 +953,7 @@ declare namespace Lestin {
 		| "treeitem"
 		| (string & {});
 
-	type ClassNameOrNested = string | ClassNameOrNested[];
+	type ClassNameOrNested = string | Falsy | ClassNameOrNested[];
 
 	interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
 		// Lestin-specific Attributes

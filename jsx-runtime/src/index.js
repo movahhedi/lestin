@@ -71,6 +71,9 @@ export function CreateElement(type, props = null) {
 			if (Array.isArray(propValue)) {
 				propValue = propValue.flat(5);
 
+				// Slower version by 30%:
+				// className = propValue.join(" ").replace(/(^ *)|( *$)/, "").replace(/ +/, " ");
+
 				const arrayLength = propValue.length;
 				// eslint-disable-next-line max-depth
 				for (let i = 0; i < arrayLength; i++) {
