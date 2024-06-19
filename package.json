@@ -27,7 +27,7 @@
 		"email": "dev@shmovahhedi.com",
 		"url": "https://shmovahhedi.com/"
 	},
-	"packageManager": "yarn@4.1.1",
+	"packageManager": "yarn@4.3.0",
 	"type": "module",
 	"source": "jsx-runtime/src/index.js",
 	"main": "jsx-runtime/dist/jsx-runtime.js",
