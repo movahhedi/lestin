@@ -30,7 +30,8 @@ After installing, to support JSX, add these configs to your `tsconfig.json` in t
 	"compilerOptions": {
 		"jsx": "react-jsx",
 		"jsxImportSource": "lestin",
-		"moduleResolution": "node"
+		"moduleResolution": "node",
+		"esModuleInterop": true,
 	}
 }
 ```
