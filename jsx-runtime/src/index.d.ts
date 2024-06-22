@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable perfectionist/sort-interfaces */
+/* eslint-disable perfectionist/sort-object-types */
 /* eslint-disable max-lines */
 
 // Credits of this file goes to the contributors of @types/react
@@ -39,6 +41,7 @@
 
 import type * as CSS from "csstype";
 import type * as PropTypes from "prop-types";
+
 import type { Falsy } from "./TypeScriptUtilities";
 
 type NativeAnimationEvent = AnimationEvent;
@@ -240,13 +243,8 @@ declare namespace Lestin {
 	 * NOTE: prefer ComponentPropsWithRef, if the ref is forwarded,
 	 * or ComponentPropsWithoutRef when refs are not supported.
 	 */
-	type ComponentProps<T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> = T extends JSXElementConstructor<
-		infer P
-	>
-		? P
-		: T extends keyof JSX.IntrinsicElements
-			? JSX.IntrinsicElements[T]
-			: {};
+	type ComponentProps<T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> =
+		T extends JSXElementConstructor<infer P> ? P : T extends keyof JSX.IntrinsicElements ? JSX.IntrinsicElements[T] : {};
 
 	//
 	// Event System
