@@ -19,3 +19,6 @@ noindex
 bgcolor
 csstype
 micobundle
+
+beforexrselect
+webkitmouseforceup

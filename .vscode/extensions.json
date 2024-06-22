@@ -11,7 +11,5 @@
 		"lacroixdavid1.vscode-format-context-menu",
 		"christian-kohler.npm-intellisense",
 		"christian-kohler.path-intellisense",
-		"rvest.vs-code-prettier-eslint",
-		"zobo.php-intellisense",
 	]
 }
