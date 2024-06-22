@@ -428,8 +428,10 @@ declare namespace Lestin {
 	type AnimationEventHandler<T = Element> = EventHandler<AnimationEvent<T>>;
 	type TransitionEventHandler<T = Element> = EventHandler<TransitionEvent<T>>;
 
-	// SoAoU: single or array or undefined
-	type SoAoU<P = LestinEventHandler> = P | P[] | undefined;
+	// SoAoU: single, or array, or undefined
+	// type SoAoU<P = LestinEventHandler> = P | P[] | undefined;
+	// SoAoU: single, or array, or undefined, or array of and undefined
+	type SoAoU<P = LestinEventHandler> = P | (P | undefined)[] | undefined;
 
 	//
 	// Props / DOM Attributes
