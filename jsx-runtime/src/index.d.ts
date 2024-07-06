@@ -429,7 +429,7 @@ declare namespace Lestin {
 	// SoAoU: single, or array, or undefined
 	// type SoAoU<P = LestinEventHandler> = P | P[] | undefined;
 	// SoAoU: single, or array, or undefined, or array of and undefined
-	type SoAoU<P = LestinEventHandler> = P | (P | undefined)[] | undefined;
+	type SoAoU<P = LestinEventHandler> = P | (P | undefined | null | false)[] | undefined | null | false;
 
 	//
 	// Props / DOM Attributes
