@@ -1,6 +1,6 @@
 {
 	"name": "lestin",
-	"version": "0.1.13",
+	"version": "0.1.14",
 	"description": "Vanilla JSX, No Virtual-DOM",
 	"keywords": [
 		"jsx",
