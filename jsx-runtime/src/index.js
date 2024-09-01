@@ -50,8 +50,11 @@ export function CreateElement(type, props = {}) {
 		}
 	}
 
+	props.children = children;
+
 	if (typeof type === "function") {
-		return type({ ...props, children });
+		// return type({ ...props, children });
+		return type(props);
 	}
 
 	const element = document.createElement(type);
@@ -150,7 +153,7 @@ export function CreateElement(type, props = {}) {
 	return element;
 }
 
-export const Fragment = (props, ...children) => children;
+export const Fragment = (props) => props.children;
 
 export function AppendChild(parent, childOrText) {
 	if (Array.isArray(childOrText)) {

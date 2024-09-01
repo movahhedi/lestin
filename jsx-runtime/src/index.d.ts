@@ -132,7 +132,7 @@ declare namespace Lestin {
 	// Top Level API
 	// ----------------------------------------------------------------------
 
-	type RefType<T> = { current: T | null };
+	type RefType<T> = { current: T | undefined };
 	function createRef<T>(): { current: T | undefined };
 	// const createRef = <T>(): RefType<T> => ({ current: null });
 
@@ -141,22 +141,18 @@ declare namespace Lestin {
 	function createElement(
 		type: "input",
 		props?: (InputHTMLAttributes<HTMLInputElement> & Attributes<HTMLInputElement>) | null,
-		...children: LestinNode[]
 	): DetailedLestinHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 	function createElement<P extends HTMLAttributes<T>, T extends HTMLElement>(
 		type: keyof LestinHTML,
 		props?: (Attributes<T> & P) | null,
-		...children: LestinNode[]
 	): DetailedLestinHTMLElement<P, T>;
 	function createElement<P extends SVGAttributes<T>, T extends SVGElement>(
 		type: keyof LestinSVG,
 		props?: (Attributes<T> & P) | null,
-		...children: LestinNode[]
 	): LestinSVGElement;
 	function createElement<P extends DOMAttributes<T>, T extends Element>(
 		type: string,
 		props?: (Attributes<T> & P) | null,
-		...children: LestinNode[]
 	): DOMElement<P, T>;
 
 	function createElement<P extends {}>(
@@ -185,7 +181,6 @@ declare namespace Lestin {
 	function createElement<P extends {}>(
 		type: FunctionComponent<P> | ComponentClass<P> | string,
 		props?: (Attributes & P) | null,
-		...children: LestinNode[]
 	): LestinElement<P>;
 
 	// Sync with `LestinChildren` until `LestinChildren` is removed.
@@ -241,7 +236,8 @@ declare namespace Lestin {
 	// Component Specs and Lifecycle
 	// ----------------------------------------------------------------------
 
-	type PropsWithChildren<P = unknown> = P & { children?: LestinNode | undefined };
+	type BaseProps<P = unknown> = P & { children?: LestinNode | undefined };
+	type PropsWithChildren<P = unknown> = BaseProps<P>;
 
 	/**
 	 * NOTE: prefer ComponentPropsWithRef, if the ref is forwarded,
@@ -962,6 +958,7 @@ declare namespace Lestin {
 	interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
 		// Lestin-specific Attributes
 		assign?: (element: T) => void;
+		ref?: RefType<T>;
 		defaultChecked?: boolean | "defaultChecked" | undefined;
 		defaultValue?: string | number | ReadonlyArray<string> | undefined;
 		suppressContentEditableWarning?: boolean | "suppressContentEditableWarning" | undefined;
