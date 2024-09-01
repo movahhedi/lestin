@@ -1,36 +1,7 @@
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference path="index.d.ts" />
 
-/**
- * https://meiert.com/en/blog/boolean-attributes-of-html/
- */
-const booleanAttributes = [
-	"allowfullscreen",
-	"async",
-	"autofocus",
-	"autoplay",
-	"checked",
-	"controls",
-	"default",
-	"defer",
-	"disabled",
-	"formnovalidate",
-	"inert",
-	"ismap",
-	"itemscope",
-	"loop",
-	"multiple",
-	"muted",
-	"nomodule",
-	"novalidate",
-	"open",
-	"playsinline",
-	"readonly",
-	"required",
-	"reversed",
-	"selected",
-	"hidden",
-];
+// import { classnames } from "tsx-dom-types";
 
 export function CreateElement(type, props = {}) {
 	// let children = props.children || [];
@@ -42,7 +13,9 @@ export function CreateElement(type, props = {}) {
 		children = [children];
 	}
 
-	for (let i = 0, childrenArrayLength = children.length; i < childrenArrayLength; i++) {
+	let childrenArrayLength = children.length;
+
+	for (let i = 0; i < childrenArrayLength; i++) {
 		const child = children[i];
 		// if ((typeof child !== "number" && !child) || (child?.length && !child?.length)) {
 		if (!((Boolean(child) && !(Array.isArray(child) && !child.length)) || child === 0)) {
@@ -71,6 +44,11 @@ export function CreateElement(type, props = {}) {
 			continue;
 		}
 
+		// Ignore some debug props that might be added by bundlers
+		if (propName === "__source" || propName === "__self" || propName === "tsxTag") {
+			continue;
+		}
+
 		if (propName == "class" || propName == "className") {
 			let className = "";
 			if (Array.isArray(propValue)) {
@@ -91,8 +69,11 @@ export function CreateElement(type, props = {}) {
 			}
 
 			element.className = propValue;
+			// element.className = classnames(propValue);
 		} else if (propName.startsWith("on")) {
-			let eventName = propName.toLowerCase().substring(2);
+			const finalName = propName.replace(/Capture$/, "");
+			const useCapture = propName !== finalName;
+			let eventName = finalName.toLowerCase().substring(2);
 
 			// TODO make this better
 			// ondblclick doesn't work (onDoubleClick)
@@ -108,7 +89,7 @@ export function CreateElement(type, props = {}) {
 			for (let i = 0; i < arrayLength; i++) {
 				// eslint-disable-next-line max-depth
 				if (eventName && propValue[i]) {
-					element.addEventListener(eventName, propValue[i]);
+					element.addEventListener(eventName, propValue[i], useCapture);
 				}
 			}
 		} else if (propName === "style") {
@@ -124,11 +105,12 @@ export function CreateElement(type, props = {}) {
 			element.htmlFor = propValue;
 		} else if (["innerHTML", "innerText", "textContent"].includes(propName)) {
 			element[propName] = propValue;
-		} else if (booleanAttributes.includes(propName) && propValue) {
+		} else if (propValue === true) {
+			// } else if (booleanAttributes.includes(propName) && propValue) {
 			// element[name] = name;
 			element.setAttribute(propName, propName);
 		} else if (propName === "ref") {
-			value.current = element;
+			propValue.current = element;
 		} else if (propName === "assign" && typeof propValue === "function") {
 			propValue(element);
 		} else {
