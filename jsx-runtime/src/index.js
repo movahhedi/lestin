@@ -87,8 +87,13 @@ export function CreateElement(type, props = null) {
 
 			element.className = propValue;
 		} else if (propName.startsWith("on")) {
-			// TODO ondblclick doesn't work (onDoubleClick)
-			const eventName = propName.toLowerCase().substring(2);
+			let eventName = propName.toLowerCase().substring(2);
+
+			// TODO make this better
+			// ondblclick doesn't work (onDoubleClick)
+			if (eventName === "doubleclick") {
+				eventName = "dblclick";
+			}
 
 			if (!Array.isArray(propValue)) {
 				propValue = [propValue];
