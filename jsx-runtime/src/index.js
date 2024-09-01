@@ -32,17 +32,17 @@ const booleanAttributes = [
 	"hidden",
 ];
 
-export function CreateElement(type, props = null) {
-	let children = props.children || [];
-	delete props.children;
+export function CreateElement(type, props = {}) {
+	// let children = props.children || [];
+	// delete props.children;
+
+	let { children, ...attrs } = props;
 
 	if (!Array.isArray(children)) {
 		children = [children];
 	}
 
-	let childrenArrayLength = children.length;
-
-	for (let i = 0; i < childrenArrayLength; i++) {
+	for (let i = 0, childrenArrayLength = children.length; i < childrenArrayLength; i++) {
 		const child = children[i];
 		// if ((typeof child !== "number" && !child) || (child?.length && !child?.length)) {
 		if (!((Boolean(child) && !(Array.isArray(child) && !child.length)) || child === 0)) {
@@ -50,17 +50,19 @@ export function CreateElement(type, props = null) {
 		}
 	}
 
-	if (typeof type === "function") return type(props, ...children);
+	if (typeof type === "function") {
+		return type({ ...props, children });
+	}
 
 	const element = document.createElement(type);
 
-	// Object.entries(props).forEach(([propName, propValue]) => {
-	for (const propName in props) {
-		if (!Object.hasOwn(props, propName)) {
+	// Object.entries(attrs).forEach(([propName, propValue]) => {
+	for (const propName in attrs) {
+		if (!Object.hasOwn(attrs, propName)) {
 			continue;
 		}
 
-		let propValue = props[propName];
+		let propValue = attrs[propName];
 
 		if (!propName || (!propValue && typeof propValue !== "number" && propValue !== "")) {
 			continue;
