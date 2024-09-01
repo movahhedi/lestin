@@ -13,8 +13,13 @@ const nameDev = "jsx-dev-runtime/dist/jsx-dev-runtime";
 const bundle = (config) => ({
 	...config,
 	input: "jsx-runtime/src/index.js",
-	external: (id) => !/^[./]/.test(id),
-	// dir: "dist",
+	external: (id) => {
+		if (id.includes(":")) {
+			return false;
+		}
+
+		return !/^[./]/.test(id);
+	},
 });
 
 const node = (name) => [

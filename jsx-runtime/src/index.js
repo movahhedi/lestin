@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference path="index.d.ts" />
 
+import { namespaces } from "./utilities/namespaces";
 // import { classnames } from "tsx-dom-types";
 
 export function CreateElement(type, props = {}) {
@@ -13,15 +14,16 @@ export function CreateElement(type, props = {}) {
 		children = [children];
 	}
 
-	let childrenArrayLength = children.length;
+	let childrenLength = children.length;
 
-	for (let i = 0; i < childrenArrayLength; i++) {
+	for (let i = 0; i < childrenLength; i++) {
 		const child = children[i];
 		// if ((typeof child !== "number" && !child) || (child?.length && !child?.length)) {
 		if (!((Boolean(child) && !(Array.isArray(child) && !child.length)) || child === 0)) {
 			children.splice(i, 1);
 		}
 	}
+	childrenLength = children.length;
 
 	props.children = children;
 
@@ -30,7 +32,20 @@ export function CreateElement(type, props = {}) {
 		return type(props);
 	}
 
-	const element = document.createElement(type);
+	if (type === "svg" || type === "path" || type === "circle") {
+		// attrs.xmlns ||= "http://www.w3.org/2000/svg";
+		// attrs.xmlns ||= "http://www.w3.org/2000/xmlns/";
+		attrs.xmlns = namespaces.svg;
+	}
+
+	let element;
+	if (attrs.xmlns) {
+		console.log("CREATE", type, attrs.xmlns);
+		element = document.createElementNS(attrs.xmlns, type);
+	} else {
+		element = document.createElement(type);
+	}
+	// attrs.xmlns = attrs.xmlns || "";
 
 	// Object.entries(attrs).forEach(([propName, propValue]) => {
 	for (const propName in attrs) {
@@ -105,29 +120,30 @@ export function CreateElement(type, props = {}) {
 			element.htmlFor = propValue;
 		} else if (["innerHTML", "innerText", "textContent"].includes(propName)) {
 			element[propName] = propValue;
-		} else if (propValue === true) {
-			// } else if (booleanAttributes.includes(propName) && propValue) {
-			// element[name] = name;
-			element.setAttribute(propName, propName);
 		} else if (propName === "ref") {
 			propValue.current = element;
 		} else if (propName === "assign" && typeof propValue === "function") {
 			propValue(element);
+		} else if (propName === "xmlns") {
+			element.setAttributeNS("http://www.w3.org/2000/xmlns/", propName, propValue.toString());
 		} else {
+			if (propValue === true) {
+				propValue = propName;
+			}
 			element.setAttribute(propName, propValue.toString());
+
+			/* if (attrs.xmlns || type === "svg" || type === "path" || type === "circle") {
+				// element.setAttributeNS(attrs.xmlns, propName, propValue.toString());
+				element.setAttributeNS(null, propName, propValue.toString());
+			} else {
+				element.setAttribute(propName, propValue.toString());
+			} */
+
+			// element.setAttributeNS(attrs.xmlns || "", propName, propValue.toString());
 		}
-
-		/*else if (type == "svg" || type == "path" || type == "circle") {
-			if (name == "xmlns") element.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.w3.org/2000/svg");
-			else element.setAttributeNS(null, name, value.toString());
-		}*/
 	}
-	// });
 
-	// children?.forEach((child) => AppendChild(element, child));
-	// for (const child of children) {
-	childrenArrayLength = children.length;
-	for (let i = 0; i < childrenArrayLength; i++) {
+	for (let i = 0; i < childrenLength; i++) {
 		const child = children[i];
 		AppendChild(element, child);
 	}
@@ -147,7 +163,8 @@ export function AppendChild(parent, childOrText) {
 			AppendChild(parent, nestedChild);
 		}
 	} else {
-		parent.appendChild(childOrText instanceof HTMLElement ? childOrText : document.createTextNode(childOrText));
+		const isElement = childOrText instanceof Element;
+		parent.appendChild(isElement ? childOrText : document.createTextNode(childOrText));
 		// HTMLElement or string or number or object or...
 		// parent.appendChild(typeof childOrText === "" ? document.createTextNode(childOrText) : childOrText);
 	}
