@@ -5,7 +5,7 @@
 		"module": "ES2015",
 		"lib": ["ES2017", "DOM"],
 		"moduleResolution": "Node",
-		"sourceMap": false,
+		"sourceMap": true,
 		"declaration": false,
 		"declarationDir": null,
 		"noEmit": true
