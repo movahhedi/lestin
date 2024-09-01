@@ -117,6 +117,8 @@ export function CreateElement(type, props = null) {
 		} else if (booleanAttributes.includes(propName) && propValue) {
 			// element[name] = name;
 			element.setAttribute(propName, propName);
+		} else if (propName === "ref") {
+			value.current = element;
 		} else if (propName === "assign" && typeof propValue === "function") {
 			propValue(element);
 		} else {
@@ -160,3 +162,5 @@ export function AppendChild(parent, childOrText) {
 }
 
 export { CreateElement as jsx, CreateElement as jsxs, CreateElement as jsxDEV };
+
+export const createRef = () => ({ current: undefined });

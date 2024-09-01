@@ -132,6 +132,10 @@ declare namespace Lestin {
 	// Top Level API
 	// ----------------------------------------------------------------------
 
+	type RefType<T> = { current: T | null };
+	function createRef<T>(): { current: T | undefined };
+	// const createRef = <T>(): RefType<T> => ({ current: null });
+
 	// DOM Elements
 	// TODO: generalize this to everything in `keyof LestinHTML`, not just "input"
 	function createElement(
