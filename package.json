@@ -1,6 +1,6 @@
 {
 	"name": "lestin",
-	"version": "0.1.14",
+	"version": "0.2.1",
 	"description": "Vanilla JSX, No Virtual-DOM",
 	"keywords": [
 		"jsx",
@@ -80,8 +80,8 @@
 	],
 	"scripts": {
 		"prepublishOnly": "yarn build",
-		"build": "rollup -c",
-		"watch": "rollup -c --watch",
+		"build": "npx rollup -c",
+		"watch": "npx rollup -c --watch",
 		"dev": "yarn watch",
 
 		"build-microbundle": "yarn build:jsx-microbundle && yarn build:dev-microbundle",
