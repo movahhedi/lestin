@@ -40,7 +40,6 @@ export function CreateElement(type, props = {}) {
 
 	let element;
 	if (attrs.xmlns) {
-		console.log("CREATE", type, attrs.xmlns);
 		element = document.createElementNS(attrs.xmlns, type);
 	} else {
 		element = document.createElement(type);
