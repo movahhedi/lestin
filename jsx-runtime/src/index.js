@@ -171,4 +171,4 @@ export function AppendChild(parent, childOrText) {
 
 export { CreateElement as jsx, CreateElement as jsxs, CreateElement as jsxDEV };
 
-export const createRef = () => ({ current: undefined });
+export const createRef = (initialValue) => ({ current: initialValue });

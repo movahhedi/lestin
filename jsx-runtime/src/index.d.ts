@@ -133,7 +133,7 @@ declare namespace Lestin {
 	// ----------------------------------------------------------------------
 
 	type RefType<T> = { current: T | undefined };
-	function createRef<T>(): { current: T | undefined };
+	function createRef<T>(initialValue?: T): { current: T | undefined };
 	// const createRef = <T>(): RefType<T> => ({ current: null });
 
 	// DOM Elements
