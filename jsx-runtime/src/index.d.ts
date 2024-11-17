@@ -444,6 +444,8 @@ declare namespace Lestin {
 	interface DOMAttributes<T> {
 		children?: LestinNode | undefined;
 		innerHTML?: string | undefined;
+		innerText?: string | undefined;
+		textContent?: string | undefined;
 
 		// Clipboard Events
 		onCopy?: SoAoU<ClipboardEventHandler<T>>;
