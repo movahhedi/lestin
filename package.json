@@ -27,7 +27,7 @@
 		"email": "dev@shmovahhedi.com",
 		"url": "https://shmovahhedi.com/"
 	},
-	"packageManager": "yarn@4.3.0",
+	"packageManager": "yarn@4.6.0",
 	"type": "module",
 	"source": "jsx-runtime/src/index.js",
 	"main": "jsx-runtime/dist/jsx-runtime.js",
@@ -83,7 +83,6 @@
 		"build": "npx rollup -c",
 		"watch": "npx rollup -c --watch",
 		"dev": "yarn watch",
-
 		"build-microbundle": "yarn build:jsx-microbundle && yarn build:dev-microbundle",
 		"watch-microbundle": "concurrently -c \"bgBlue,bgGreen\" \"npm:watch:jsx-microbundle\" \"npm:watch:dev-microbundle\"",
 		"build:jsx-microbundle": "microbundle build --tsconfig tsconfig.json --raw true --no-generateType -f modern,esm,cjs,umd --cwd \"jsx-runtime\"",
@@ -91,7 +90,6 @@
 		"watch:jsx-microbundle": "microbundle watch --tsconfig tsconfig.json --raw true --no-generateType -f modern,esm,cjs,umd --cwd \"jsx-runtime\"",
 		"watch:dev-microbundle": "microbundle watch --tsconfig tsconfig.json --raw true --no-generateType -f modern,esm,cjs,umd --cwd \"jsx-dev-runtime\"",
 		"dev-microbundle": "microbundle watch -f modern,esm,cjs,umd --cwd \"jsx-runtime\"",
-
 		"update": "npx npm-check-updates -i"
 	},
 	"dependencies": {
