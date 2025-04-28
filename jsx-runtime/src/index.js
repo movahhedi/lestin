@@ -124,7 +124,7 @@ export function CreateElement(type, props = {}) {
 		} else if (propName === "assign" && typeof propValue === "function") {
 			propValue(element);
 		} else if (propName === "xmlns") {
-			element.setAttributeNS("http://www.w3.org/2000/xmlns/", propName, propValue.toString());
+			element.setAttributeNS(namespaces.xmlns, propName, propValue.toString());
 		} else {
 			if (propValue === true) {
 				propValue = propName;
