@@ -2,6 +2,7 @@
 /// <reference path="index.d.ts" />
 
 import { namespaces } from "./utilities/namespaces";
+import { svgElements } from "./utilities/svgElements";
 // import { classnames } from "tsx-dom-types";
 
 export function CreateElement(type, props = {}) {
@@ -32,9 +33,7 @@ export function CreateElement(type, props = {}) {
 		return type(props);
 	}
 
-	if (type === "svg" || type === "path" || type === "circle") {
-		// attrs.xmlns ||= "http://www.w3.org/2000/svg";
-		// attrs.xmlns ||= "http://www.w3.org/2000/xmlns/";
+	if (svgElements.includes(type)) {
 		attrs.xmlns = namespaces.svg;
 	}
 
