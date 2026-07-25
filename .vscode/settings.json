@@ -23,7 +23,7 @@
 	},
 	"gitlens.defaultTimeFormat": "H:mm",
 	"gitlens.views.contributors.showStatistics": true,
-	"typescript.format.semicolons": "insert",
+	"js/ts.format.semicolons": "insert",
 	"prettier.endOfLine": "crlf",
 	"prettier.printWidth": 128,
 	"prettier.semi": true,

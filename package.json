@@ -10,11 +10,10 @@
 		"virtual-dom",
 		"js",
 		"ts",
-		"babel",
 		"react",
 		"jsx-runtime"
 	],
-	"homepage": "https://github.com/movahhedi/lestin",
+	"homepage": "https://lestin.js.org",
 	"bugs": "https://github.com/movahhedi/lestin/issues",
 	"license": "MIT",
 	"repository": {
@@ -27,90 +26,67 @@
 		"email": "dev@shmovahhedi.com",
 		"url": "https://shmovahhedi.com/"
 	},
-	"packageManager": "yarn@4.6.0",
 	"type": "module",
-	"source": "jsx-runtime/src/index.js",
-	"main": "jsx-runtime/dist/jsx-runtime.js",
-	"module": "jsx-runtime/dist/jsx-runtime.mjs",
-	"types": "jsx-runtime/src/index.d.ts",
-	"typings": "jsx-runtime/src/index.d.ts",
-	"umd:main": "jsx-runtime/dist/jsx-runtime.umd.js",
-	"unpkg": "jsx-runtime/dist/jsx-runtime.js",
+	"packageManager": "pnpm@11.17.0",
+
+	"source": "src/index.js",
+	"main": "dist/index.js",
+	"module": "dist/index.js",
+	"types": "src/index.d.ts",
+	"typings": "src/index.d.ts",
+	"umd:main": "dist/index.umd.js",
+	"unpkg": "dist/index.js",
 	"exports": {
 		".": {
-			"types": "./jsx-runtime/src/index.d.ts",
-			"default": "./jsx-runtime/dist/jsx-runtime.mjs",
-			"browser": "./jsx-runtime/dist/jsx-runtime.mjs",
-			"umd": "./jsx-runtime/dist/jsx-runtime.umd.js",
-			"import": "./jsx-runtime/dist/jsx-runtime.mjs",
-			"require": "./jsx-runtime/dist/jsx-runtime.js"
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js",
+			"browser": "./dist/index.js",
+			"import": "./dist/index.js",
+			"umd": "./dist/index.umd.js",
+			"require": "./dist/index.cjs"
 		},
 		"./jsx-runtime": {
-			"types": "./jsx-runtime/src/index.d.ts",
-			"default": "./jsx-runtime/dist/jsx-runtime.mjs",
-			"browser": "./jsx-runtime/dist/jsx-runtime.mjs",
-			"umd": "./jsx-runtime/dist/jsx-runtime.umd.js",
-			"import": "./jsx-runtime/dist/jsx-runtime.mjs",
-			"require": "./jsx-runtime/dist/jsx-runtime.js"
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js",
+			"browser": "./dist/index.js",
+			"import": "./dist/index.js",
+			"umd": "./dist/index.umd.js",
+			"require": "./dist/index.cjs"
 		},
 		"./jsx-dev-runtime": {
-			"types": "./jsx-dev-runtime/src/index.d.ts",
-			"default": "./jsx-dev-runtime/dist/jsx-dev-runtime.mjs",
-			"browser": "./jsx-dev-runtime/dist/jsx-dev-runtime.mjs",
-			"umd": "./jsx-dev-runtime/dist/jsx-dev-runtime.umd.js",
-			"import": "./jsx-dev-runtime/dist/jsx-dev-runtime.mjs",
-			"require": "./jsx-dev-runtime/dist/jsx-dev-runtime.js"
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js",
+			"browser": "./dist/index.js",
+			"import": "./dist/index.js",
+			"umd": "./dist/index.umd.js",
+			"require": "./dist/index.cjs"
 		},
-		"./jsx-runtime/src/index.js": "./jsx-runtime/src/index.js",
-		"./jsx-runtime/src/index.d.ts": "./jsx-runtime/src/index.d.ts",
-		"./jsx-runtime/src/global.d.ts": "./jsx-runtime/src/global.d.ts",
-		"./jsx-dev-runtime/src/index.js": "./jsx-dev-runtime/src/index.js",
-		"./jsx-dev-runtime/src/index.d.ts": "./jsx-dev-runtime/src/index.d.ts",
+		"./jsx-runtime/index.js": "./src/index.js",
+		"./jsx-runtime/index.d.ts": "./src/index.d.ts",
+		"./jsx-runtime/global.d.ts": "./src/global.d.ts",
+
 		"./package.json": "./package.json"
 	},
 	"files": [
 		"src",
-		"dist",
-		"jsx-runtime/src",
-		"jsx-runtime/dist",
-		"jsx-runtime/package.json",
-		"jsx-dev-runtime/src",
-		"jsx-dev-runtime/dist",
-		"jsx-dev-runtime/package.json"
+		"dist"
 	],
 	"scripts": {
-		"prepublishOnly": "yarn build",
-		"build": "npx rollup -c",
-		"watch": "npx rollup -c --watch",
-		"dev": "yarn watch",
+		"prepublishOnly": "pnpm build",
+		"build": "npx tsdown",
+		"dev": "npx tsdown --watch",
 		"update": "npx npm-check-updates -i"
 	},
 	"dependencies": {
 		"csstype": "^3.2.3"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.9.1",
-		"@rollup/plugin-terser": "^1.0.0",
-		"@rollup/plugin-typescript": "^12.3.0",
-		"concurrently": "^10.0.4",
-		"esbuild": "^0.28.1",
-		"eslint": "^9.9.1",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-define-config": "^2.1.0",
-		"eslint-plugin-perfectionist": "^3.3.0",
-		"eslint-plugin-prettier": "^5.5.6",
-		"eslint-plugin-react": "^7.37.5",
-		"globals": "^17.7.0",
+		"@movahhedi/eslint-config": "^1.2.3",
+		"eslint": "^10.7.0",
 		"npm-check-updates": "^22.2.9",
 		"prettier": "^3.9.6",
-		"prettier-eslint-cli": "^8.0.1",
 		"prop-types": "^15.8.1",
-		"rimraf": "^6.1.3",
-		"rollup": "^4.62.2",
-		"rollup-plugin-dts": "^6.4.1",
-		"rollup-plugin-esbuild": "^6.2.1",
-		"tsx-dom-types": "^2.1.0",
-		"typescript": "^6.0.3",
-		"typescript-eslint": "^8.65.0"
+		"tsdown": "^0.22.14",
+		"typescript": "^6.0.3"
 	}
 }

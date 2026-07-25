@@ -1,14 +1,10 @@
 {
 	"recommendations": [
-		"eamodio.gitlens",
-		"esbenp.prettier-vscode",
 		"streetsidesoftware.code-spell-checker",
 		"gruntfuggly.todo-tree",
-		"movahhedi.shahabix",
 		"aaron-bond.better-comments",
 		"dbaeumer.vscode-eslint",
 		"mkxml.vscode-filesize",
-		"lacroixdavid1.vscode-format-context-menu",
 		"christian-kohler.npm-intellisense",
 		"christian-kohler.path-intellisense",
 	]

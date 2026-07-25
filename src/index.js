@@ -137,7 +137,7 @@ export function CreateElement(type, props = {}) {
 		}
 	}
 
-	let childrenLength = children.length;
+	const childrenLength = children.length;
 	for (let i = 0; i < childrenLength; i++) {
 		const child = children[i];
 		AppendChild(element, child);
@@ -165,6 +165,6 @@ export function AppendChild(parent, childOrText) {
 	}
 }
 
-export { CreateElement as jsx, CreateElement as jsxs, CreateElement as jsxDEV };
+export { CreateElement as jsx, CreateElement as jsxDEV, CreateElement as jsxs };
 
 export const createRef = (initialValue) => ({ current: initialValue });

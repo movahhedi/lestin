@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable perfectionist/sort-interfaces */
 /* eslint-disable perfectionist/sort-object-types */
@@ -42,7 +41,7 @@
 import type * as CSS from "csstype";
 import type * as PropTypes from "prop-types";
 
-import type { Falsy } from "./TypeScriptUtilities";
+import type { Falsy } from "./TypeScriptUtilities.ts";
 
 type NativeAnimationEvent = AnimationEvent;
 type NativeClipboardEvent = ClipboardEvent;
@@ -58,7 +57,7 @@ type NativeUIEvent = UIEvent;
 type NativeWheelEvent = WheelEvent;
 type Booleanish = boolean | "true" | "false";
 
-export = Lestin;
+export default Lestin;
 export as namespace Lestin;
 
 declare namespace Lestin {
@@ -88,9 +87,10 @@ declare namespace Lestin {
 
 	interface LestinElement extends HTMLElement {}
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	interface LestinElement<P = any, T extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>>
-		extends HTMLElement {}
+	interface LestinElement<
+		P = any,
+		T extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>,
+	> extends HTMLElement {}
 
 	interface LestinComponentElement<
 		T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>,
