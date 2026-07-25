@@ -1,6 +1,6 @@
 {
 	"name": "lestin",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"description": "Vanilla JSX, No Virtual-DOM",
 	"keywords": [
 		"jsx",
@@ -82,11 +82,15 @@
 	},
 	"devDependencies": {
 		"@movahhedi/eslint-config": "^1.2.3",
+		"@vitest/browser-playwright": "4.1.10",
+		"@vitest/coverage-v8": "4.1.10",
 		"eslint": "^10.8.0",
 		"npm-check-updates": "^22.2.9",
 		"prettier": "^3.9.6",
 		"prop-types": "^15.8.1",
+		"playwright": "^1.61.1",
 		"tsdown": "^0.22.14",
-		"typescript": "^6.0.3"
+		"typescript": "^6.0.3",
+		"vitest": "^4.1.10"
 	}
 }
