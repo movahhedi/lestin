@@ -2,11 +2,11 @@
 	"compilerOptions": {
 		"noImplicitAny": false,
 		"target": "esnext",
-		"module": "ESNext",
+		"module": "node20",
 		"lib": ["ESNext", "DOM"],
 		"jsx": "react-jsx",
 		"jsxImportSource": "lestin",
-		"moduleResolution": "node",
+		"moduleResolution": "node16",
 		"esModuleInterop": true,
 		"typeRoots": [
 			"./node_modules/@types",

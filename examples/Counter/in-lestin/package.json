@@ -1,6 +1,7 @@
 {
 	"name": "lestin-test",
 	"version": "0.0.1",
+	"type": "module",
 	"main": "index.tsx",
 	"author": {
 		"name": "Shahab Movahhedi",
