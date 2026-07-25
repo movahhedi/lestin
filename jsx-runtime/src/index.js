@@ -6,26 +6,20 @@ import { svgElements } from "./utilities/svgElements";
 // import { classnames } from "tsx-dom-types";
 
 export function CreateElement(type, props = {}) {
-	// let children = props.children || [];
-	// delete props.children;
-
 	let { children, ...attrs } = props;
 
 	if (!Array.isArray(children)) {
 		children = [children];
 	}
 
-	let childrenLength = children.length;
-
-	for (let i = 0; i < childrenLength; i++) {
+	for (let i = 0; i < children.length; i++) {
 		const child = children[i];
 		// if ((typeof child !== "number" && !child) || (child?.length && !child?.length)) {
 		if (!((Boolean(child) && !(Array.isArray(child) && !child.length)) || child === 0)) {
 			children.splice(i, 1);
+			i--;
 		}
 	}
-	childrenLength = children.length;
-
 	props.children = children;
 
 	if (typeof type === "function") {
@@ -45,7 +39,6 @@ export function CreateElement(type, props = {}) {
 	}
 	// attrs.xmlns = attrs.xmlns || "";
 
-	// Object.entries(attrs).forEach(([propName, propValue]) => {
 	for (const propName in attrs) {
 		if (!Object.hasOwn(attrs, propName)) {
 			continue;
@@ -144,6 +137,7 @@ export function CreateElement(type, props = {}) {
 		}
 	}
 
+	let childrenLength = children.length;
 	for (let i = 0; i < childrenLength; i++) {
 		const child = children[i];
 		AppendChild(element, child);
