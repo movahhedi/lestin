@@ -57,15 +57,8 @@ type NativeUIEvent = UIEvent;
 type NativeWheelEvent = WheelEvent;
 type Booleanish = boolean | "true" | "false";
 
-export default Lestin;
+export = Lestin;
 export as namespace Lestin;
-
-export const createElement: typeof Lestin.createElement;
-export const jsx: typeof Lestin.createElement;
-export const jsxs: typeof Lestin.createElement;
-export const jsxDEV: typeof Lestin.createElement;
-export const createRef: typeof Lestin.createRef;
-export const fragment: typeof Lestin.fragment;
 
 declare namespace Lestin {
 	//
@@ -79,7 +72,8 @@ declare namespace Lestin {
 		| ComponentType<P>;
 	type ComponentType<P = {}> = ComponentClass<P> | FunctionComponent<P>;
 
-	type JSXElementConstructor<P> = ((props: P) => LestinElement<any, any> | null) | (new (props: P) => Component<any, any>);
+	type JSXElementConstructor<P> =
+		((props: P) => LestinElement<any, any> | null) | (new (props: P) => Component<any, any>);
 
 	type ComponentState = any;
 
@@ -105,12 +99,21 @@ declare namespace Lestin {
 	> extends LestinElement<P, Exclude<T, number>> {}
 
 	// string fallback for custom web-components
-	interface DOMElement<P extends HTMLAttributes<T> | SVGAttributes<T>, T extends Element> extends LestinElement<P, string> {}
+	interface DOMElement<
+		P extends HTMLAttributes<T> | SVGAttributes<T>,
+		T extends Element,
+	> extends LestinElement<P, string> {}
 
 	// LestinHTML for LestinHTMLElement
-	interface LestinHTMLElement<T extends HTMLElement> extends DetailedLestinHTMLElement<AllHTMLAttributes<T>, T> {}
+	interface LestinHTMLElement<T extends HTMLElement> extends DetailedLestinHTMLElement<
+		AllHTMLAttributes<T>,
+		T
+	> {}
 
-	interface DetailedLestinHTMLElement<P extends HTMLAttributes<T>, T extends HTMLElement> extends DOMElement<P, T> {}
+	interface DetailedLestinHTMLElement<
+		P extends HTMLAttributes<T>,
+		T extends HTMLElement,
+	> extends DOMElement<P, T> {}
 
 	// LestinSVG for LestinSVGElement
 	interface LestinSVGElement extends DOMElement<SVGAttributes<SVGElement>, SVGElement> {
@@ -124,12 +127,18 @@ declare namespace Lestin {
 
 	interface HTMLFactory<T extends HTMLElement> extends DetailedHTMLFactory<AllHTMLAttributes<T>, T> {}
 
-	interface DetailedHTMLFactory<P extends HTMLAttributes<T>, T extends HTMLElement> extends DOMFactory<P, T> {
+	interface DetailedHTMLFactory<P extends HTMLAttributes<T>, T extends HTMLElement> extends DOMFactory<
+		P,
+		T
+	> {
 		(props?: (Attributes<T> & P) | null, ...children: LestinNode[]): DetailedLestinHTMLElement<P, T>;
 	}
 
 	interface SVGFactory extends DOMFactory<SVGAttributes<SVGElement>, SVGElement> {
-		(props?: (Attributes<SVGElement> & SVGAttributes<SVGElement>) | null, ...children: LestinNode[]): LestinSVGElement;
+		(
+			props?: (Attributes<SVGElement> & SVGAttributes<SVGElement>) | null,
+			...children: LestinNode[]
+		): LestinSVGElement;
 	}
 
 	type LestinFragment = LestinNode[] /*Iterable<LestinNode>*/;
@@ -251,7 +260,11 @@ declare namespace Lestin {
 	 * or ComponentPropsWithoutRef when refs are not supported.
 	 */
 	type ComponentProps<T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> =
-		T extends JSXElementConstructor<infer P> ? P : T extends keyof JSX.IntrinsicElements ? JSX.IntrinsicElements[T] : {};
+		T extends JSXElementConstructor<infer P>
+			? P
+			: T extends keyof JSX.IntrinsicElements
+				? JSX.IntrinsicElements[T]
+				: {};
 
 	//
 	// Event System
@@ -283,7 +296,11 @@ declare namespace Lestin {
 	 * This might be a child element to the element on which the event listener is registered.
 	 * If you thought this should be `EventTarget & T`, see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/11508#issuecomment-256045682
 	 */
-	interface SyntheticEvent<T = Element, E = Event> extends BaseSyntheticEvent<E, EventTarget & T, EventTarget> {}
+	interface SyntheticEvent<T = Element, E = Event> extends BaseSyntheticEvent<
+		E,
+		EventTarget & T,
+		EventTarget
+	> {}
 
 	interface ClipboardEvent<T = Element> extends SyntheticEvent<T, NativeClipboardEvent> {
 		clipboardData: DataTransfer;
@@ -310,7 +327,10 @@ declare namespace Lestin {
 		isPrimary: boolean;
 	}
 
-	interface FocusEvent<Target = Element, RelatedTarget = Element> extends SyntheticEvent<Target, NativeFocusEvent> {
+	interface FocusEvent<Target = Element, RelatedTarget = Element> extends SyntheticEvent<
+		Target,
+		NativeFocusEvent
+	> {
 		relatedTarget: (EventTarget & RelatedTarget) | null;
 		target: EventTarget & Target;
 	}
@@ -729,7 +749,8 @@ declare namespace Lestin {
 		 */
 		"aria-controls"?: string | undefined;
 		/** Indicates the element that represents the current item within a container or set of related elements. */
-		"aria-current"?: boolean | "false" | "true" | "page" | "step" | "location" | "date" | "time" | undefined;
+		"aria-current"?:
+			boolean | "false" | "true" | "page" | "step" | "location" | "date" | "time" | undefined;
 		/**
 		 * Identifies the element (or elements) that describes the object.
 		 * @see aria-labelledby
@@ -768,7 +789,8 @@ declare namespace Lestin {
 		 */
 		"aria-grabbed"?: Booleanish | undefined;
 		/** Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. */
-		"aria-haspopup"?: boolean | "false" | "true" | "menu" | "listbox" | "tree" | "grid" | "dialog" | undefined;
+		"aria-haspopup"?:
+			boolean | "false" | "true" | "menu" | "listbox" | "tree" | "grid" | "dialog" | undefined;
 		/**
 		 * Indicates whether the element is exposed to an accessibility API.
 		 * @see aria-disabled.
@@ -2215,29 +2237,53 @@ declare global {
 			bdi: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			bdo: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			big: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
-			blockquote: Lestin.DetailedHTMLProps<Lestin.BlockquoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>;
+			blockquote: Lestin.DetailedHTMLProps<
+				Lestin.BlockquoteHTMLAttributes<HTMLQuoteElement>,
+				HTMLQuoteElement
+			>;
 			body: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLBodyElement>, HTMLBodyElement>;
 			br: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLBRElement>, HTMLBRElement>;
-			button: Lestin.DetailedHTMLProps<Lestin.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
-			canvas: Lestin.DetailedHTMLProps<Lestin.CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement>;
+			button: Lestin.DetailedHTMLProps<
+				Lestin.ButtonHTMLAttributes<HTMLButtonElement>,
+				HTMLButtonElement
+			>;
+			canvas: Lestin.DetailedHTMLProps<
+				Lestin.CanvasHTMLAttributes<HTMLCanvasElement>,
+				HTMLCanvasElement
+			>;
 			caption: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			cite: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			code: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			col: Lestin.DetailedHTMLProps<Lestin.ColHTMLAttributes<HTMLTableColElement>, HTMLTableColElement>;
-			colgroup: Lestin.DetailedHTMLProps<Lestin.ColgroupHTMLAttributes<HTMLTableColElement>, HTMLTableColElement>;
+			colgroup: Lestin.DetailedHTMLProps<
+				Lestin.ColgroupHTMLAttributes<HTMLTableColElement>,
+				HTMLTableColElement
+			>;
 			data: Lestin.DetailedHTMLProps<Lestin.DataHTMLAttributes<HTMLDataElement>, HTMLDataElement>;
-			datalist: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLDataListElement>, HTMLDataListElement>;
+			datalist: Lestin.DetailedHTMLProps<
+				Lestin.HTMLAttributes<HTMLDataListElement>,
+				HTMLDataListElement
+			>;
 			dd: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			del: Lestin.DetailedHTMLProps<Lestin.DelHTMLAttributes<HTMLModElement>, HTMLModElement>;
-			details: Lestin.DetailedHTMLProps<Lestin.DetailsHTMLAttributes<HTMLDetailsElement>, HTMLDetailsElement>;
+			details: Lestin.DetailedHTMLProps<
+				Lestin.DetailsHTMLAttributes<HTMLDetailsElement>,
+				HTMLDetailsElement
+			>;
 			dfn: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
-			dialog: Lestin.DetailedHTMLProps<Lestin.DialogHTMLAttributes<HTMLDialogElement>, HTMLDialogElement>;
+			dialog: Lestin.DetailedHTMLProps<
+				Lestin.DialogHTMLAttributes<HTMLDialogElement>,
+				HTMLDialogElement
+			>;
 			div: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 			dl: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLDListElement>, HTMLDListElement>;
 			dt: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			em: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			embed: Lestin.DetailedHTMLProps<Lestin.EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement>;
-			fieldset: Lestin.DetailedHTMLProps<Lestin.FieldsetHTMLAttributes<HTMLFieldSetElement>, HTMLFieldSetElement>;
+			fieldset: Lestin.DetailedHTMLProps<
+				Lestin.FieldsetHTMLAttributes<HTMLFieldSetElement>,
+				HTMLFieldSetElement
+			>;
 			figcaption: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			figure: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			footer: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
@@ -2254,7 +2300,10 @@ declare global {
 			hr: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLHRElement>, HTMLHRElement>;
 			html: Lestin.DetailedHTMLProps<Lestin.HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>;
 			i: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
-			iframe: Lestin.DetailedHTMLProps<Lestin.IframeHTMLAttributes<HTMLIFrameElement>, HTMLIFrameElement>;
+			iframe: Lestin.DetailedHTMLProps<
+				Lestin.IframeHTMLAttributes<HTMLIFrameElement>,
+				HTMLIFrameElement
+			>;
 			img: Lestin.DetailedHTMLProps<Lestin.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>;
 			input: Lestin.DetailedHTMLProps<Lestin.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 			ins: Lestin.DetailedHTMLProps<Lestin.InsHTMLAttributes<HTMLModElement>, HTMLModElement>;
@@ -2274,16 +2323,31 @@ declare global {
 			nav: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			noindex: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			noscript: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
-			object: Lestin.DetailedHTMLProps<Lestin.ObjectHTMLAttributes<HTMLObjectElement>, HTMLObjectElement>;
+			object: Lestin.DetailedHTMLProps<
+				Lestin.ObjectHTMLAttributes<HTMLObjectElement>,
+				HTMLObjectElement
+			>;
 			ol: Lestin.DetailedHTMLProps<Lestin.OlHTMLAttributes<HTMLOListElement>, HTMLOListElement>;
-			optgroup: Lestin.DetailedHTMLProps<Lestin.OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement>;
-			option: Lestin.DetailedHTMLProps<Lestin.OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>;
-			output: Lestin.DetailedHTMLProps<Lestin.OutputHTMLAttributes<HTMLOutputElement>, HTMLOutputElement>;
+			optgroup: Lestin.DetailedHTMLProps<
+				Lestin.OptgroupHTMLAttributes<HTMLOptGroupElement>,
+				HTMLOptGroupElement
+			>;
+			option: Lestin.DetailedHTMLProps<
+				Lestin.OptionHTMLAttributes<HTMLOptionElement>,
+				HTMLOptionElement
+			>;
+			output: Lestin.DetailedHTMLProps<
+				Lestin.OutputHTMLAttributes<HTMLOutputElement>,
+				HTMLOutputElement
+			>;
 			p: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>;
 			param: Lestin.DetailedHTMLProps<Lestin.ParamHTMLAttributes<HTMLParamElement>, HTMLParamElement>;
 			picture: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			pre: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLPreElement>, HTMLPreElement>;
-			progress: Lestin.DetailedHTMLProps<Lestin.ProgressHTMLAttributes<HTMLProgressElement>, HTMLProgressElement>;
+			progress: Lestin.DetailedHTMLProps<
+				Lestin.ProgressHTMLAttributes<HTMLProgressElement>,
+				HTMLProgressElement
+			>;
 			q: Lestin.DetailedHTMLProps<Lestin.QuoteHTMLAttributes<HTMLQuoteElement>, HTMLQuoteElement>;
 			rp: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			rt: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
@@ -2291,11 +2355,20 @@ declare global {
 			s: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			samp: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			slot: Lestin.DetailedHTMLProps<Lestin.SlotHTMLAttributes<HTMLSlotElement>, HTMLSlotElement>;
-			script: Lestin.DetailedHTMLProps<Lestin.ScriptHTMLAttributes<HTMLScriptElement>, HTMLScriptElement>;
+			script: Lestin.DetailedHTMLProps<
+				Lestin.ScriptHTMLAttributes<HTMLScriptElement>,
+				HTMLScriptElement
+			>;
 			section: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
-			select: Lestin.DetailedHTMLProps<Lestin.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
+			select: Lestin.DetailedHTMLProps<
+				Lestin.SelectHTMLAttributes<HTMLSelectElement>,
+				HTMLSelectElement
+			>;
 			small: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
-			source: Lestin.DetailedHTMLProps<Lestin.SourceHTMLAttributes<HTMLSourceElement>, HTMLSourceElement>;
+			source: Lestin.DetailedHTMLProps<
+				Lestin.SourceHTMLAttributes<HTMLSourceElement>,
+				HTMLSourceElement
+			>;
 			span: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>;
 			strong: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			style: Lestin.DetailedHTMLProps<Lestin.StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement>;
@@ -2303,13 +2376,34 @@ declare global {
 			summary: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			sup: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLElement>, HTMLElement>;
 			table: Lestin.DetailedHTMLProps<Lestin.TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>;
-			template: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTemplateElement>, HTMLTemplateElement>;
-			tbody: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>;
-			td: Lestin.DetailedHTMLProps<Lestin.TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>;
-			textarea: Lestin.DetailedHTMLProps<Lestin.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
-			tfoot: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>;
-			th: Lestin.DetailedHTMLProps<Lestin.ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>;
-			thead: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>;
+			template: Lestin.DetailedHTMLProps<
+				Lestin.HTMLAttributes<HTMLTemplateElement>,
+				HTMLTemplateElement
+			>;
+			tbody: Lestin.DetailedHTMLProps<
+				Lestin.HTMLAttributes<HTMLTableSectionElement>,
+				HTMLTableSectionElement
+			>;
+			td: Lestin.DetailedHTMLProps<
+				Lestin.TdHTMLAttributes<HTMLTableDataCellElement>,
+				HTMLTableDataCellElement
+			>;
+			textarea: Lestin.DetailedHTMLProps<
+				Lestin.TextareaHTMLAttributes<HTMLTextAreaElement>,
+				HTMLTextAreaElement
+			>;
+			tfoot: Lestin.DetailedHTMLProps<
+				Lestin.HTMLAttributes<HTMLTableSectionElement>,
+				HTMLTableSectionElement
+			>;
+			th: Lestin.DetailedHTMLProps<
+				Lestin.ThHTMLAttributes<HTMLTableHeaderCellElement>,
+				HTMLTableHeaderCellElement
+			>;
+			thead: Lestin.DetailedHTMLProps<
+				Lestin.HTMLAttributes<HTMLTableSectionElement>,
+				HTMLTableSectionElement
+			>;
 			time: Lestin.DetailedHTMLProps<Lestin.TimeHTMLAttributes<HTMLTimeElement>, HTMLTimeElement>;
 			title: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTitleElement>, HTMLTitleElement>;
 			tr: Lestin.DetailedHTMLProps<Lestin.HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>;

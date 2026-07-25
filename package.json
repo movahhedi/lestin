@@ -31,13 +31,13 @@
 	"source": "src/index.js",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
-	"types": "dist/index.d.ts",
-	"typings": "dist/index.d.ts",
+	"types": "src/index.d.cts",
+	"typings": "src/index.d.cts",
 	"umd:main": "dist/index.umd.js",
 	"unpkg": "dist/index.js",
 	"exports": {
 		".": {
-			"types": "./dist/index.d.ts",
+			"types": "./src/index.d.cts",
 			"browser": "./dist/index.js",
 			"import": "./dist/index.js",
 			"umd": "./dist/index.umd.js",
@@ -45,7 +45,7 @@
 			"default": "./dist/index.js"
 		},
 		"./jsx-runtime": {
-			"types": "./dist/index.d.ts",
+			"types": "./src/index.d.cts",
 			"browser": "./dist/index.js",
 			"import": "./dist/index.js",
 			"umd": "./dist/index.umd.js",
@@ -53,7 +53,7 @@
 			"default": "./dist/index.js"
 		},
 		"./jsx-dev-runtime": {
-			"types": "./dist/index.d.ts",
+			"types": "./src/index.d.cts",
 			"browser": "./dist/index.js",
 			"import": "./dist/index.js",
 			"umd": "./dist/index.umd.js",
@@ -61,8 +61,8 @@
 			"default": "./dist/index.js"
 		},
 		"./jsx-runtime/index.js": "./src/index.js",
-		"./jsx-runtime/index.d.ts": "./src/index.d.ts",
-		"./jsx-runtime/global.d.ts": "./src/global.d.ts",
+		"./jsx-runtime/index.d.cts": "./src/index.d.cts",
+		"./jsx-runtime/global.d.cts": "./src/global.d.cts",
 		"./package.json": "./package.json"
 	},
 	"files": [
@@ -73,6 +73,7 @@
 		"prepublishOnly": "pnpm build",
 		"build": "npx tsdown",
 		"dev": "npx tsdown --watch",
+		"test": "pnpm build && vitest run --config test/vitest.config.js --coverage",
 		"update": "npx npm-check-updates -i"
 	},
 	"dependencies": {

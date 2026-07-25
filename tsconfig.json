@@ -9,6 +9,7 @@
 		"declaration": false,
 		"declarationDir": null,
 		"allowJs": true,
+		"esModuleInterop": true,
 		"noEmit": true
 	}
 }

@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/triple-slash-reference */
-/// <reference path="index.d.ts" />
+/// <reference path="index.d.cts" />
 
 import { namespaces } from "./utilities/namespaces.js";
 import { svgElements } from "./utilities/svgElements.js";
 // import { classnames } from "tsx-dom-types";
 
 function CreateElement(type, props = {}) {
+	if (!props) {
+		props = {};
+	}
+
 	let { children, ...attrs } = props;
 
 	if (!Array.isArray(children)) {
