@@ -81,7 +81,10 @@ export function CreateElement(type, props = {}) {
 				propValue = className;
 			}
 
-			element.className = propValue;
+			// Setting the className for SVG elements is different.
+			// TODO: Check if this is correct for SVG elements.
+			// element.className = propValue;
+			element.setAttribute("class", propValue.toString());
 			// element.className = classnames(propValue);
 		} else if (propName.startsWith("on")) {
 			const finalName = propName.replace(/Capture$/, "");

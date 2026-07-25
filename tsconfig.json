@@ -2,9 +2,9 @@
 	"compilerOptions": {
 		"noImplicitAny": false,
 		"target": "ES2015",
-		"module": "ES2015",
+		"module": "Node16",
 		"lib": ["ES2017", "DOM"],
-		"moduleResolution": "Node",
+		"moduleResolution": "node16",
 		"sourceMap": true,
 		"declaration": false,
 		"declarationDir": null,
