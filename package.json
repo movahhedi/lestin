@@ -28,43 +28,41 @@
 	},
 	"type": "module",
 	"packageManager": "pnpm@11.17.0",
-
 	"source": "src/index.js",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
-	"types": "src/index.d.ts",
-	"typings": "src/index.d.ts",
+	"types": "dist/index.d.ts",
+	"typings": "dist/index.d.ts",
 	"umd:main": "dist/index.umd.js",
 	"unpkg": "dist/index.js",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js",
 			"browser": "./dist/index.js",
 			"import": "./dist/index.js",
 			"umd": "./dist/index.umd.js",
-			"require": "./dist/index.cjs"
+			"require": "./dist/index.cjs",
+			"default": "./dist/index.js"
 		},
 		"./jsx-runtime": {
 			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js",
 			"browser": "./dist/index.js",
 			"import": "./dist/index.js",
 			"umd": "./dist/index.umd.js",
-			"require": "./dist/index.cjs"
+			"require": "./dist/index.cjs",
+			"default": "./dist/index.js"
 		},
 		"./jsx-dev-runtime": {
 			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js",
 			"browser": "./dist/index.js",
 			"import": "./dist/index.js",
 			"umd": "./dist/index.umd.js",
-			"require": "./dist/index.cjs"
+			"require": "./dist/index.cjs",
+			"default": "./dist/index.js"
 		},
 		"./jsx-runtime/index.js": "./src/index.js",
 		"./jsx-runtime/index.d.ts": "./src/index.d.ts",
 		"./jsx-runtime/global.d.ts": "./src/global.d.ts",
-
 		"./package.json": "./package.json"
 	},
 	"files": [
@@ -78,11 +76,12 @@
 		"update": "npx npm-check-updates -i"
 	},
 	"dependencies": {
+		"@types/prop-types": "^15.7.15",
 		"csstype": "^3.2.3"
 	},
 	"devDependencies": {
 		"@movahhedi/eslint-config": "^1.2.3",
-		"eslint": "^10.7.0",
+		"eslint": "^10.8.0",
 		"npm-check-updates": "^22.2.9",
 		"prettier": "^3.9.6",
 		"prop-types": "^15.8.1",

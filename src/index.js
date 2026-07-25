@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference path="index.d.ts" />
 
-import { namespaces } from "./utilities/namespaces";
-import { svgElements } from "./utilities/svgElements";
+import { namespaces } from "./utilities/namespaces.js";
+import { svgElements } from "./utilities/svgElements.js";
 // import { classnames } from "tsx-dom-types";
 
-export function CreateElement(type, props = {}) {
+function CreateElement(type, props = {}) {
 	let { children, ...attrs } = props;
 
 	if (!Array.isArray(children)) {
@@ -146,9 +146,9 @@ export function CreateElement(type, props = {}) {
 	return element;
 }
 
-export const Fragment = (props) => props.children;
+const Fragment = (props) => props.children;
 
-export function AppendChild(parent, childOrText) {
+function AppendChild(parent, childOrText) {
 	if (Array.isArray(childOrText)) {
 		// childOrText.forEach((nestedChild) => AppendChild(parent, nestedChild));
 		// for (const nestedChild of childOrText) {
@@ -165,6 +165,12 @@ export function AppendChild(parent, childOrText) {
 	}
 }
 
-export { CreateElement as jsx, CreateElement as jsxDEV, CreateElement as jsxs };
+export {
+	CreateElement as createElement,
+	Fragment as fragment,
+	CreateElement as jsx,
+	CreateElement as jsxDEV,
+	CreateElement as jsxs,
+};
 
 export const createRef = (initialValue) => ({ current: initialValue });

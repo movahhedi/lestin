@@ -1,2 +1,4 @@
 allowBuilds:
   core-js: true
+minimumReleaseAgeExclude:
+  - eslint@10.8.0

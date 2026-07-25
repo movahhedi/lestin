@@ -3,7 +3,7 @@ Lestin has one job: Transform JSX codes to pure HTML elements using `document.cr
 
 Lestin is DOM-based. There's no virtual-DOM, and thus, no additional overhead. We can theoretically say its performance is ~equal to vanilla JS (it's just three functions). (Please contribute on testing Lestin performance).
 
-Lestin adds **less than 1KB** gzipped to bundles, but reduces the project size much more than this, as it simplifies component and element creations by supporting JSX; Compared to React (~30KB) and Preact (~3KB).
+Lestin adds **less than 2KB** gzipped to bundles, but reduces the project size much more than this, as it simplifies component and element creations by supporting JSX; Compared to React (~30KB).
 
 ## Using Lestin
 
@@ -11,9 +11,9 @@ To use Lestin, install it with TypeScript and Vite, and add the configs describe
 
 ### Installing Lestin
 
-Installing using Yarn:
+Installing using PNPM:
 ```
-yarn add -D lestin typescript vite
+pnpm add -D lestin typescript vite
 ```
 
 Installing using NPM:
@@ -30,7 +30,7 @@ After installing, to support JSX, add these configs to your `tsconfig.json` in t
 	"compilerOptions": {
 		"jsx": "react-jsx",
 		"jsxImportSource": "lestin",
-		"moduleResolution": "node",
+		"moduleResolution": "node16",
 		"esModuleInterop": true,
 	}
 }

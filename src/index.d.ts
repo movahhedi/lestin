@@ -41,7 +41,7 @@
 import type * as CSS from "csstype";
 import type * as PropTypes from "prop-types";
 
-import type { Falsy } from "./TypeScriptUtilities.ts";
+import type { Falsy } from "./utilities/TypeScriptUtilities.ts";
 
 type NativeAnimationEvent = AnimationEvent;
 type NativeClipboardEvent = ClipboardEvent;
@@ -59,6 +59,13 @@ type Booleanish = boolean | "true" | "false";
 
 export default Lestin;
 export as namespace Lestin;
+
+export const createElement: typeof Lestin.createElement;
+export const jsx: typeof Lestin.createElement;
+export const jsxs: typeof Lestin.createElement;
+export const jsxDEV: typeof Lestin.createElement;
+export const createRef: typeof Lestin.createRef;
+export const fragment: typeof Lestin.fragment;
 
 declare namespace Lestin {
 	//
@@ -168,7 +175,7 @@ declare namespace Lestin {
 		props?: (Lestin.HTMLAttributes<T> & P) | null,
 	): Lestin.LestinNode;
 
-	function Fragment(props: any, ...children: Lestin.LestinNode[]): Lestin.LestinNode[];
+	function fragment(props: any, ...children: Lestin.LestinNode[]): Lestin.LestinNode[];
 
 	function appendChild(parent: HTMLElement, text: string): void;
 	function appendChild(parent: HTMLElement, child: HTMLElement): void;
